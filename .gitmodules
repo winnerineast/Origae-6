@@ -1,0 +1,4 @@
+[submodule "DIGITS"]
+	path = DIGITS
+	url = https://github.com/NVIDIA/DIGITS.git
+	branch = digits-6.0
