@@ -1,0 +1,2 @@
+# 6 Oct, 2017
+Rebased Origae-6 to python 3.6.2(Anaconda) and confirmed the way to deal with various open source code dependencies (agree to use source code when compling and building is difficult but in most time conda, apt, brew or yum will be used accordingly.)
