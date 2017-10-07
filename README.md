@@ -26,16 +26,16 @@ A more detailed working progress can be found in my daily [work notes](docs/dail
 - pip: Python package manager and v9.0.1. (Warning: if you're using Mac OS, strongly suggest you uninstall all other pythons including the ones from brew because I could only make the installation successfully when I follow up the installation instructions here.)
 - [Google/Protobuf](https://github.com/google/protobuf.git)(use 3.4.x) used to exchange data and messages.
 - [opencv 3.3.0 and 2.4.13.3](https://github.com/opencv/opencv.git) you could install it by brew when you're using Mac OS.
-- [NVIDIA caffe](https://github.com/NVIDIA/caffe) the official version supported by DIGITs. Please install this version when you're new to C/C++ coding.
-- [caffe](https://github.com/BVLC/caffe) the original version supported by wider scope. Don't use this version if you have no confident to build caffe by yourself.
+- [NVIDIA caffe](https://github.com/NVIDIA/caffe) the official version supported by DIGITs. Please install this version when you're new to C/C++ coding. Some installation guide can be found [here](docs/BuildCaffe.md)
+- [caffe](https://github.com/BVLC/caffe) the original version supported by wider scope. Don't use this version if you have no confident to build caffe by yourself. Some installation scrip can be found [here](bin/install_caffe.sh). The key thing to build caffe in mac os is to make sure your PYTHONLIB pointing to right python installed by brew instead of Apple MacOS itself. (do this right before you cmake or make caffe. PYTHONLIB:=/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/lib:$PYTHONLIB). Another tricky part is PYTHON_INCLUDE := /usr/include/python2.7 \
+        /usr/local/lib/python2.7/site-packages/numpy/core/include/.
 - [Tensorflow](tensorflow.org): a famous deep learning framework and v1.3.
 - [Keras](keras.io): a wrapper for tensorflow and others.
 - [PyTorch](pytorch.org):a deep learning framework in python from Facebook and v0.2.0.
 - [NVIDIA/DIGITS](https://github.com/NVIDIA/DIGITS.git)
 - [jetson_inference](https://github.com/dusty-nv/jetson-inference.git)(use L4T-R27.1)
 ## Installing and Developing Origae-6
-An actual install script can be referenced here [installation script](https://github.com/winnerineast/Origae-6/blob/master/bin/install.sh) but you have to take care of any difference of versions and models.
-When you want to run Origae-6, run the following command:
+Clone Origae-6 project and, run the following command:
 ```bash
 cd Origae-6
 bin/run.sh

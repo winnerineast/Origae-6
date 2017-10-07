@@ -2,3 +2,12 @@
 	path = DIGITS
 	url = https://github.com/NVIDIA/DIGITS.git
 	branch = digits-6.0
+[submodule "jetson-inference"]
+	path = jetson-inference
+	url = https://github.com/dusty-nv/jetson-inference.git
+[submodule "caffe"]
+	path = caffe
+	url = https://github.com/BVLC/caffe.git
+[submodule "nvcaffe"]
+	path = nvcaffe
+	url = https://github.com/NVIDIA/caffe.git
