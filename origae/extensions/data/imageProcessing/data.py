@@ -7,7 +7,7 @@ import random
 
 import numpy as np
 
-from digits.utils import image, subclass, override, constants
+from origae.utils import image, subclass, override, constants
 from ..interface import DataIngestionInterface
 from .forms import DatasetForm
 

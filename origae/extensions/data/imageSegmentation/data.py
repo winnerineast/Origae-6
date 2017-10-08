@@ -9,8 +9,8 @@ import numpy as np
 import PIL.Image
 import PIL.ImagePalette
 
-from digits.utils import image, subclass, override, constants
-from digits.utils.constants import COLOR_PALETTE_ATTRIBUTE
+from origae.utils import image, subclass, override, constants
+from origae.utils.constants import COLOR_PALETTE_ATTRIBUTE
 from ..interface import DataIngestionInterface
 from .forms import DatasetForm
 

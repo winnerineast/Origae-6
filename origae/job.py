@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import os
@@ -11,8 +11,8 @@ import time
 import flask
 
 from .status import Status, StatusCls
-from digits.config import config_value
-from digits.utils import sizeof_fmt, filesystem as fs
+from origae.config import config_value
+from origae.utils import sizeof_fmt, filesystem as fs
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 2
@@ -30,7 +30,7 @@ class Job(StatusCls):
         Loads a Job in the given job_id
         Returns the Job or throws an exception
         """
-        from digits.model.tasks import TrainTask
+        from origae.model.tasks import TrainTask
 
         job_dir = os.path.join(config_value('jobs_dir'), job_id)
         filename = os.path.join(job_dir, cls.SAVE_FILE)
@@ -222,7 +222,7 @@ class Job(StatusCls):
         """
         Called when StatusCls.status.setter is used
         """
-        from digits.webapp import app, socketio
+        from origae.webapp import app, socketio
 
         message = {
             'update': 'status',
@@ -307,7 +307,7 @@ class Job(StatusCls):
         """
         progress = self.get_progress()
 
-        from digits.webapp import socketio
+        from origae.webapp import socketio
         socketio.emit('job update',
                       {
                           'job_id': self.id(),
@@ -322,7 +322,7 @@ class Job(StatusCls):
         """
         Call socketio.emit for task job update
         """
-        from digits.webapp import socketio
+        from origae.webapp import socketio
         socketio.emit('job update',
                       {
                           'job_id': self.id(),

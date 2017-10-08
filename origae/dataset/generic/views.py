@@ -8,7 +8,6 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-import caffe_pb2
 import flask
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -17,11 +16,11 @@ import PIL.Image
 
 from .forms import GenericDatasetForm
 from .job import GenericDatasetJob
-from digits import extensions, utils
-from digits.utils.constants import COLOR_PALETTE_ATTRIBUTE
-from digits.utils.routing import request_wants_json, job_from_request
-from digits.utils.lmdbreader import DbReader
-from digits.webapp import scheduler
+from origae import extensions, utils
+from origae.utils.constants import COLOR_PALETTE_ATTRIBUTE
+from origae.utils.routing import request_wants_json, job_from_request
+from origae.utils.lmdbreader import DbReader
+from origae.webapp import scheduler
 
 blueprint = flask.Blueprint(__name__, __name__)
 

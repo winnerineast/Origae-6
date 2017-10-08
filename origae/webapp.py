@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import os
@@ -9,10 +9,10 @@ from gevent import monkey
 monkey.patch_all()
 
 from .config import config_value  # noqa
-from digits import utils  # noqa
-from digits.utils import filesystem as fs  # noqa
-from digits.utils.store import StoreCache  # noqa
-import digits.scheduler  # noqa
+from origae import utils  # noqa
+from origae.utils import filesystem as fs  # noqa
+from origae.utils.store import StoreCache  # noqa
+import origae.scheduler  # noqa
 
 # Create Flask, Scheduler and SocketIO objects
 
@@ -28,16 +28,14 @@ app.config['URL_PREFIX'] = url_prefix
 socketio = SocketIO(app, async_mode='gevent', path=url_prefix+'/socket.io')
 app.config['store_cache'] = StoreCache()
 app.config['store_url_list'] = config_value('model_store')['url_list']
-scheduler = digits.scheduler.Scheduler(config_value('gpu_list'), True)
+scheduler = origae.scheduler.Scheduler(config_value('gpu_list'), True)
 
 # Register filters and views
 
 app.jinja_env.globals['server_name'] = config_value('server_name')
-app.jinja_env.globals['server_version'] = digits.__version__
-app.jinja_env.globals['caffe_version'] = config_value('caffe')['version']
-app.jinja_env.globals['caffe_flavor'] = config_value('caffe')['flavor']
+app.jinja_env.globals['server_version'] = origae.__version__
 app.jinja_env.globals['dir_hash'] = fs.dir_hash(
-    os.path.join(os.path.dirname(digits.__file__), 'static'))
+    os.path.join(os.path.dirname(origae.__file__), 'static'))
 app.jinja_env.filters['print_time'] = utils.time_filters.print_time
 app.jinja_env.filters['print_time_diff'] = utils.time_filters.print_time_diff
 app.jinja_env.filters['print_time_since'] = utils.time_filters.print_time_since
@@ -46,41 +44,41 @@ app.jinja_env.filters['has_permission'] = utils.auth.has_permission
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
-import digits.views  # noqa
-app.register_blueprint(digits.views.blueprint,
+import origae.views  # noqa
+app.register_blueprint(origae.views.blueprint,
                        url_prefix=url_prefix)
-import digits.dataset.views  # noqa
-app.register_blueprint(digits.dataset.views.blueprint,
+import origae.dataset.views  # noqa
+app.register_blueprint(origae.dataset.views.blueprint,
                        url_prefix=url_prefix+'/datasets')
-import digits.dataset.generic.views  # noqa
-app.register_blueprint(digits.dataset.generic.views.blueprint,
+import origae.dataset.generic.views  # noqa
+app.register_blueprint(origae.dataset.generic.views.blueprint,
                        url_prefix=url_prefix+'/datasets/generic')
-import digits.dataset.images.views  # noqa
-app.register_blueprint(digits.dataset.images.views.blueprint,
+import origae.dataset.images.views  # noqa
+app.register_blueprint(origae.dataset.images.views.blueprint,
                        url_prefix=url_prefix+'/datasets/images')
-import digits.dataset.images.classification.views  # noqa
-app.register_blueprint(digits.dataset.images.classification.views.blueprint,
+import origae.dataset.images.classification.views  # noqa
+app.register_blueprint(origae.dataset.images.classification.views.blueprint,
                        url_prefix=url_prefix+'/datasets/images/classification')
-import digits.dataset.images.generic.views  # noqa
-app.register_blueprint(digits.dataset.images.generic.views.blueprint,
+import origae.dataset.images.generic.views  # noqa
+app.register_blueprint(origae.dataset.images.generic.views.blueprint,
                        url_prefix=url_prefix+'/datasets/images/generic')
-import digits.model.views  # noqa
-app.register_blueprint(digits.model.views.blueprint,
+import origae.model.views  # noqa
+app.register_blueprint(origae.model.views.blueprint,
                        url_prefix=url_prefix+'/models')
-import digits.model.images.views  # noqa
-app.register_blueprint(digits.model.images.views.blueprint,
+import origae.model.images.views  # noqa
+app.register_blueprint(origae.model.images.views.blueprint,
                        url_prefix=url_prefix+'/models/images')
-import digits.model.images.classification.views  # noqa
-app.register_blueprint(digits.model.images.classification.views.blueprint,
+import origae.model.images.classification.views  # noqa
+app.register_blueprint(origae.model.images.classification.views.blueprint,
                        url_prefix=url_prefix+'/models/images/classification')
-import digits.model.images.generic.views  # noqa
-app.register_blueprint(digits.model.images.generic.views.blueprint,
+import origae.model.images.generic.views  # noqa
+app.register_blueprint(origae.model.images.generic.views.blueprint,
                        url_prefix=url_prefix+'/models/images/generic')
-import digits.pretrained_model.views  # noqa
-app.register_blueprint(digits.pretrained_model.views.blueprint,
+import origae.pretrained_model.views  # noqa
+app.register_blueprint(origae.pretrained_model.views.blueprint,
                        url_prefix=url_prefix+'/pretrained_models')
-import digits.store.views  # noqa
-app.register_blueprint(digits.store.views.blueprint,
+import origae.store.views  # noqa
+app.register_blueprint(origae.store.views.blueprint,
                        url_prefix=url_prefix+'/store')
 
 

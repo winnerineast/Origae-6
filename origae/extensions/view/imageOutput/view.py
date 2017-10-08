@@ -6,8 +6,8 @@ import os
 import PIL.Image
 import PIL.ImageDraw
 
-import digits
-from digits.utils import subclass, override
+import origae
+from origae.utils import subclass, override
 from .forms import ConfigForm
 from ..interface import VisualizationInterface
 
@@ -71,8 +71,8 @@ class Visualization(VisualizationInterface):
           - context is a dictionary of context variables to use for rendering
           the form
         """
-        return self.view_template, {'image_input': digits.utils.image.embed_image_html(data[0]),
-                                    'image_output': digits.utils.image.embed_image_html(data[1])}
+        return self.view_template, {'image_input': origae.utils.image.embed_image_html(data[0]),
+                                    'image_output': origae.utils.image.embed_image_html(data[1])}
 
     @override
     def process_data(self, input_id, input_data, output_data):

@@ -2,8 +2,8 @@
 from __future__ import absolute_import
 
 from ..job import DatasetJob
-from digits.dataset import tasks
-from digits.utils import subclass, override, constants
+from origae.dataset import tasks
+from origae.utils import subclass, override, constants
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 1

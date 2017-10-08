@@ -9,8 +9,8 @@ import StringIO
 
 import numpy as np
 
-import digits
-from digits.utils import subclass, override, constants
+import origae
+from origae.utils import subclass, override, constants
 from ..interface import DataIngestionInterface
 from .forms import DatasetForm
 from .utils import GroundTruth, GroundTruthObj

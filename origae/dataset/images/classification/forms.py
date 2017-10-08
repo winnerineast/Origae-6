@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import os.path
@@ -8,8 +8,8 @@ import wtforms
 from wtforms import validators
 
 from ..forms import ImageDatasetForm
-from digits import utils
-from digits.utils.forms import validate_required_iff, validate_greater_than
+from origae import utils
+from origae.utils.forms import validate_required_iff, validate_greater_than
 
 
 class ImageClassificationDatasetForm(ImageDatasetForm):

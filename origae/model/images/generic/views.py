@@ -10,17 +10,17 @@ import werkzeug.exceptions
 
 from .forms import GenericImageModelForm
 from .job import GenericImageModelJob
-from digits.pretrained_model.job import PretrainedModelJob
-from digits import extensions, frameworks, utils
-from digits.config import config_value
-from digits.dataset import GenericDatasetJob, GenericImageDatasetJob
-from digits.inference import ImageInferenceJob
-from digits.status import Status
-from digits.utils import filesystem as fs
-from digits.utils import constants
-from digits.utils.forms import fill_form_if_cloned, save_form_to_job
-from digits.utils.routing import request_wants_json, job_from_request
-from digits.webapp import scheduler
+from origae.pretrained_model.job import PretrainedModelJob
+from origae import extensions, frameworks, utils
+from origae.config import config_value
+from origae.dataset import GenericDatasetJob, GenericImageDatasetJob
+from origae.inference import ImageInferenceJob
+from origae.status import Status
+from origae.utils import filesystem as fs
+from origae.utils import constants
+from origae.utils.forms import fill_form_if_cloned, save_form_to_job
+from origae.utils.routing import request_wants_json, job_from_request
+from origae.webapp import scheduler
 
 blueprint = flask.Blueprint(__name__, __name__)
 

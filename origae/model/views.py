@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import io
@@ -13,11 +13,11 @@ import werkzeug.exceptions
 
 from . import images as model_images
 from . import ModelJob
-from digits.pretrained_model.job import PretrainedModelJob
-from digits import frameworks, extensions
-from digits.utils import auth
-from digits.utils.routing import request_wants_json, job_from_request, get_request_arg
-from digits.webapp import scheduler
+from origae.pretrained_model.job import PretrainedModelJob
+from origae import frameworks, extensions
+from origae.utils import auth
+from origae.utils.routing import request_wants_json, job_from_request, get_request_arg
+from origae.webapp import scheduler
 
 blueprint = flask.Blueprint(__name__, __name__)
 

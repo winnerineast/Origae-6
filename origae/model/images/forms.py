@@ -1,10 +1,10 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 from wtforms import validators
 
 from ..forms import ModelForm
-from digits import utils
+from origae import utils
 
 
 class ImageModelForm(ModelForm):

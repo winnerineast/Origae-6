@@ -1,10 +1,9 @@
-# Copyright (c) 2016-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 import os
 
-from digits.job import Job
-from digits.utils import subclass, override
-from digits.pretrained_model.tasks import CaffeUploadTask, TorchUploadTask, TensorflowUploadTask
+from origae.job import Job
+from origae.utils import subclass, override
+from origae.pretrained_model.tasks import TensorflowUploadTask
 
 
 @subclass
@@ -35,11 +34,7 @@ class PretrainedModelJob(Job):
             "job_dir": self.dir()
         }
 
-        if self.framework == "caffe":
-            self.tasks.append(CaffeUploadTask(**taskKwargs))
-        elif self.framework == "torch":
-            self.tasks.append(TorchUploadTask(**taskKwargs))
-        elif self.framework == "tensorflow":
+        if self.framework == "tensorflow":
             self.tasks.append(TensorflowUploadTask(**taskKwargs))
         else:
             raise Exception("framework of type " + self.framework + " is not supported")

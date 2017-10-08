@@ -5,7 +5,7 @@ import wtforms
 from wtforms import validators
 
 from ..forms import DatasetForm
-from digits import utils
+from origae import utils
 
 
 class GenericDatasetForm(DatasetForm):

@@ -5,9 +5,9 @@ from flask.ext.wtf import Form
 import os
 from wtforms import validators
 
-from digits import utils
-from digits.utils import subclass
-from digits.utils.forms import validate_required_if_set
+from origae import utils
+from origae.utils import subclass
+from origae.utils.forms import validate_required_if_set
 
 
 @subclass

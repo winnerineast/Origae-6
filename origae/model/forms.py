@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 
 import os
 
@@ -7,12 +7,12 @@ from flask.ext.wtf import Form
 import wtforms
 from wtforms import validators
 
-from digits.config import config_value
-from digits.device_query import get_device, get_nvml_info
-from digits import utils
-from digits.utils import sizeof_fmt
-from digits.utils.forms import validate_required_iff
-from digits import frameworks
+from origae.config import config_value
+from origae.device_query import get_device, get_nvml_info
+from origae import utils
+from origae.utils import sizeof_fmt
+from origae.utils.forms import validate_required_iff
+from origae import frameworks
 
 
 class ModelForm(Form):

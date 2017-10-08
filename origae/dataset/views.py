@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import flask
@@ -6,9 +6,9 @@ import werkzeug.exceptions
 
 from . import images as dataset_images
 from . import generic
-from digits import extensions
-from digits.utils.routing import job_from_request, request_wants_json
-from digits.webapp import scheduler
+from origae import extensions
+from origae.utils.routing import job_from_request, request_wants_json
+from origae.webapp import scheduler
 
 blueprint = flask.Blueprint(__name__, __name__)
 

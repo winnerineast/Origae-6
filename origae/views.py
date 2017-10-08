@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import glob
@@ -14,10 +14,10 @@ import werkzeug.exceptions
 
 from .config import config_value
 from .webapp import app, socketio, scheduler
-import digits
-from digits import dataset, extensions, model, utils, pretrained_model
-from digits.log import logger
-from digits.utils.routing import request_wants_json
+import origae
+from origae import dataset, extensions, model, utils, pretrained_model
+from origae.log import logger
+from origae.utils.routing import request_wants_json
 
 blueprint = flask.Blueprint(__name__, __name__)
 
@@ -42,7 +42,7 @@ def home(tab=2):
 
     if request_wants_json():
         data = {
-            'version': digits.__version__,
+            'version': origae.__version__,
             'jobs_dir': config_value('jobs_dir'),
             'datasets': [j.json_dict()
                          for j in running_datasets + completed_datasets],
@@ -635,7 +635,7 @@ def handle_error(e):
         return flask.jsonify({'error': details}), status_code
     else:
         message = message.replace('\\n', '<br />')
-        if isinstance(e, digits.frameworks.errors.NetworkVisualizationError):
+        if isinstance(e, origae.frameworks.errors.NetworkVisualizationError):
             trace = message
             message = ''
         return flask.render_template('error.html',
@@ -710,7 +710,7 @@ def extension_static(extension_type, extension_id, filename):
     if extension is None:
         raise ValueError("Unknown extension '%s'" % extension_id)
 
-    digits_root = os.path.dirname(os.path.abspath(digits.__file__))
+    digits_root = os.path.dirname(os.path.abspath(origae.__file__))
     rootdir = os.path.join(digits_root, *['extensions', 'view', extension.get_dirname(), 'static'])
     return flask.send_from_directory(rootdir, filename)
 
