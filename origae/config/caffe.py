@@ -9,8 +9,8 @@ import subprocess
 import sys
 
 from . import option_list
-from digits import device_query
-from digits.utils import parse_version
+from origae import device_query
+from origae.utils import parse_version
 
 
 def load_from_envvar(envvar):

@@ -9,16 +9,17 @@ brew install hdf5 opencv
 brew install --build-from-source --with-python -vd protobuf
 brew install --build-from-source -vd boost boost-python
 
-for x in snappy leveldb protobuf gflags glog szip boost boost-python lmdb homebrew/science/opencv; do brew edit $x; done
+for x in snappy leveldb protobuf gflags glog szip boost boost-python lmdb opencv; do brew edit $x; done
 #      # ADD THE FOLLOWING:
 #      ENV.append "CXXFLAGS", "-stdlib=libstdc++"
 #      ENV.append "CFLAGS", "-stdlib=libstdc++"
 #      ENV.append "LDFLAGS", "-stdlib=libstdc++ -lstdc++"
 #      # The following is necessary because libtool likes to strip LDFLAGS:
 #      ENV["CXX"] = "/usr/bin/clang++ -stdlib=libstdc++"
-for x in snappy leveldb gflags glog szip lmdb homebrew/science/opencv; do brew uninstall $x; brew install --build-from-source -vd $x; done
+for x in leveldb gflags hdf5 snappy  glog szip lmdb opencv; do brew uninstall $x; done
+for x in leveldb gflags hdf5 snappy  glog szip lmdb opencv; do brew install --build-from-source -vd $x; done
 brew uninstall protobuf; brew install --build-from-source --with-python -vd protobuf
-brew install --build-from-source -vd boost boost-python
+brew uninstall boost boost-python; brew install --build-from-source -vd boost boost-python
 # Clone the caffe repo
 cd ~/Documents
 git clone https://github.com/BVLC/caffe.git
@@ -46,7 +47,7 @@ make pytest
 
 # To get python going, first we need the dependencies
 #   On a super-clean Mac install, you'll need to easy_install pip.
-sudo -H easy_install pip
+# sudo -H easy_install pip
 #   Now, we'll install the requirements system-wide. You may also muck about with a virtualenv.
 #   Astonishingly, --user is not better known. 
 pip install --user -r python/requirements.txt
@@ -74,11 +75,11 @@ install_name_tool -change @rpath/libcaffe.so.1.0.0-rc3 ~/Library/Python/2.7/lib/
 python -c 'import caffe'
 # If you got this far without errors, congratulations, you installed Caffe on a modern Mac OS X
 # Create local git in order to do brew update.
-cd /usr/local
+cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
 git checkout -b caffe
 git add .
 git commit -m "Update Caffe dependencies to use libstdc++"
-cd /usr/local/Library/Taps/homebrew/homebrew-science
+cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-science
 git checkout -b caffe
 git add .
 git commit -m "Update Caffe dependencies"
