@@ -2,8 +2,8 @@
 from __future__ import absolute_import
 import os
 import shutil
-from digits.task import Task
-from digits.utils import subclass, override
+from origae.task import Task
+from origae.utils import subclass, override
 
 
 @subclass

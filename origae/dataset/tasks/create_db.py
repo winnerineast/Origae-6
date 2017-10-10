@@ -5,10 +5,10 @@ import os.path
 import re
 import sys
 
-import digits
-from digits import utils
-from digits.task import Task
-from digits.utils import subclass, override
+import origae
+from origae import utils
+from origae.task import Task
+from origae.utils import subclass, override
 
 # NOTE: Increment this every time the pickled version changes
 PICKLE_VERSION = 3
@@ -148,7 +148,7 @@ class CreateDbTask(Task):
     @override
     def task_arguments(self, resources, env):
         args = [sys.executable, os.path.join(
-            os.path.dirname(os.path.abspath(digits.__file__)),
+            os.path.dirname(os.path.abspath(origae.__file__)),
             'tools', 'create_db.py'),
             self.path(self.input_file),
             self.path(self.db_name),
@@ -235,7 +235,7 @@ class CreateDbTask(Task):
 
     @override
     def after_run(self):
-        from digits.webapp import socketio
+        from origae.webapp import socketio
 
         super(CreateDbTask, self).after_run()
         self.create_db_log.close()
@@ -346,7 +346,7 @@ class CreateDbTask(Task):
         }
 
     def update_distribution_graph(self):
-        from digits.webapp import socketio
+        from origae.webapp import socketio
         data = self.distribution_data()
 
         if data:

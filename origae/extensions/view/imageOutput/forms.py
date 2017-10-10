@@ -3,8 +3,8 @@ from __future__ import absolute_import
 
 from flask.ext.wtf import Form
 
-from digits import utils
-from digits.utils import subclass
+from origae import utils
+from origae.utils import subclass
 
 
 @subclass

@@ -5,7 +5,7 @@ import os
 import tempfile
 
 from . import option_list
-import digits
+import origae
 
 
 if 'DIGITS_MODE_TEST' in os.environ:
@@ -13,7 +13,7 @@ if 'DIGITS_MODE_TEST' in os.environ:
 elif 'DIGITS_JOBS_DIR' in os.environ:
     value = os.environ['DIGITS_JOBS_DIR']
 else:
-    value = os.path.join(os.path.dirname(digits.__file__), 'jobs')
+    value = os.path.join(os.path.dirname(origae.__file__), 'jobs')
 
 
 try:

@@ -7,8 +7,8 @@ import wtforms
 from wtforms import validators
 
 from ..forms import ImageDatasetForm
-from digits import utils
-from digits.utils.forms import validate_required_iff
+from origae import utils
+from origae.utils.forms import validate_required_iff
 
 
 class GenericImageDatasetForm(ImageDatasetForm):

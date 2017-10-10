@@ -4,8 +4,8 @@ from __future__ import absolute_import
 import os
 import PIL.Image
 
-import digits
-from digits.utils import subclass, override
+import origae
+from origae.utils import subclass, override
 from .forms import ConfigForm
 from ..interface import VisualizationInterface
 
@@ -119,7 +119,7 @@ class Visualization(VisualizationInterface):
             # last number is confidence
             bboxes[key] = [list(o) for o in outputs if o[-1] > 0]
             self.bbox_count += len(bboxes[key])
-        image_html = digits.utils.image.embed_image_html(image)
+        image_html = origae.utils.image.embed_image_html(image)
 
         return {
             'image': image_html,

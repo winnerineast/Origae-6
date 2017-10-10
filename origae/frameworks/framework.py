@@ -1,5 +1,5 @@
 # Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
-from digits.inference.tasks import InferenceTask
+from origae.inference.tasks import InferenceTask
 
 
 class Framework(object):

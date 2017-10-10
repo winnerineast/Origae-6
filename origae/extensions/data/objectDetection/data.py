@@ -9,8 +9,8 @@ import StringIO
 
 import numpy as np
 
-import digits
-from digits.utils import subclass, override, constants
+import origae
+from origae.utils import subclass, override, constants
 from ..interface import DataIngestionInterface
 from .forms import DatasetForm
 from .utils import GroundTruth, GroundTruthObj
@@ -53,7 +53,7 @@ class DataIngestion(DataIngestionInterface):
         # (1) image part
 
         # load from file (this returns a PIL image)
-        img = digits.utils.image.load_image(image_filename)
+        img = origae.utils.image.load_image(image_filename)
         if self.channel_conversion != 'none':
             if img.mode != self.channel_conversion:
                 # convert to different image mode if necessary
@@ -72,7 +72,7 @@ class DataIngestion(DataIngestionInterface):
             resize_ratio_x = float(self.resize_image_width) / img.size[0]
             resize_ratio_y = float(self.resize_image_height) / img.size[1]
             # resize and convert to numpy HWC
-            img = digits.utils.image.resize_image(
+            img = origae.utils.image.resize_image(
                 img,
                 self.resize_image_height,
                 self.resize_image_width)
@@ -222,7 +222,7 @@ class DataIngestion(DataIngestionInterface):
         image_files = []
         for dirpath, dirnames, filenames in os.walk(folder, followlinks=True):
             for filename in filenames:
-                if filename.lower().endswith(digits.utils.image.SUPPORTED_EXTENSIONS):
+                if filename.lower().endswith(origae.utils.image.SUPPORTED_EXTENSIONS):
                     image_files.append('%s' % os.path.join(dirpath, filename))
         if len(image_files) == 0:
             raise ValueError("Unable to find supported images in %s" % folder)

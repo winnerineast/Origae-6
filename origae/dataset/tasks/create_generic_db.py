@@ -5,9 +5,9 @@ import os
 import re
 import sys
 
-import digits
-from digits.task import Task
-from digits.utils import subclass, override
+import origae
+from origae.task import Task
+from origae.utils import subclass, override
 
 # NOTE: Increment this every time the pickled version changes
 PICKLE_VERSION = 1
@@ -162,12 +162,12 @@ class CreateGenericDbTask(Task):
         args = [
             sys.executable,
             os.path.join(
-                os.path.dirname(os.path.abspath(digits.__file__)),
+                os.path.dirname(os.path.abspath(origae.__file__)),
                 'tools',
                 'create_generic_db.py'),
             self.job.id(),
             '--stage=%s' % self.stage,
-            '--jobs_dir=%s' % digits.config.config_value('jobs_dir'),
+            '--jobs_dir=%s' % origae.config.config_value('jobs_dir'),
         ]
 
         return args

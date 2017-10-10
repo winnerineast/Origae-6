@@ -1,9 +1,9 @@
 # Copyright (c) 2016-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 import os
-from digits.utils import subclass, override
-from digits.status import Status
-from digits.pretrained_model.tasks import UploadPretrainedModelTask
+from origae.utils import subclass, override
+from origae.status import Status
+from origae.pretrained_model.tasks import UploadPretrainedModelTask
 
 
 @subclass

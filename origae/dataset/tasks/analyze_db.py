@@ -5,9 +5,9 @@ import os.path
 import re
 import sys
 
-import digits
-from digits.task import Task
-from digits.utils import subclass, override
+import origae
+from origae.task import Task
+from origae.utils import subclass, override
 
 # NOTE: Increment this every time the pickled object
 PICKLE_VERSION = 1

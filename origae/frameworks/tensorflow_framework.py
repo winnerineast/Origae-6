@@ -9,10 +9,10 @@ import sys
 
 from .errors import NetworkVisualizationError
 from .framework import Framework
-import digits
-from digits import utils
-from digits.model.tasks import TensorflowTrainTask
-from digits.utils import subclass, override, constants
+import origae
+from origae import utils
+from origae.model.tasks import TensorflowTrainTask
+from origae.utils import subclass, override, constants
 
 
 @subclass
@@ -54,7 +54,7 @@ class TensorflowFramework(Framework):
         """
         return description of standard network
         """
-        networks_dir = os.path.join(os.path.dirname(digits.__file__), 'standard-networks', self.CLASS)
+        networks_dir = os.path.join(os.path.dirname(origae.__file__), 'standard-networks', self.CLASS)
 
         for filename in os.listdir(networks_dir):
             path = os.path.join(networks_dir, filename)
@@ -124,7 +124,7 @@ class TensorflowFramework(Framework):
         try:  # do this in a try..finally clause to make sure we delete the temp file
             # build command line
             args = [sys.executable,
-                    os.path.join(os.path.dirname(digits.__file__), 'tools', 'tensorflow', 'main.py'),
+                    os.path.join(os.path.dirname(origae.__file__), 'tools', 'tensorflow', 'main.py'),
                     '--network=%s' % os.path.basename(temp_network_path),
                     '--networkDirectory=%s' % os.path.dirname(temp_network_path),
                     '--visualizeModelPath=%s' % temp_graphdef_path,

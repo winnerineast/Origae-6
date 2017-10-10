@@ -10,11 +10,11 @@ import uuid
 import flask
 import requests
 
-from digits.log import logger
-from digits.pretrained_model import PretrainedModelJob
-from digits.utils import auth
-from digits.utils.store import StoreParser
-from digits.webapp import app, scheduler, socketio
+from origae.log import logger
+from origae.pretrained_model import PretrainedModelJob
+from origae.utils import auth
+from origae.utils.store import StoreParser
+from origae.webapp import app, scheduler, socketio
 
 
 blueprint = flask.Blueprint(__name__, __name__)

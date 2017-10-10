@@ -9,9 +9,9 @@ import flask
 import gevent
 import psutil
 
-from digits import device_query
-from digits.task import Task
-from digits.utils import subclass, override
+from origae import device_query
+from origae.task import Task
+from origae.utils import subclass, override
 
 # NOTE: Increment this every time the picked object changes
 PICKLE_VERSION = 2
@@ -181,7 +181,7 @@ class TrainTask(Task):
         Arguments:
         gpus -- a list of identifiers for the GPUs currently being used
         """
-        from digits.webapp import app, socketio
+        from origae.webapp import app, socketio
 
         devices = []
         if gpus is not None:
@@ -252,7 +252,7 @@ class TrainTask(Task):
         """
         Save output to self.train_outputs
         """
-        from digits.webapp import socketio
+        from origae.webapp import socketio
 
         if not self.save_output(self.train_outputs, *args):
             return
@@ -307,7 +307,7 @@ class TrainTask(Task):
         """
         Save output to self.val_outputs
         """
-        from digits.webapp import socketio
+        from origae.webapp import socketio
 
         if not self.save_output(self.val_outputs, *args):
             return

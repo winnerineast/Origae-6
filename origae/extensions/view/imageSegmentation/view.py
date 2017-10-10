@@ -10,9 +10,9 @@ import numpy as np
 import PIL.Image
 import skfmm
 
-import digits
-from digits.utils import subclass, override
-from digits.utils.constants import COLOR_PALETTE_ATTRIBUTE
+import origae
+from origae.utils import subclass, override
+from origae.utils.constants import COLOR_PALETTE_ATTRIBUTE
 from .forms import ConfigForm
 from ..interface import VisualizationInterface
 
@@ -163,11 +163,11 @@ class Visualization(VisualizationInterface):
         """
         return self.view_template, {
             'input_id': data['input_id'],
-            'input_image': digits.utils.image.embed_image_html(data['input_image']),
-            'fill_image': digits.utils.image.embed_image_html(data['fill_image']),
-            'line_image': digits.utils.image.embed_image_html(data['line_image']),
-            'seg_image': digits.utils.image.embed_image_html(data['seg_image']),
-            'mask_image': digits.utils.image.embed_image_html(data['mask_image']),
+            'input_image': origae.utils.image.embed_image_html(data['input_image']),
+            'fill_image': origae.utils.image.embed_image_html(data['fill_image']),
+            'line_image': origae.utils.image.embed_image_html(data['line_image']),
+            'seg_image': origae.utils.image.embed_image_html(data['seg_image']),
+            'mask_image': origae.utils.image.embed_image_html(data['mask_image']),
             'legend': data['legend'],
             'is_binary': data['is_binary'],
             'class_data': json.dumps(data['class_data'].tolist()),

@@ -7,7 +7,7 @@ from wtforms import SubmitField
 from wtforms import validators
 from wtforms.compat import string_types
 
-from digits.utils.routing import get_request_arg
+from origae.utils.routing import get_request_arg
 
 
 def validate_required_iff(**kwargs):
@@ -142,7 +142,7 @@ class Explanation(object):
             kwargs.setdefault('for', self.field_id)
 
         import flask
-        from digits.webapp import app
+        from origae.webapp import app
 
         html = ''
         # get the text from the html file
@@ -541,7 +541,7 @@ def fill_form_from_job(job, form):
 
 def fill_form_if_cloned(form):
     # is there a request to clone a job.
-    from digits.webapp import scheduler
+    from origae.webapp import scheduler
     clone = get_request_arg('clone')
     if clone is not None:
         clone_job = scheduler.get_job(clone)

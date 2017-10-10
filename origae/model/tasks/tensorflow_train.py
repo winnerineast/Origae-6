@@ -14,9 +14,9 @@ import h5py
 import numpy as np
 
 from .train import TrainTask
-import digits
-from digits import utils
-from digits.utils import subclass, override, constants
+import origae
+from origae import utils
+from origae.utils import subclass, override, constants
 import tensorflow as tf
 
 # NOTE: Increment this everytime the pickled object changes
@@ -173,7 +173,7 @@ class TensorflowTrainTask(TrainTask):
     def task_arguments(self, resources, env):
 
         args = [sys.executable,
-                os.path.join(os.path.dirname(os.path.abspath(digits.__file__)), 'tools', 'tensorflow', 'main.py'),
+                os.path.join(os.path.dirname(os.path.abspath(origae.__file__)), 'tools', 'tensorflow', 'main.py'),
                 '--network=%s' % self.model_file,
                 '--epoch=%d' % int(self.train_epochs),
                 '--networkDirectory=%s' % self.job_dir,
@@ -419,7 +419,7 @@ class TensorflowTrainTask(TrainTask):
         Sends socketio message about the snapshot list
         """
         # TODO: move to TrainTask
-        from digits.webapp import socketio
+        from origae.webapp import socketio
 
         socketio.emit('task update', {'task': self.html_id(),
                                       'update': 'snapshots',
@@ -543,7 +543,7 @@ class TensorflowTrainTask(TrainTask):
         file_to_load = self.get_snapshot(snapshot_epoch)
 
         args = [sys.executable,
-                os.path.join(os.path.dirname(os.path.abspath(digits.__file__)), 'tools', 'tensorflow', 'main.py'),
+                os.path.join(os.path.dirname(os.path.abspath(origae.__file__)), 'tools', 'tensorflow', 'main.py'),
                 '--inference_db=%s' % temp_image_path,
                 '--network=%s' % self.model_file,
                 '--networkDirectory=%s' % self.job_dir,
@@ -600,7 +600,7 @@ class TensorflowTrainTask(TrainTask):
                 for line in utils.nonblocking_readlines(p.stdout):
                     if self.aborted.is_set():
                         p.terminate()
-                        raise digits.inference.errors.InferenceError('%s classify one task got aborted. error code - %d' % (self.get_framework_id(), p.returncode))  # noqa
+                        raise origae.inference.errors.InferenceError('%s classify one task got aborted. error code - %d' % (self.get_framework_id(), p.returncode))  # noqa
 
                     if line is not None and len(line) > 1:
                         if not self.process_test_output(line, predictions, 'one'):
@@ -613,7 +613,7 @@ class TensorflowTrainTask(TrainTask):
             if p.poll() is None:
                 p.terminate()
             error_message = ''
-            if type(e) == digits.inference.errors.InferenceError:
+            if type(e) == origae.inference.errors.InferenceError:
                 error_message = e.__str__()
             else:
                 error_message = '%s classify one task failed with error code %d \n %s' % (
@@ -622,7 +622,7 @@ class TensorflowTrainTask(TrainTask):
             if unrecognized_output:
                 unrecognized_output = '\n'.join(unrecognized_output)
                 error_message = error_message + unrecognized_output
-            raise digits.inference.errors.InferenceError(error_message)
+            raise origae.inference.errors.InferenceError(error_message)
 
         finally:
             self.after_test_run(temp_image_path)
@@ -633,7 +633,7 @@ class TensorflowTrainTask(TrainTask):
             if unrecognized_output:
                 unrecognized_output = '\n'.join(unrecognized_output)
                 error_message = error_message + unrecognized_output
-            raise digits.inference.errors.InferenceError(error_message)
+            raise origae.inference.errors.InferenceError(error_message)
         else:
             self.logger.info('%s classify one task completed.' % self.get_framework_id())
 
@@ -787,7 +787,7 @@ class TensorflowTrainTask(TrainTask):
             return True
 
         if level in ['error', 'critical']:
-            raise digits.inference.errors.InferenceError('%s classify %s task failed with error message - %s' % (
+            raise origae.inference.errors.InferenceError('%s classify %s task failed with error message - %s' % (
                 self.get_framework_id(), test_category, message))
 
         return False  # control should never reach this line.
@@ -841,7 +841,7 @@ class TensorflowTrainTask(TrainTask):
             file_to_load = self.get_snapshot(snapshot_epoch)
 
             args = [sys.executable,
-                    os.path.join(os.path.dirname(os.path.abspath(digits.__file__)), 'tools', 'tensorflow', 'main.py'),
+                    os.path.join(os.path.dirname(os.path.abspath(origae.__file__)), 'tools', 'tensorflow', 'main.py'),
                     '--testMany=1',
                     '--allPredictions=1',  # all predictions are grabbed and formatted as required by DIGITS
                     '--inference_db=%s' % str(temp_dir_path),
@@ -891,7 +891,7 @@ class TensorflowTrainTask(TrainTask):
                     for line in utils.nonblocking_readlines(p.stdout):
                         if self.aborted.is_set():
                             p.terminate()
-                            raise digits.inference.errors.InferenceError('%s classify many task got aborted.'
+                            raise origae.inference.errors.InferenceError('%s classify many task got aborted.'
                                                                          'error code - %d' % (self.get_framework_id(),
                                                                                               p.returncode))
 
@@ -906,7 +906,7 @@ class TensorflowTrainTask(TrainTask):
                 if p.poll() is None:
                     p.terminate()
                 error_message = ''
-                if type(e) == digits.inference.errors.InferenceError:
+                if type(e) == origae.inference.errors.InferenceError:
                     error_message = e.__str__()
                 else:
                     error_message = '%s classify many task failed with error code %d \n %s' % (
@@ -915,7 +915,7 @@ class TensorflowTrainTask(TrainTask):
                 if unrecognized_output:
                     unrecognized_output = '\n'.join(unrecognized_output)
                     error_message = error_message + unrecognized_output
-                raise digits.inference.errors.InferenceError(error_message)
+                raise origae.inference.errors.InferenceError(error_message)
 
             if p.returncode != 0:
                 error_message = '%s classify many task failed with error code %d' % (self.get_framework_id(),
@@ -924,7 +924,7 @@ class TensorflowTrainTask(TrainTask):
                 if unrecognized_output:
                     unrecognized_output = '\n'.join(unrecognized_output)
                     error_message = error_message + unrecognized_output
-                raise digits.inference.errors.InferenceError(error_message)
+                raise origae.inference.errors.InferenceError(error_message)
             else:
                 self.logger.info('%s classify many task completed.' % self.get_framework_id())
         finally:

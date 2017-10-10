@@ -10,18 +10,17 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-import caffe_pb2
 import flask
 import PIL.Image
 
 from .forms import ImageClassificationDatasetForm
 from .job import ImageClassificationDatasetJob
-from digits import utils
-from digits.dataset import tasks
-from digits.utils.forms import fill_form_if_cloned, save_form_to_job
-from digits.utils.lmdbreader import DbReader
-from digits.utils.routing import request_wants_json, job_from_request
-from digits.webapp import scheduler
+from origae import utils
+from origae.dataset import tasks
+from origae.utils.forms import fill_form_if_cloned, save_form_to_job
+from origae.utils.lmdbreader import DbReader
+from origae.utils.routing import request_wants_json, job_from_request
+from origae.webapp import scheduler
 
 
 blueprint = flask.Blueprint(__name__, __name__)
@@ -398,7 +397,7 @@ def explore():
     pages = range(min_page, max_page + 1)
     for key, value in reader.entries():
         if count >= page * size:
-            datum = caffe_pb2.Datum()
+            datum = []#caffe_pb2.Datum()
             datum.ParseFromString(value)
             if label is None or datum.label == label:
                 if datum.encoded:
@@ -423,7 +422,7 @@ def explore():
         if label is None:
             count += 1
         else:
-            datum = caffe_pb2.Datum()
+            datum = [] #caffe_pb2.Datum()
             datum.ParseFromString(value)
             if datum.label == int(label):
                 count += 1

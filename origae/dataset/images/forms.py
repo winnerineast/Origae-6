@@ -6,7 +6,7 @@ from wtforms import validators
 
 from ..forms import DatasetForm
 from .job import ImageDatasetJob
-from digits import utils
+from origae import utils
 
 
 class ImageDatasetForm(DatasetForm):

@@ -5,7 +5,7 @@ import logging
 import logging.handlers
 import sys
 
-from digits.config import config_value
+from origae.config import config_value
 
 
 DATE_FORMAT = '%Y-%m-%d %H:%M:%S'

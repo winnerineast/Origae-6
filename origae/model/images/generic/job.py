@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import os.path
 
 from ..job import ImageModelJob
-from digits.utils import subclass, override
+from origae.utils import subclass, override
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 1

@@ -12,8 +12,8 @@ except ImportError:
 import flask
 import PIL.Image
 
-import digits
-from digits import utils
+import origae
+from origae import utils
 
 blueprint = flask.Blueprint(__name__, __name__)
 
@@ -24,7 +24,7 @@ def resize_example():
     Resizes the example image, and returns it as a string of png data
     """
     try:
-        example_image_path = os.path.join(os.path.dirname(digits.__file__), 'static', 'images', 'mona_lisa.jpg')
+        example_image_path = os.path.join(os.path.dirname(origae.__file__), 'static', 'images', 'mona_lisa.jpg')
         image = utils.image.load_image(example_image_path)
 
         width = int(flask.request.form['width'])

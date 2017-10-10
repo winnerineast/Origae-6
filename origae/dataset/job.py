@@ -1,8 +1,8 @@
 # Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
-from digits.job import Job
-from digits.utils import subclass
+from origae.job import Job
+from origae.utils import subclass
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 1

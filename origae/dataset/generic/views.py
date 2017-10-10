@@ -8,7 +8,6 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-import caffe_pb2
 import flask
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -17,11 +16,11 @@ import PIL.Image
 
 from .forms import GenericDatasetForm
 from .job import GenericDatasetJob
-from digits import extensions, utils
-from digits.utils.constants import COLOR_PALETTE_ATTRIBUTE
-from digits.utils.routing import request_wants_json, job_from_request
-from digits.utils.lmdbreader import DbReader
-from digits.webapp import scheduler
+from origae import extensions, utils
+from origae.utils.constants import COLOR_PALETTE_ATTRIBUTE
+from origae.utils.routing import request_wants_json, job_from_request
+from origae.utils.lmdbreader import DbReader
+from origae.webapp import scheduler
 
 blueprint = flask.Blueprint(__name__, __name__)
 
@@ -176,7 +175,7 @@ def explore():
     pages = range(min_page, max_page + 1)
     for key, value in reader.entries():
         if count >= page * size:
-            datum = caffe_pb2.Datum()
+            datum = [] #caffe_pb2.Datum()
             datum.ParseFromString(value)
             if not datum.encoded:
                 raise RuntimeError("Expected encoded database")

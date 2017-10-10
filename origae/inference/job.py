@@ -2,9 +2,9 @@
 from __future__ import absolute_import
 
 from . import tasks
-import digits.frameworks
-from digits.job import Job
-from digits.utils import subclass, override
+import origae.frameworks
+from origae.job import Job
+from origae.utils import subclass, override
 
 
 @subclass
@@ -25,7 +25,7 @@ class InferenceJob(Job):
 
         # get handle to framework object
         fw_id = model.train_task().framework_id
-        fw = digits.frameworks.get_framework_by_id(fw_id)
+        fw = origae.frameworks.get_framework_by_id(fw_id)
 
         if fw is None:
             raise RuntimeError(

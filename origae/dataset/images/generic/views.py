@@ -5,11 +5,11 @@ import flask
 
 from .forms import GenericImageDatasetForm
 from .job import GenericImageDatasetJob
-from digits import utils
-from digits.dataset import tasks
-from digits.webapp import scheduler
-from digits.utils.forms import fill_form_if_cloned, save_form_to_job
-from digits.utils.routing import request_wants_json
+from origae import utils
+from origae.dataset import tasks
+from origae.webapp import scheduler
+from origae.utils.forms import fill_form_if_cloned, save_form_to_job
+from origae.utils.routing import request_wants_json
 
 blueprint = flask.Blueprint(__name__, __name__)
 

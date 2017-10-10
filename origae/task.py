@@ -15,7 +15,7 @@ import gevent.event
 from . import utils
 from .config import config_value
 from .status import Status, StatusCls
-import digits.log
+import origae.log
 
 # NOTE: Increment this every time the pickled version changes
 PICKLE_VERSION = 1
@@ -70,7 +70,7 @@ class Task(StatusCls):
         self.set_logger()
 
     def set_logger(self):
-        self.logger = digits.log.JobIdLoggerAdapter(
+        self.logger = origae.log.JobIdLoggerAdapter(
             logging.getLogger('digits.webapp'),
             {'job_id': self.job_id},
         )
@@ -91,7 +91,7 @@ class Task(StatusCls):
         """
         Called when StatusCls.status.setter is used
         """
-        from digits.webapp import app, socketio
+        from origae.webapp import app, socketio
 
         # Send socketio updates
         message = {
@@ -115,7 +115,7 @@ class Task(StatusCls):
                       room=self.job_id,
                       )
 
-        from digits.webapp import scheduler
+        from origae.webapp import scheduler
         job = scheduler.get_job(self.job_id)
         if job:
             job.on_status_update()
@@ -291,7 +291,7 @@ class Task(StatusCls):
         match = re.match(r'(\S{10} \S{8}) \[(\w+)\s*\] (.*)$', line)
         if match:
             timestr = match.group(1)
-            timestamp = time.mktime(time.strptime(timestr, digits.log.DATE_FORMAT))
+            timestamp = time.mktime(time.strptime(timestr, origae.log.DATE_FORMAT))
             level = match.group(2)
             message = match.group(3)
             if level.startswith('DEB'):
@@ -343,7 +343,7 @@ class Task(StatusCls):
         """
         Call socketio.emit for task progress update, and trigger job progress update.
         """
-        from digits.webapp import socketio
+        from origae.webapp import socketio
         socketio.emit('task update',
                       {
                           'task': self.html_id(),
@@ -355,7 +355,7 @@ class Task(StatusCls):
                       room=self.job_id,
                       )
 
-        from digits.webapp import scheduler
+        from origae.webapp import scheduler
         job = scheduler.get_job(self.job_id)
         if job:
             job.emit_progress_update()

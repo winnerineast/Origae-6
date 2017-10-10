@@ -20,7 +20,7 @@ from .log import logger
 from .model import ModelJob
 from .pretrained_model import PretrainedModelJob
 from .status import Status
-from digits.utils import errors
+from origae.utils import errors
 
 """
 This constant configures how long to wait before automatically
@@ -179,7 +179,7 @@ class Scheduler:
 
             # Need to fix this properly
             # if True or flask._app_ctx_stack.top is not None:
-            from digits.webapp import app, socketio
+            from origae.webapp import app, socketio
             with app.app_context():
                 # send message to job_management room that the job is added
 
@@ -277,7 +277,7 @@ class Scheduler:
             if os.path.exists(job.dir()):
                 shutil.rmtree(job.dir())
             logger.info('Job deleted.', job_id=job_id)
-            from digits.webapp import socketio
+            from origae.webapp import socketio
             socketio.emit('job update',
                           {
                               'update': 'deleted',
@@ -519,7 +519,7 @@ class Scheduler:
         """
         Call socketio.emit gpu availability
         """
-        from digits.webapp import scheduler, socketio
+        from origae.webapp import scheduler, socketio
         socketio.emit('server update',
                       {
                           'update': 'gpus_available',

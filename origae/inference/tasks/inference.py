@@ -9,10 +9,10 @@ import tempfile
 import re
 import sys
 
-import digits
-from digits.task import Task
-from digits.utils import subclass, override
-from digits.utils.image import embed_image_html
+import origae
+from origae.task import Task
+from origae.utils import subclass, override
+from origae.utils.image import embed_image_html
 
 
 @subclass
@@ -190,11 +190,11 @@ class InferenceTask(Task):
     def task_arguments(self, resources, env):
 
         args = [sys.executable,
-                os.path.join(os.path.dirname(os.path.abspath(digits.__file__)), 'tools', 'inference.py'),
+                os.path.join(os.path.dirname(os.path.abspath(origae.__file__)), 'tools', 'inference.py'),
                 self.image_list_path if self.image_list_path is not None else self.images,
                 self.job_dir,
                 self.model.id(),
-                '--jobs_dir=%s' % digits.config.config_value('jobs_dir'),
+                '--jobs_dir=%s' % origae.config.config_value('jobs_dir'),
                 ]
 
         if self.epoch is not None:

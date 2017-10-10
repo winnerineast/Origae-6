@@ -11,8 +11,8 @@ import time
 import flask
 
 from .status import Status, StatusCls
-from digits.config import config_value
-from digits.utils import sizeof_fmt, filesystem as fs
+from origae.config import config_value
+from origae.utils import sizeof_fmt, filesystem as fs
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 2

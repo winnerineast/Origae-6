@@ -5,7 +5,7 @@ import logging
 import os
 
 from . import option_list
-import digits
+import origae
 
 
 def load_logfile_filename():
@@ -20,7 +20,7 @@ def load_logfile_filename():
         filename = os.environ['DIGITS_LOGFILE_FILENAME']
         throw_error = True
     else:
-        filename = os.path.join(os.path.dirname(digits.__file__), 'digits.log')
+        filename = os.path.join(os.path.dirname(origae.__file__), 'digits.log')
 
     if filename is not None:
         try:

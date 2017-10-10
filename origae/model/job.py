@@ -2,8 +2,8 @@
 from __future__ import absolute_import
 
 from . import tasks
-from digits.job import Job
-from digits.utils import override
+from origae.job import Job
+from origae.utils import override
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 1
@@ -47,7 +47,7 @@ class ModelJob(Job):
         return d
 
     def load_dataset(self):
-        from digits.webapp import scheduler
+        from origae.webapp import scheduler
         job = scheduler.get_job(self.dataset_id)
         assert job is not None, 'Cannot find dataset'
         self.dataset = job

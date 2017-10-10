@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 
 from ..job import InferenceJob
-from digits.utils import subclass, override
+from origae.utils import subclass, override
 
 
 @subclass

@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from flask.ext.wtf import Form
 from wtforms.validators import DataRequired
 
-from digits import utils
+from origae import utils
 
 
 class DatasetForm(Form):

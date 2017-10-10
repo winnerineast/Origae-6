@@ -5,10 +5,10 @@ import os.path
 import re
 import sys
 
-import digits
-from digits import utils
-from digits.task import Task
-from digits.utils import subclass, override
+import origae
+from origae import utils
+from origae.task import Task
+from origae.utils import subclass, override
 
 # NOTE: Increment this every time the pickled object
 PICKLE_VERSION = 1
@@ -118,7 +118,7 @@ class ParseFolderTask(Task):
     @override
     def task_arguments(self, resources, env):
         args = [sys.executable, os.path.join(
-            os.path.dirname(os.path.abspath(digits.__file__)),
+            os.path.dirname(os.path.abspath(origae.__file__)),
             'tools', 'parse_folder.py'),
             self.folder,
             self.path(utils.constants.LABELS_FILE),

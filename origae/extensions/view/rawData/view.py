@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import os
 
-from digits.utils import subclass, override
+from origae.utils import subclass, override
 from .forms import ConfigForm
 from ..interface import VisualizationInterface
 
