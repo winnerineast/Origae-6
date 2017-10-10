@@ -1,22 +1,22 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
-
 import argparse
 import os.path
 import sys
 
 
-# Update PATH to include the local DIGITS directory
-PARENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-found_parent_dir = False
-for p in sys.path:
-    if os.path.abspath(p) == PARENT_DIR:
-        found_parent_dir = True
-        break
-if not found_parent_dir:
-    sys.path.insert(0, PARENT_DIR)
+# Update PATH to include the local Origae-6 directory
+def set_origae_directory_into_path():
+    PARENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    found_parent_dir = False
+    for p in sys.path:
+        if os.path.abspath(p) == PARENT_DIR:
+            found_parent_dir = True
+            break
+    if not found_parent_dir:
+        sys.path.insert(0, PARENT_DIR)
 
 
 def main():
+    set_origae_directory_into_path()
     parser = argparse.ArgumentParser(description='DIGITS server')
     parser.add_argument(
         '-p', '--port',
@@ -41,22 +41,17 @@ def main():
     import origae
 
     if args['version']:
-        print origae.__version__
+        print(origae.__version__)
         sys.exit()
 
-    print '  ___ ___ ___ ___ _____ ___'
-    print ' |   \_ _/ __|_ _|_   _/ __|'
-    print ' | |) | | (_ || |  | | \__ \\'
-    print ' |___/___\___|___| |_| |___/', origae.__version__
-    print
+    print('This is Origae-6: ', origae.__version__)
+    print('')
 
-    import origae.config
-    import origae.log
     import origae.webapp
 
     try:
         if not origae.webapp.scheduler.start():
-            print 'ERROR: Scheduler would not start'
+            print('ERROR: Scheduler would not start')
         else:
             origae.webapp.app.debug = args['debug']
             origae.webapp.socketio.run(origae.webapp.app, '0.0.0.0', args['port'])

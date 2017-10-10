@@ -2,7 +2,7 @@
 {% extends "job.html" %}
 
 {% block nav %}
-<li><a href="{{url_for('digits.model.views.show', job_id=model_job.id())}}">{{model_job.name()}}</a></li>
+<li><a href="{{url_for('origae.model.views.show', job_id=model_job.id())}}">{{model_job.name()}}</a></li>
 <li class="active"><a>Classify Many</a></li>
 {% endblock %}
 

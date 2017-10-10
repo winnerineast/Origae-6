@@ -20,7 +20,7 @@ def load_logfile_filename():
         filename = os.environ['DIGITS_LOGFILE_FILENAME']
         throw_error = True
     else:
-        filename = os.path.join(os.path.dirname(origae.__file__), 'digits.log')
+        filename = os.path.join(os.path.dirname(origae.__file__), 'origae-6.log')
 
     if filename is not None:
         try:

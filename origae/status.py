@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import time
@@ -11,7 +10,6 @@ class Status():
     """
 
     # Enum-like attributes
-
     INIT = 'I'
     WAIT = 'W'
     RUN = 'R'

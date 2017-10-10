@@ -8,8 +8,8 @@ import tempfile
 from bs4 import BeautifulSoup
 
 from .test_lmdb_creator import create_lmdbs
-from digits import test_utils
-import digits.test_views
+from origae import test_utils
+import origae.test_views
 
 # May be too short on a slow system
 TIMEOUT_DATASET = 45
@@ -19,7 +19,7 @@ TIMEOUT_DATASET = 45
 ################################################################################
 
 
-class BaseViewsTest(digits.test_views.BaseViewsTest):
+class BaseViewsTest(origae.test_views.BaseViewsTest):
     """
     Provides some functions
     """
@@ -221,8 +221,8 @@ class TestCreation(BaseViewsTestWithImageset, test_utils.DatasetMixin):
         content2.pop('directory')
         assert (content1 == content2), 'job content does not match'
 
-        job1 = digits.webapp.scheduler.get_job(job1_id)
-        job2 = digits.webapp.scheduler.get_job(job2_id)
+        job1 = origae.webapp.scheduler.get_job(job1_id)
+        job2 = origae.webapp.scheduler.get_job(job2_id)
 
         assert (job1.form_data == job2.form_data), 'form content does not match'
 

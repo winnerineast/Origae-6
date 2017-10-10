@@ -10,7 +10,7 @@ def job_from_request():
     Returns the job after grabbing job_id from request.args or request.form
     Raises werkzeug.exceptions
     """
-    from digits.webapp import scheduler
+    from origae.webapp import scheduler
 
     job_id = get_request_arg('job_id')
     if job_id is None:

@@ -15,16 +15,13 @@ from __future__ import division
 from __future__ import print_function
 
 from PIL import Image
+from . import utils as origae
 import logging
 import magic
 import math
 import numpy as np
 import os
 import tensorflow as tf
-
-# Local imports
-import caffe_tf_pb2
-import utils as digits
 
 # Constants
 MIN_FRACTION_OF_EXAMPLES_IN_QUEUE = 0.4
@@ -101,7 +98,7 @@ class MeanLoader(object):
         file_extension = os.path.splitext(self._mean_file_path)[1].upper()
 
         if file_extension == '.BINARYPROTO':
-            blob = caffe_tf_pb2.BlobProto()
+            blob = [] # caffe_tf_pb2.BlobProto()
             with open(self._mean_file_path, 'rb') as infile:
                 blob.ParseFromString(infile.read())
             data = np.array(blob.data, dtype="float32").reshape(blob.channels, blob.height, blob.width)
@@ -244,7 +241,7 @@ class LoaderFactory(object):
     def reshape_decode(self, data, shape):
         if self.float_data:  # @TODO(tzaman): this is LMDB specific - Make generic!
             data = tf.reshape(data, shape)
-            data = digits.chw_to_hwc(data)
+            data = origae.chw_to_hwc(data)
         else:
             # Decode image of any time option might come: https://github.com/tensorflow/tensorflow/issues/4009
             # Distinguish between mime types
@@ -263,12 +260,12 @@ class LoaderFactory(object):
                 # if data is in CHW, set the shape and convert to HWC
                 if self.unencoded_data_format == 'chw':
                     data = tf.reshape(data, [shape[0], shape[1], shape[2]])
-                    data = digits.chw_to_hwc(data)
+                    data = origae.chw_to_hwc(data)
                 else:  # 'hwc'
                     data = tf.reshape(data, shape)
 
                 if (self.channels == 3) and self.unencoded_channel_scheme == 'bgr':
-                    data = digits.bgr_to_rgb(data)
+                    data = origae.bgr_to_rgb(data)
 
             # Convert to float
             data = tf.to_float(data)
@@ -300,7 +297,7 @@ class LoaderFactory(object):
 
         single_label = None
         single_label_shape = None
-        if self.stage == digits.STAGE_INF:
+        if self.stage == origae.STAGE_INF:
             single_key, single_data, single_data_shape, _, _ = self.get_single_data(key_queue)
         else:
             single_key, single_data, single_data_shape, single_label, single_label_shape = \
@@ -326,7 +323,7 @@ class LoaderFactory(object):
         # (Random) Cropping
         if self.croplen:
             with tf.name_scope('cropping'):
-                if self.stage == digits.STAGE_TRAIN:
+                if self.stage == origae.STAGE_TRAIN:
                     single_data = tf.random_crop(single_data,
                                                  [self.croplen, self.croplen, self.channels],
                                                  seed=self._seed)
@@ -440,7 +437,7 @@ class LmdbLoader(LoaderFactory):
 
         # Read the first entry to get some info
         lmdb_val = self.lmdb_txn.get(self.keys[0])
-        datum = caffe_tf_pb2.Datum()
+        datum = [] # caffe_tf_pb2.Datum()
         datum.ParseFromString(lmdb_val)
 
         self.channels = datum.channels
@@ -505,7 +502,7 @@ class LmdbLoader(LoaderFactory):
         """
         def get_data_and_shape(lmdb_txn, key):
             val = lmdb_txn.get(key)
-            datum = caffe_tf_pb2.Datum()
+            datum = [] #caffe_tf_pb2.Datum()
             datum.ParseFromString(val)
             shape = np.array([datum.channels, datum.height, datum.width], dtype=np.int32)
             if datum.float_data:

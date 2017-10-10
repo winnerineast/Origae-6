@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import os
@@ -15,9 +14,10 @@ from origae.utils.store import StoreCache  # noqa
 import origae.scheduler  # noqa
 
 # Create Flask, Scheduler and SocketIO objects
-
 url_prefix = config_value('url_prefix')
+
 app = flask.Flask(__name__, static_url_path=url_prefix+'/static')
+
 app.config['DEBUG'] = True
 # Disable CSRF checking in WTForms
 app.config['WTF_CSRF_ENABLED'] = False
@@ -31,7 +31,6 @@ app.config['store_url_list'] = config_value('model_store')['url_list']
 scheduler = origae.scheduler.Scheduler(config_value('gpu_list'), True)
 
 # Register filters and views
-
 app.jinja_env.globals['server_name'] = config_value('server_name')
 app.jinja_env.globals['server_version'] = origae.__version__
 app.jinja_env.globals['dir_hash'] = fs.dir_hash(
@@ -92,9 +91,9 @@ def username_decorator(f):
         return f(*args, **kwargs)
     return decorated
 
-for endpoint, function in app.view_functions.iteritems():
-    app.view_functions[endpoint] = username_decorator(function)
+
+for an_endpoint, a_function in app.view_functions.iteritems():
+    app.view_functions[an_endpoint] = username_decorator(a_function)
 
 # Setup the environment
-
 scheduler.load_past_jobs()

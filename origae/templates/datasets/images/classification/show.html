@@ -1,5 +1,3 @@
-{# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved. #}
-
 {% extends "job.html" %}
 {% from "helper.html" import serve_file %}
 
@@ -98,7 +96,7 @@
     <div class="distribution-graph" style="display:none;"></div>
     {% if task.distribution_data() %}
         <script>
-            drawDistributionGraph("{{task.html_id()}}",
+            drawDistributionGraph("{{task.html_id()}}"
                 {% autoescape false %}
                 {{task.distribution_data()}}
                 {% endautoescape %}
@@ -114,14 +112,14 @@
     {% if task.status=='D' and task.mean_file %}
         <script>
             displayMeanImage("{{task.html_id()}}",
-                "{{url_for('digits.views.serve_file', path=task.path('mean.jpg', relative=True))}}");
+                "{{url_for('origae.views.serve_file', path=task.path('mean.jpg', relative=True))}}");
         </script>
     {% endif %}
 
     {# Exploration #}
     {% if task.backend=='lmdb' %}
         <div class="exploration" style="display:none;">
-            <a href="{{url_for('digits.dataset.images.classification.views.explore', job_id=job.id(), db=task.db_name.lower())}}" class="btn btn-primary">Explore the db</a>
+            <a href="{{url_for('origae.dataset.images.classification.views.explore', job_id=job.id(), db=task.db_name.lower())}}" class="btn btn-primary">Explore the db</a>
         </div>
         {% if task.status=='D' %}
             <script>

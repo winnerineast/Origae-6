@@ -36,7 +36,7 @@ from tensorflow.core.framework import summary_pb2
 
 
 # Local imports
-import utils as digits
+import utils as origae
 import lr_policy
 from model import Model, Tower  # noqa
 from utils import model_property  # noqa
@@ -479,8 +479,8 @@ def main(_):
         # @TODO(tzaman) - add mode checks to UserModel
 
         if FLAGS.train_db:
-            with tf.name_scope(digits.STAGE_TRAIN) as stage_scope:
-                train_model = Model(digits.STAGE_TRAIN, FLAGS.croplen, nclasses, FLAGS.optimization, FLAGS.momentum)
+            with tf.name_scope(origae.STAGE_TRAIN) as stage_scope:
+                train_model = Model(origae.STAGE_TRAIN, FLAGS.croplen, nclasses, FLAGS.optimization, FLAGS.momentum)
                 train_model.create_dataloader(FLAGS.train_db)
                 train_model.dataloader.setup(FLAGS.train_labels,
                                              FLAGS.shuffle,

@@ -86,6 +86,6 @@
         {# Absolute path - don't serve file for security reasons #}
         {{path}}
     {% else %}
-        <a href="{{url_for('digits.views.serve_file', path=obj.path(path, relative=True))}}">{{path}}</a>
+        <a href="{{url_for('origae.views.serve_file', path=obj.path(path, relative=True))}}">{{path}}</a>
     {% endif %}
 {% endmacro %}

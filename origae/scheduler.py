@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 from collections import OrderedDict
@@ -93,7 +92,6 @@ class Scheduler:
     """
     Coordinates execution of Jobs
     """
-
     def __init__(self, gpu_list=None, verbose=False):
         """
         Keyword arguments:

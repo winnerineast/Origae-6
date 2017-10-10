@@ -24,10 +24,7 @@ import PIL.Image
 if __name__ == '__main__':
     dirname = os.path.dirname(os.path.realpath(__file__))
     sys.path.insert(0, os.path.join(dirname, '..', '..', '..', '..'))
-    import digits.config  # noqa
-
-# Import digits.config first to set the path to Caffe
-import caffe_pb2  # noqa
+    import origae.config  # noqa
 
 
 IMAGE_SIZE = 10

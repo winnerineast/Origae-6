@@ -5,9 +5,9 @@ import tempfile
 import unittest
 
 from . import create_generic_db
-from digits import extensions
-from digits import test_utils
-from digits.utils import constants
+from origae import extensions
+from origae import test_utils
+from origae.utils import constants
 
 
 test_utils.skipIfNotFramework('none')

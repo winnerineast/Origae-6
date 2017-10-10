@@ -1,12 +1,10 @@
-# Copyright (c) 2016-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 from HTMLParser import HTMLParser
 import time
 
 
-class StoreCache():
-
+class StoreCache:
     def __init__(self, ttl=86400):
         self.expiration_time = time.time() + ttl
         self.ttl = ttl

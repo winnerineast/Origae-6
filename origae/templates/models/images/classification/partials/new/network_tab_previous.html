@@ -18,7 +18,7 @@
                 <td>
                     {{network}}
                     {{network.label}}
-                    <a href="{{url_for('digits.model.views.show', job_id=network.data)}}" target="_blank">View</a>
+                    <a href="{{url_for('origae.model.views.show', job_id=network.data)}}" target="_blank">View</a>
                     <span class="badge">{{previous_job.train_task().get_framework_id()}}</span>
                 </td>
                 <td>

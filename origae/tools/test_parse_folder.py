@@ -11,7 +11,7 @@ import numpy as np
 import PIL.Image
 
 from . import parse_folder
-from digits import test_utils
+from origae import test_utils
 
 
 test_utils.skipIfNotFramework('none')
@@ -148,8 +148,8 @@ class TestValidateRange():
         assert parse_folder.validate_range('foo') is False
 
 
-@mock.patch('digits.tools.parse_folder.validate_output_file')
-@mock.patch('digits.tools.parse_folder.validate_input_file')
+@mock.patch('origae.tools.parse_folder.validate_output_file')
+@mock.patch('origae.tools.parse_folder.validate_input_file')
 class TestCalculatePercentages():
 
     @raises(AssertionError)
@@ -274,7 +274,7 @@ class TestParseWebListing():
                     ['bird.jpg'],
                 ),
         ]:
-            with mock.patch('digits.tools.parse_folder.requests') as mock_requests:
+            with mock.patch('origae.tools.parse_folder.requests') as mock_requests:
                 response = mock.Mock()
                 response.status_code = mock_requests.codes.ok
                 response.content = content

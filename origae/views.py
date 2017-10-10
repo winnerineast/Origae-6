@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import glob
@@ -9,7 +8,7 @@ import os
 
 import flask
 from flask.ext.socketio import join_room, leave_room
-from werkzeug import HTTP_STATUS_CODES
+from werkzeug.http import HTTP_STATUS_CODES
 import werkzeug.exceptions
 
 from .config import config_value
@@ -19,6 +18,7 @@ from origae import dataset, extensions, model, utils, pretrained_model
 from origae.log import logger
 from origae.utils.routing import request_wants_json
 
+
 blueprint = flask.Blueprint(__name__, __name__)
 
 
@@ -26,7 +26,7 @@ blueprint = flask.Blueprint(__name__, __name__)
 @blueprint.route('/', methods=['GET'])
 def home(tab=2):
     """
-    DIGITS home page
+    Origae-6 home page
     Returns information about each job on the server
 
     Returns JSON when requested:
@@ -49,6 +49,7 @@ def home(tab=2):
             'models': [j.json_dict()
                        for j in running_models + completed_models],
         }
+        # Attach server name if it's running in cluster mode.
         if config_value('server_name'):
             data['server_name'] = config_value('server_name')
         return flask.jsonify(data)
@@ -58,12 +59,12 @@ def home(tab=2):
                 'image-classification': {
                     'title': 'Classification',
                     'url': flask.url_for(
-                        'digits.dataset.images.classification.views.new'),
+                        'origae.dataset.images.classification.views.new'),
                 },
                 'image-other': {
                     'title': 'Other',
                     'url': flask.url_for(
-                        'digits.dataset.images.generic.views.new'),
+                        'origae.dataset.images.generic.views.new'),
                 },
             },
         }
@@ -73,12 +74,12 @@ def home(tab=2):
                 'image-classification': {
                     'title': 'Classification',
                     'url': flask.url_for(
-                        'digits.model.images.classification.views.new'),
+                        'origae.model.images.classification.views.new'),
                 },
                 'image-other': {
                     'title': 'Other',
                     'url': flask.url_for(
-                        'digits.model.images.generic.views.new'),
+                        'origae.model.images.generic.views.new'),
                 },
             },
         }
@@ -89,12 +90,12 @@ def home(tab=2):
                     'title': 'Upload Pretrained Model',
                     'id': 'uploadPretrainedModel',
                     'url': flask.url_for(
-                        'digits.pretrained_model.views.new'),
+                        'origae.pretrained_model.views.new'),
                 },
                 'access-model-store': {
                     'title': 'Retrieve from Model Store',
                     'id': 'retrieveModelStore',
-                    'url': flask.url_for('digits.store.views.store'),
+                    'url': flask.url_for('origae.store.views.store'),
                 }
             },
         }
@@ -110,7 +111,7 @@ def home(tab=2):
             new_dataset_options[ext_category][ext_id] = {
                 'title': ext_title,
                 'url': flask.url_for(
-                    'digits.dataset.generic.views.new',
+                    'origae.dataset.generic.views.new',
                     extension_id=ext_id),
             }
             if ext_category not in new_model_options:
@@ -118,7 +119,7 @@ def home(tab=2):
             new_model_options[ext_category][ext_id] = {
                 'title': ext_title,
                 'url': flask.url_for(
-                    'digits.model.images.generic.views.new',
+                    'origae.model.images.generic.views.new',
                     extension_id=ext_id),
             }
 
@@ -317,9 +318,8 @@ def group():
 
     return 'Jobs regrouped.'
 
+
 # Authentication/login
-
-
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     """
@@ -328,7 +328,8 @@ def login():
     """
     # Get the URL to redirect to after logging in
     next_url = utils.routing.get_request_arg('next') or \
-        flask.request.referrer or flask.url_for('.home')
+               flask.request.referrer or \
+               flask.url_for('.home')
 
     if flask.request.method == 'GET':
         return flask.render_template('login.html', next=next_url)
@@ -373,11 +374,11 @@ def show_job(job_id):
         raise werkzeug.exceptions.NotFound('Job not found')
 
     if isinstance(job, dataset.DatasetJob):
-        return flask.redirect(flask.url_for('digits.dataset.views.show', job_id=job_id))
+        return flask.redirect(flask.url_for('origae.dataset.views.show', job_id=job_id))
     if isinstance(job, model.ModelJob):
-        return flask.redirect(flask.url_for('digits.model.views.show', job_id=job_id))
+        return flask.redirect(flask.url_for('origae.model.views.show', job_id=job_id))
     if isinstance(job, pretrained_model.PretrainedModelJob):
-        return flask.redirect(flask.url_for('digits.pretrained_model.views.show', job_id=job_id))
+        return flask.redirect(flask.url_for('origae.pretrained_model.views.show', job_id=job_id))
     else:
         raise werkzeug.exceptions.BadRequest('Invalid job type')
 
@@ -592,15 +593,15 @@ def clone_job(clone):
 
     if isinstance(job, dataset.GenericDatasetJob):
         return flask.redirect(
-            flask.url_for('digits.dataset.generic.views.new', extension_id=job.extension_id) + '?clone=' + clone)
+            flask.url_for('origae.dataset.generic.views.new', extension_id=job.extension_id) + '?clone=' + clone)
     if isinstance(job, dataset.ImageClassificationDatasetJob):
-        return flask.redirect(flask.url_for('digits.dataset.images.classification.views.new') + '?clone=' + clone)
+        return flask.redirect(flask.url_for('origae.dataset.images.classification.views.new') + '?clone=' + clone)
     if isinstance(job, dataset.GenericImageDatasetJob):
-        return flask.redirect(flask.url_for('digits.dataset.images.generic.views.new') + '?clone=' + clone)
+        return flask.redirect(flask.url_for('origae.dataset.images.generic.views.new') + '?clone=' + clone)
     if isinstance(job, model.ImageClassificationModelJob):
-        return flask.redirect(flask.url_for('digits.model.images.classification.views.new') + '?clone=' + clone)
+        return flask.redirect(flask.url_for('origae.model.images.classification.views.new') + '?clone=' + clone)
     if isinstance(job, model.GenericImageModelJob):
-        return flask.redirect(flask.url_for('digits.model.images.generic.views.new') + '?clone=' + clone)
+        return flask.redirect(flask.url_for('origae.model.images.generic.views.new') + '?clone=' + clone)
     else:
         raise werkzeug.exceptions.BadRequest('Invalid job type')
 
@@ -698,7 +699,7 @@ def extension_static(extension_type, extension_id, filename):
     Returns static files from an extension's static directory.
     '/extension-static/view/image-segmentation/js/app.js'
     would send the file
-    'digits/extensions/view/imageSegmentation/static/js/app.js'
+    'origae/extensions/view/imageSegmentation/static/js/app.js'
     """
 
     extension = None
@@ -710,8 +711,8 @@ def extension_static(extension_type, extension_id, filename):
     if extension is None:
         raise ValueError("Unknown extension '%s'" % extension_id)
 
-    digits_root = os.path.dirname(os.path.abspath(origae.__file__))
-    rootdir = os.path.join(digits_root, *['extensions', 'view', extension.get_dirname(), 'static'])
+    origae_root = os.path.dirname(os.path.abspath(origae.__file__))
+    rootdir = os.path.join(origae_root, *['extensions', 'view', extension.get_dirname(), 'static'])
     return flask.send_from_directory(rootdir, filename)
 
 # SocketIO functions

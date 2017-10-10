@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import os
@@ -30,7 +29,7 @@ class Job(StatusCls):
         Loads a Job in the given job_id
         Returns the Job or throws an exception
         """
-        from digits.model.tasks import TrainTask
+        from origae.model.tasks import TrainTask
 
         job_dir = os.path.join(config_value('jobs_dir'), job_id)
         filename = os.path.join(job_dir, cls.SAVE_FILE)
@@ -222,7 +221,7 @@ class Job(StatusCls):
         """
         Called when StatusCls.status.setter is used
         """
-        from digits.webapp import app, socketio
+        from origae.webapp import app, socketio
 
         message = {
             'update': 'status',
@@ -307,7 +306,7 @@ class Job(StatusCls):
         """
         progress = self.get_progress()
 
-        from digits.webapp import socketio
+        from origae.webapp import socketio
         socketio.emit('job update',
                       {
                           'job_id': self.id(),
@@ -322,7 +321,7 @@ class Job(StatusCls):
         """
         Call socketio.emit for task job update
         """
-        from digits.webapp import socketio
+        from origae.webapp import socketio
         socketio.emit('job update',
                       {
                           'job_id': self.id(),

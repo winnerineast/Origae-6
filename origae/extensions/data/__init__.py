@@ -10,7 +10,7 @@ from . import objectDetection
 
 # Entry point group (this is the key we use to register and
 # find installed plug-ins)
-GROUP = "digits.plugins.data"
+GROUP = "origae.plugins.data"
 
 # built-in extensions
 builtin_data_extensions = [

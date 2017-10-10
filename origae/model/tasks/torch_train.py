@@ -14,13 +14,10 @@ import numpy as np
 import PIL.Image
 
 from .train import TrainTask
-import digits
-from digits import utils
-from digits.config import config_value
-from digits.utils import subclass, override, constants
-
-# Must import after importing digit.config
-import caffe_pb2
+import origae
+from origae import utils
+from origae.config import config_value
+from origae.utils import subclass, override, constants
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 1

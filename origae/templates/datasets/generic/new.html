@@ -11,7 +11,7 @@ New {{ extension_title }} Dataset
 {% endblock %}
 
 {% block nav %}
-<li class="active"><a href="{{url_for('digits.dataset.generic.views.new', extension_id=extension_id)}}">New Dataset</a></li>
+<li class="active"><a href="{{url_for('origae.dataset.generic.views.new', extension_id=extension_id)}}">New Dataset</a></li>
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@ New {{ extension_title }} Dataset
     <h1>New {{ extension_title }} Dataset</h1>
 </div>
 
-<form action="{{url_for('digits.dataset.generic.views.create', extension_id=extension_id)}}" enctype="multipart/form-data" method="post">
+<form action="{{url_for('origae.dataset.generic.views.create', extension_id=extension_id)}}" enctype="multipart/form-data" method="post">
 
     {{ form.hidden_tag() }}
 

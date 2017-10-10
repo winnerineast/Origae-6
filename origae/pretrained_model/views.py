@@ -192,4 +192,4 @@ def new():
 
     scheduler.add_job(job)
 
-    return flask.redirect(flask.url_for('digits.views.home', tab=3)), 302
+    return flask.redirect(flask.url_for('origae.views.home', tab=3)), 302

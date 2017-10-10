@@ -254,7 +254,7 @@ def to_pretrained(job_id):
 
     scheduler.add_job(job)
 
-    return flask.redirect(flask.url_for('digits.views.home', tab=3)), 302
+    return flask.redirect(flask.url_for('origae.views.home', tab=3)), 302
 
 
 @blueprint.route('/<job_id>/download',
