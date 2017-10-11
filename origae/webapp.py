@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 from __future__ import absolute_import
 
 import os
@@ -12,6 +13,23 @@ from origae import utils  # noqa
 from origae.utils import filesystem as fs  # noqa
 from origae.utils.store import StoreCache  # noqa
 import origae.scheduler  # noqa
+
+
+def get_tensorflow_version():
+    try:
+        import tensorflow as tf
+        return tf.__version__
+    except ImportError:
+        return 'not found'
+
+
+def get_keras_version():
+    try:
+        import keras as kf
+        return kf.__version__
+    except ImportError:
+        return 'not found'
+
 
 # Create Flask, Scheduler and SocketIO objects
 url_prefix = config_value('url_prefix')
@@ -33,6 +51,8 @@ scheduler = origae.scheduler.Scheduler(config_value('gpu_list'), True)
 # Register filters and views
 app.jinja_env.globals['server_name'] = config_value('server_name')
 app.jinja_env.globals['server_version'] = origae.__version__
+app.jinja_env.globals['tensorflow_version'] = get_tensorflow_version()
+app.jinja_env.globals['keras_version'] = get_keras_version()
 app.jinja_env.globals['dir_hash'] = fs.dir_hash(
     os.path.join(os.path.dirname(origae.__file__), 'static'))
 app.jinja_env.filters['print_time'] = utils.time_filters.print_time

@@ -7,7 +7,7 @@ from __future__ import absolute_import
 import os
 import unittest
 
-from digits.config import config_value
+from origae.config import config_value
 
 
 def skipIfNotFramework(framework):

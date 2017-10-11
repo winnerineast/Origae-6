@@ -3,7 +3,7 @@
     <!-- For Internet Explorer -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="icon" href="{{url_for('static', filename='images/nvidia.ico')}}" />
+    <link rel="icon" href="{{url_for('static', filename='images/origae.ico')}}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css', ver=dir_hash) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css', ver=dir_hash) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', ver=dir_hash) }}">
@@ -58,8 +58,8 @@
                         <li><span class="navbar-text">Server: {{server_name}}</span></li>
                     {% endif %}
                     <li><span class="navbar-text">DIGITS version: <br> {{server_version}}</span></li>
-                    <li><span class="navbar-text">Caffe version: <br> {{caffe_version}}</span></li>
-                    <li><span class="navbar-text">Caffe flavor: <br> {{caffe_flavor}}</span></li>
+                    <li><span class="navbar-text">Tensorflow version: <br> {{tensorflow_version}}</span></li>
+                    <li><span class="navbar-text">Keras version: <br> {{keras_version}}</span></li>
                 </ul>
             </li>
             <li class="dropdown">

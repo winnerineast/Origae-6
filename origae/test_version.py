@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import os.path
 import re
 
-from digits import test_utils
+from origae import test_utils
 
 
 test_utils.skipIfNotFramework('none')
@@ -27,18 +27,18 @@ class TestVersion():
             'Version string "%s" is ill-formatted' % version
 
     def test_package_version(self):
-        import digits
-        self.check_version(digits.__version__)
+        import origae
+        self.check_version(origae.__version__)
 
     def test_import_version(self):
-        import digits.version
-        self.check_version(digits.version.__version__)
+        import origae.version
+        self.check_version(origae.version.__version__)
 
     # Test a programmatic and reliable way to check the version
     # python -c "execfile('digits/version.py'); print __version__"
     def test_execfile_version(self):
-        import digits
-        filename = os.path.join(os.path.dirname(digits.__file__), 'version.py')
+        import origae
+        filename = os.path.join(os.path.dirname(origae.__file__), 'version.py')
         file_locals = {}
         execfile(filename, {}, file_locals)
         assert file_locals.keys() == ['__version__'], \
@@ -47,7 +47,7 @@ class TestVersion():
 
     # Make sure somebody doesn't overwrite the version in __init__.py
     def test_package_version_matches_import_version(self):
-        import digits
-        import digits.version
+        import origae
+        import origae.version
 
-        assert digits.__version__ == digits.version.__version__
+        assert origae.__version__ == origae.version.__version__
