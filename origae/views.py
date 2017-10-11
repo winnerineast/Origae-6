@@ -24,7 +24,7 @@ blueprint = flask.Blueprint(__name__, __name__)
 
 @blueprint.route('/index.json', methods=['GET'])
 @blueprint.route('/', methods=['GET'])
-def home(tab=2):
+def home(tab=4):
     """
     Origae-6 home page
     Returns information about each job on the server
@@ -39,7 +39,7 @@ def home(tab=2):
     completed_datasets = get_job_list(dataset.DatasetJob, False)
     running_models = get_job_list(model.ModelJob, True)
     completed_models = get_job_list(model.ModelJob, False)
-
+    # if it's request data only
     if request_wants_json():
         data = {
             'version': origae.__version__,
@@ -54,6 +54,7 @@ def home(tab=2):
             data['server_name'] = config_value('server_name')
         return flask.jsonify(data)
     else:
+        # this is requested by browser.
         new_dataset_options = {
             'Images': {
                 'image-classification': {
@@ -122,7 +123,7 @@ def home(tab=2):
                     'origae.model.images.generic.views.new',
                     extension_id=ext_id),
             }
-
+        # time to bring a comprehensive home page.
         return flask.render_template(
             'home.html',
             tab=tab,

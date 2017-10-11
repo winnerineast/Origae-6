@@ -48,7 +48,7 @@ def main():
     print('')
 
     import origae.webapp
-
+    # enable message channel.
     try:
         if not origae.webapp.scheduler.start():
             print('ERROR: Scheduler would not start')
