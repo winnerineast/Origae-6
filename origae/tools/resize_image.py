@@ -10,10 +10,10 @@ import PIL.Image
 
 # Add path for DIGITS package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-import digits.config  # noqa
-from digits import utils, log  # noqa
+import origae.config  # noqa
+from origae import utils, log  # noqa
 
-logger = logging.getLogger('digits.tools.resize_image')
+logger = logging.getLogger('origae.tools.resize_image')
 
 
 def validate_output_file(filename):

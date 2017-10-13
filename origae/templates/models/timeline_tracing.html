@@ -55,7 +55,7 @@ function showTimeline() {
     var e = document.getElementById("timeline-trace-list");
     var step = e.options[e.selectedIndex].value;
 
-    $.ajax("{{url_for('digits.model.views.timeline_trace_data')}}",
+    $.ajax("{{url_for('origae.model.views.timeline_trace_data')}}",
     {
         type: "POST",
         data: {'step': step, job_id: job_id},

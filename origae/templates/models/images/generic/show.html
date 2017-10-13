@@ -40,7 +40,7 @@
             <div id="dataset-summary"></div>
             {% if job.dataset %}
             <script>
-            $.ajax("{{url_for('digits.dataset.views.summary', job_id=job.dataset.id())}}",
+            $.ajax("{{url_for('origae.dataset.views.summary', job_id=job.dataset.id())}}",
             {
                 type: "GET",
                 }
@@ -65,12 +65,12 @@
                 style="height:500px;width:100%;background:white;display:none;"></div>
             <div class="pull-right combined-graph" style="display:none;">
                 <a class="btn btn-primary btn-sm" target="_blank"
-                    href="{{url_for('digits.model.images.generic.views.large_graph', job_id=job.id())}}">
+                    href="{{url_for('origae.model.images.generic.views.large_graph', job_id=job.id())}}">
                     View Large
                 </a>
                 {% if job.train_task().has_timeline_traces() %}
                 <a class="btn btn-primary btn-sm" target="_blank"
-                    href="{{url_for('digits.model.images.classification.views.timeline_tracing', job_id=job.id())}}">
+                    href="{{url_for('origae.model.images.classification.views.timeline_tracing', job_id=job.id())}}">
                     View Timeline Traces
                 </a>
                 {% endif %}
@@ -144,14 +144,14 @@ updateSnapshotList({% autoescape false %}{{task.snapshot_list()}}{% endautoescap
                     </div>
                     <div class="col-sm-4">
                         <button
-                            formaction="{{url_for('digits.model.views.download', job_id=job.id())}}"
+                            formaction="{{url_for('origae.model.views.download', job_id=job.id())}}"
                             formmethod="post"
                             formenctype="multipart/form-data"
                             class="btn btn-info">
                             Download Model
                         </button>
                         <button
-                            formaction="{{url_for('digits.model.views.to_pretrained', job_id=job.id())}}"
+                            formaction="{{url_for('origae.model.views.to_pretrained', job_id=job.id())}}"
                             formmethod="post"
                             formenctype="multipart/form-data"
                             class="btn btn-success">
@@ -253,7 +253,7 @@ updateSnapshotList({% autoescape false %}{{task.snapshot_list()}}{% endautoescap
                         <input type="hidden" name="Language" value="English">
 
                         <button name="infer-db-btn"
-                            formaction="{{url_for('digits.model.images.generic.views.infer_extension', job_id=job.id())}}"
+                            formaction="{{url_for('origae.model.images.generic.views.infer_extension', job_id=job.id())}}"
                             formmethod="post"
                             formenctype="multipart/form-data"
                             formtarget="_blank"
@@ -306,7 +306,7 @@ updateSnapshotList({% autoescape false %}{{task.snapshot_list()}}{% endautoescap
                                 ></span>
                         </div>
                         <button name="infer-one-btn"
-                            formaction="{{url_for('digits.model.images.generic.views.infer_one', job_id=job.id())}}"
+                            formaction="{{url_for('origae.model.images.generic.views.infer_one', job_id=job.id())}}"
                             formmethod="post"
                             formenctype="multipart/form-data"
                             formtarget="_blank"
@@ -320,7 +320,7 @@ updateSnapshotList({% autoescape false %}{{task.snapshot_list()}}{% endautoescap
                             <small>Specify path to LMDB database on server</small>
                         </div>
                         <button name="infer-db-btn"
-                            formaction="{{url_for('digits.model.images.generic.views.infer_db', job_id=job.id())}}"
+                            formaction="{{url_for('origae.model.images.generic.views.infer_db', job_id=job.id())}}"
                             formmethod="post"
                             formenctype="multipart/form-data"
                             formtarget="_blank"
@@ -356,7 +356,7 @@ updateSnapshotList({% autoescape false %}{{task.snapshot_list()}}{% endautoescap
                             <small>Leave blank to use all</small>
                         </div>
                         <button name="infer-many-btn"
-                            formaction="{{url_for('digits.model.images.generic.views.infer_many', job_id=job.id())}}"
+                            formaction="{{url_for('origae.model.images.generic.views.infer_many', job_id=job.id())}}"
                             formmethod="post"
                             formenctype="multipart/form-data"
                             formtarget="_blank"

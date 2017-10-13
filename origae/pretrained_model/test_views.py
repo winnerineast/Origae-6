@@ -8,11 +8,11 @@ import tarfile
 
 from bs4 import BeautifulSoup
 
-import digits.webapp
-import digits.dataset.images.classification.test_views
-import digits.model.images.classification.test_views
-from digits import test_utils
-import digits.test_views
+import origae.webapp
+import origae.dataset.images.classification.test_views
+import origae.model.images.classification.test_views
+from origae import test_utils
+import origae.test_views
 
 
 # May be too short on a slow system
@@ -20,14 +20,14 @@ TIMEOUT_DATASET = 45
 TIMEOUT_MODEL = 60
 
 
-class BaseTestUpload(digits.model.images.classification.test_views.BaseViewsTestWithModel):
+class BaseTestUpload(origae.model.images.classification.test_views.BaseViewsTestWithModel):
     """
     Tests uploading Pretrained Models
     """
 
     def test_upload_manual(self):
-        # job = digits.webapp.scheduler.get_job(self.model_id)
-        job = digits.webapp.scheduler.get_job(self.model_id)
+        # job = origae.webapp.scheduler.get_job(self.model_id)
+        job = origae.webapp.scheduler.get_job(self.model_id)
 
         if job is None:
             raise AssertionError('Failed To Create Job')
@@ -62,7 +62,7 @@ class BaseTestUpload(digits.model.images.classification.test_views.BaseViewsTest
         assert rv.status_code == 302, 'POST failed with %s\n\n%s' % (rv.status_code, body)
 
     def test_upload_archive(self):
-        job = digits.webapp.scheduler.get_job(self.model_id)
+        job = origae.webapp.scheduler.get_job(self.model_id)
 
         if job is None:
             raise AssertionError('Failed To Create Job')

@@ -1,4 +1,4 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 
 import os.path
 import shutil
@@ -8,9 +8,9 @@ import lmdb
 import numpy as np
 
 from . import analyze_db
-from digits import test_utils
+from origae import test_utils
 
-# Must import after importing digits.config
+# Must import after importing origae.config
 import caffe.io
 
 

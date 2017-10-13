@@ -321,7 +321,7 @@ def create():
                 if request_wants_json():
                     return flask.jsonify(job.json_dict())
                 else:
-                    return flask.redirect(flask.url_for('digits.model.views.show', job_id=job.id()))
+                    return flask.redirect(flask.url_for('origae.model.views.show', job_id=job.id()))
 
         except:
             if job:
@@ -337,7 +337,7 @@ def create():
 
 def show(job, related_jobs=None):
     """
-    Called from digits.model.views.models_show()
+    Called from origae.model.views.models_show()
     """
     return flask.render_template(
         'models/images/classification/show.html',

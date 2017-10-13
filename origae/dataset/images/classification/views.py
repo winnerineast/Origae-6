@@ -10,6 +10,7 @@ try:
 except ImportError:
     from StringIO import StringIO
 
+import caffe_pb2
 import flask
 import PIL.Image
 
@@ -397,7 +398,7 @@ def explore():
     pages = range(min_page, max_page + 1)
     for key, value in reader.entries():
         if count >= page * size:
-            datum = []#caffe_pb2.Datum()
+            datum = caffe_pb2.Datum()
             datum.ParseFromString(value)
             if label is None or datum.label == label:
                 if datum.encoded:
@@ -422,7 +423,7 @@ def explore():
         if label is None:
             count += 1
         else:
-            datum = [] #caffe_pb2.Datum()
+            datum = caffe_pb2.Datum()
             datum.ParseFromString(value)
             if datum.label == int(label):
                 count += 1

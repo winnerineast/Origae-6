@@ -10,10 +10,10 @@ from bs4 import BeautifulSoup
 import numpy as np
 import PIL.Image
 
-import digits.test_views
-from digits import extensions
-from digits import test_utils
-from digits.utils import constants
+import origae.test_views
+from origae import extensions
+from origae import test_utils
+from origae.utils import constants
 
 # May be too short on a slow system
 TIMEOUT_DATASET = 45
@@ -23,7 +23,7 @@ TIMEOUT_DATASET = 45
 ################################################################################
 
 
-class BaseViewsTest(digits.test_views.BaseViewsTest):
+class BaseViewsTest(origae.test_views.BaseViewsTest):
     """
     Provides some functions
     """
@@ -284,8 +284,8 @@ class GenericCreationTest(BaseViewsTestWithDataset):
         content2.pop('directory')
         assert (content1 == content2), 'job content does not match'
 
-        job1 = digits.webapp.scheduler.get_job(job1_id)
-        job2 = digits.webapp.scheduler.get_job(job2_id)
+        job1 = origae.webapp.scheduler.get_job(job1_id)
+        job2 = origae.webapp.scheduler.get_job(job2_id)
 
         assert (job1.form_data == job2.form_data), 'form content does not match'
 

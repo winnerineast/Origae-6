@@ -1,11 +1,11 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import re
 import time
 
-from digits import test_utils
-from digits import utils
+from origae import test_utils
+from origae import utils
 
 
 test_utils.skipIfNotFramework('none')

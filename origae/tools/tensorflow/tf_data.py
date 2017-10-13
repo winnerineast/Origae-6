@@ -15,13 +15,16 @@ from __future__ import division
 from __future__ import print_function
 
 from PIL import Image
-from . import utils as origae
 import logging
 import magic
 import math
 import numpy as np
 import os
 import tensorflow as tf
+
+# Local imports
+import caffe_tf_pb2
+import utils as origae
 
 # Constants
 MIN_FRACTION_OF_EXAMPLES_IN_QUEUE = 0.4
@@ -98,7 +101,7 @@ class MeanLoader(object):
         file_extension = os.path.splitext(self._mean_file_path)[1].upper()
 
         if file_extension == '.BINARYPROTO':
-            blob = [] # caffe_tf_pb2.BlobProto()
+            blob = caffe_tf_pb2.BlobProto()
             with open(self._mean_file_path, 'rb') as infile:
                 blob.ParseFromString(infile.read())
             data = np.array(blob.data, dtype="float32").reshape(blob.channels, blob.height, blob.width)
@@ -437,7 +440,7 @@ class LmdbLoader(LoaderFactory):
 
         # Read the first entry to get some info
         lmdb_val = self.lmdb_txn.get(self.keys[0])
-        datum = [] # caffe_tf_pb2.Datum()
+        datum = caffe_tf_pb2.Datum()
         datum.ParseFromString(lmdb_val)
 
         self.channels = datum.channels
@@ -502,7 +505,7 @@ class LmdbLoader(LoaderFactory):
         """
         def get_data_and_shape(lmdb_txn, key):
             val = lmdb_txn.get(key)
-            datum = [] #caffe_tf_pb2.Datum()
+            datum = caffe_tf_pb2.Datum()
             datum.ParseFromString(val)
             shape = np.array([datum.channels, datum.height, datum.width], dtype=np.int32)
             if datum.float_data:

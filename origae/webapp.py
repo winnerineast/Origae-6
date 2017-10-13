@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import os
@@ -14,28 +14,10 @@ from origae.utils import filesystem as fs  # noqa
 from origae.utils.store import StoreCache  # noqa
 import origae.scheduler  # noqa
 
-
-def get_tensorflow_version():
-    try:
-        import tensorflow as tf
-        return tf.__version__
-    except ImportError:
-        return 'not found'
-
-
-def get_keras_version():
-    try:
-        import keras as kf
-        return kf.__version__
-    except ImportError:
-        return 'not found'
-
-
 # Create Flask, Scheduler and SocketIO objects
+
 url_prefix = config_value('url_prefix')
-
 app = flask.Flask(__name__, static_url_path=url_prefix+'/static')
-
 app.config['DEBUG'] = True
 # Disable CSRF checking in WTForms
 app.config['WTF_CSRF_ENABLED'] = False
@@ -49,10 +31,11 @@ app.config['store_url_list'] = config_value('model_store')['url_list']
 scheduler = origae.scheduler.Scheduler(config_value('gpu_list'), True)
 
 # Register filters and views
+
 app.jinja_env.globals['server_name'] = config_value('server_name')
 app.jinja_env.globals['server_version'] = origae.__version__
-app.jinja_env.globals['tensorflow_version'] = get_tensorflow_version()
-app.jinja_env.globals['keras_version'] = get_keras_version()
+app.jinja_env.globals['caffe_version'] = config_value('caffe')['version']
+app.jinja_env.globals['caffe_flavor'] = config_value('caffe')['flavor']
 app.jinja_env.globals['dir_hash'] = fs.dir_hash(
     os.path.join(os.path.dirname(origae.__file__), 'static'))
 app.jinja_env.filters['print_time'] = utils.time_filters.print_time
@@ -111,9 +94,9 @@ def username_decorator(f):
         return f(*args, **kwargs)
     return decorated
 
-
-for an_endpoint, a_function in app.view_functions.iteritems():
-    app.view_functions[an_endpoint] = username_decorator(a_function)
+for endpoint, function in app.view_functions.iteritems():
+    app.view_functions[endpoint] = username_decorator(function)
 
 # Setup the environment
+
 scheduler.load_past_jobs()

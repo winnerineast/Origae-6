@@ -2,7 +2,7 @@ from model import Tower
 from utils import model_property
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
-import utils as digits
+import utils as origae
 
 
 class UserModel(Tower):
@@ -33,7 +33,7 @@ class UserModel(Tower):
 
     @model_property
     def loss(self):
-        loss = digits.classification_loss(self.inference, self.y)
-        accuracy = digits.classification_accuracy(self.inference, self.y)
+        loss = origae.classification_loss(self.inference, self.y)
+        accuracy = origae.classification_accuracy(self.inference, self.y)
         self.summaries.append(tf.summary.scalar(accuracy.op.name, accuracy))
         return loss

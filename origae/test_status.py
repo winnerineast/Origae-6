@@ -1,4 +1,4 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import os
@@ -16,7 +16,7 @@ test_utils.skipIfNotFramework('none')
 class TestStatus():
 
     def test_run_too_soon(self):
-        job = Job(name='testsuite-job', username='digits-testsuite')
+        job = Job(name='testsuite-job', username='origae-testsuite')
         job.status = Status.WAIT
         job.status = Status.RUN
         # Status.WAIT should be removed so the len should be 2 rather
@@ -24,7 +24,7 @@ class TestStatus():
         assert len(job.status_history) == 2, 'history length should be 2'
 
     def test_empty_history(self):
-        job = Job(name='testsuite-job', username='digits-testsuite')
+        job = Job(name='testsuite-job', username='origae-testsuite')
 
         job.status = Status.WAIT
         job.status = Status.RUN
@@ -34,7 +34,7 @@ class TestStatus():
         assert job.status == Status.INIT, 'status should be Status.INIT'
 
     def test_set_dict(self):
-        job = Job(name='testsuite-job', username='digits-testsuite')
+        job = Job(name='testsuite-job', username='origae-testsuite')
 
         # Testing some untested cases in set_dict()
         job.status = Status.ERROR

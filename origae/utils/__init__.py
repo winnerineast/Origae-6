@@ -126,7 +126,7 @@ def sizeof_fmt(size, suffix='B'):
         i = len(size_name) - 1
     p = math.pow(1024, i)
     s = size / p
-    # round to 3 significant digits
+    # round to 3 significant origae
     s = round(s, 2 - int(math.floor(math.log10(s))))
     if s.is_integer():
         s = int(s)

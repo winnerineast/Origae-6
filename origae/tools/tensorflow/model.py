@@ -18,7 +18,7 @@ from tensorflow.python.framework import ops
 
 # Local imports
 import tf_data
-import utils as digits
+import utils as origae
 from utils import model_property
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s',
@@ -97,7 +97,7 @@ class Model(object):
         #     self.optimizer
 
     def create_dataloader(self, db_path):
-        self.dataloader = tf_data.LoaderFactory.set_source(db_path, is_inference=(self.stage == digits.STAGE_INF))
+        self.dataloader = tf_data.LoaderFactory.set_source(db_path, is_inference=(self.stage == origae.STAGE_INF))
         # @TODO(tzaman) communicate the dataloader summaries to our Model summary list
         self.dataloader.stage = self.stage
         self.dataloader.croplen = self.croplen
@@ -105,7 +105,7 @@ class Model(object):
 
     def init_dataloader(self):
         with tf.device('/cpu:0'):
-            with tf.name_scope(digits.GraphKeys.LOADER):
+            with tf.name_scope(origae.GraphKeys.LOADER):
                 self.dataloader.create_input_pipeline()
 
     def create_model(self, obj_UserModel, stage_scope, batch_x=None):
@@ -113,13 +113,13 @@ class Model(object):
         if batch_x is None:
             self.init_dataloader()
             batch_x = self.dataloader.batch_x
-            if self.stage != digits.STAGE_INF:
+            if self.stage != origae.STAGE_INF:
                 batch_y = self.dataloader.batch_y
         else:
-            assert self.stage == digits.STAGE_INF
+            assert self.stage == origae.STAGE_INF
             batch_x = batch_x
 
-        available_devices = digits.get_available_gpus()
+        available_devices = origae.get_available_gpus()
         if not available_devices:
             available_devices.append('/cpu:0')
 
@@ -128,13 +128,13 @@ class Model(object):
         # Split the batch over the batch dimension over the number of available gpu's
         if len(available_devices) == 1:
             batch_x_split = [batch_x]
-            if self.stage != digits.STAGE_INF:  # Has no labels
+            if self.stage != origae.STAGE_INF:  # Has no labels
                 batch_y_split = [batch_y]
         else:
             with tf.name_scope('parallelize'):
                 # Split them up
                 batch_x_split = tf.split(batch_x, len(available_devices), 0, name='split_batch')
-                if self.stage != digits.STAGE_INF:  # Has no labels
+                if self.stage != origae.STAGE_INF:  # Has no labels
                     batch_y_split = tf.split(batch_y, len(available_devices), 0, name='split_batch')
 
         # Run the user model through the build_model function that should be filled in
@@ -144,7 +144,7 @@ class Model(object):
                 current_scope = stage_scope if len(available_devices) == 1 else ('tower_%d' % dev_i)
                 with tf.name_scope(current_scope) as scope_tower:
 
-                    if self.stage != digits.STAGE_INF:
+                    if self.stage != origae.STAGE_INF:
                         tower_model = self.add_tower(obj_tower=obj_UserModel,
                                                      x=batch_x_split[dev_i],
                                                      y=batch_y_split[dev_i])
@@ -153,29 +153,29 @@ class Model(object):
                                                      x=batch_x_split[dev_i],
                                                      y=None)
 
-                    with tf.variable_scope(digits.GraphKeys.MODEL, reuse=dev_i > 0 or self._reuse):
+                    with tf.variable_scope(origae.GraphKeys.MODEL, reuse=dev_i > 0 or self._reuse):
                         tower_model.inference  # touch to initialize
 
                         # Reuse the variables in this scope for the next tower/device
                         tf.get_variable_scope().reuse_variables()
 
-                        if self.stage == digits.STAGE_INF:
+                        if self.stage == origae.STAGE_INF:
                             # For inferencing we will only use the inference part of the graph
                             continue
 
-                        with tf.name_scope(digits.GraphKeys.LOSS):
+                        with tf.name_scope(origae.GraphKeys.LOSS):
                             for loss in self.get_tower_losses(tower_model):
-                                tf.add_to_collection(digits.GraphKeys.LOSSES, loss['loss'])
+                                tf.add_to_collection(origae.GraphKeys.LOSSES, loss['loss'])
 
                             # Assemble all made within this scope so far. The user can add custom
-                            # losses to the digits.GraphKeys.LOSSES collection
-                            losses = tf.get_collection(digits.GraphKeys.LOSSES, scope=scope_tower)
+                            # losses to the origae.GraphKeys.LOSSES collection
+                            losses = tf.get_collection(origae.GraphKeys.LOSSES, scope=scope_tower)
                             losses += ops.get_collection(ops.GraphKeys.REGULARIZATION_LOSSES, scope=None)
                             tower_loss = tf.add_n(losses, name='loss')
 
                             self.summaries.append(tf.summary.scalar(tower_loss.op.name, tower_loss))
 
-                        if self.stage == digits.STAGE_TRAIN:
+                        if self.stage == origae.STAGE_TRAIN:
                             grad_tower_losses = []
                             for loss in self.get_tower_losses(tower_model):
                                 grad_tower_loss = self.optimizer.compute_gradients(loss['loss'], loss['vars'])
@@ -184,7 +184,7 @@ class Model(object):
                             grad_towers.append(grad_tower_losses)
 
         # Assemble and average the gradients from all towers
-        if self.stage == digits.STAGE_TRAIN:
+        if self.stage == origae.STAGE_TRAIN:
             n_gpus = len(available_devices)
             if n_gpus == 1:
                 grad_averages = grad_towers[0]
@@ -205,11 +205,11 @@ class Model(object):
         queue_runners = tf.get_collection(tf.GraphKeys.QUEUE_RUNNERS, scope=self.stage+'.*')
         for qr in queue_runners:
             if self.stage in qr.name:
-                tf.add_to_collection(digits.GraphKeys.QUEUE_RUNNERS, qr)
+                tf.add_to_collection(origae.GraphKeys.QUEUE_RUNNERS, qr)
 
         self.queue_coord = tf.train.Coordinator()
         self.queue_threads = tf.train.start_queue_runners(sess=sess, coord=self.queue_coord,
-                                                          collection=digits.GraphKeys.QUEUE_RUNNERS)
+                                                          collection=origae.GraphKeys.QUEUE_RUNNERS)
         logging.info('Queue runners started (%s)', self.stage)
 
     def __del__(self):
@@ -220,8 +220,8 @@ class Model(object):
             self.queue_coord.join(self.queue_threads)
 
     def add_tower(self, obj_tower, x, y):
-        is_training = self.stage == digits.STAGE_TRAIN
-        is_inference = self.stage == digits.STAGE_INF
+        is_training = self.stage == origae.STAGE_TRAIN
+        is_inference = self.stage == origae.STAGE_INF
         input_shape = self.dataloader.get_shape()
         tower = obj_tower(x, y, input_shape, self.nclasses, is_training, is_inference)
         self.towers.append(tower)

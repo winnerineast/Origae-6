@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 
 import argparse
 from collections import Counter
@@ -21,14 +21,14 @@ import PIL.Image
 
 # Add path for DIGITS package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-import digits.config  # noqa
-from digits import log  # noqa
+import origae.config  # noqa
+from origae import log  # noqa
 
-# Import digits.config first to set path to Caffe
+# Import origae.config first to set path to Caffe
 import caffe.io  # noqa
 import caffe_pb2  # noqa
 
-logger = logging.getLogger('digits.tools.analyze_db')
+logger = logging.getLogger('origae.tools.analyze_db')
 np.set_printoptions(suppress=True, precision=3)
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-from __future__ import absolute_import
+# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 
 import argparse
 from collections import Counter
@@ -13,7 +13,6 @@ import shutil
 import sys
 import threading
 import time
-import tensorflow as tf
 
 # Find the best implementation available
 try:
@@ -31,6 +30,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 import origae.config  # noqa
 from origae import utils, log  # noqa
 
+# Import origae.config first to set the path to Caffe
+import caffe.io  # noqa
+import caffe_pb2  # noqa
+
+if origae.config.config_value('tensorflow')['enabled']:
+    import tensorflow as tf
+else:
+    tf = None
 
 logger = logging.getLogger('origae.tools.create_db')
 
@@ -742,26 +749,6 @@ def _array_to_tf_feature(image, label, encoding):
         ))
     return example.SerializeToString()
 
-from origae.proto.caffe import caffe_pb2
-
-
-def caffe_io_array_to_datum(arr, label=None):
-    """Converts a 3-dimensional array to datum. If the array has dtype uint8,
-    the output data will be encoded as a string. Otherwise, the output data
-    will be stored in float format.
-    """
-    if arr.ndim != 3:
-        raise ValueError('Incorrect array shape.')
-    datum = caffe_pb2.Datum()
-    datum.channels, datum.height, datum.width = arr.shape
-    if arr.dtype == np.uint8:
-        datum.data = arr.tostring()
-    else:
-        datum.float_data.extend(arr.astype(float).flat)
-    if label is not None:
-        datum.label = label
-    return datum
-
 
 def _array_to_datum(image, label, encoding):
     """
@@ -781,7 +768,7 @@ def _array_to_datum(image, label, encoding):
             image = image[np.newaxis, :, :]
         else:
             raise Exception('Image has unrecognized shape: "%s"' % image.shape)
-        datum = caffe_io_array_to_datum(image, label)
+        datum = caffe.io.array_to_datum(image, label)
     else:
         datum = caffe_pb2.Datum()
         if image.ndim == 3:

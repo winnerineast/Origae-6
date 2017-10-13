@@ -1,4 +1,4 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import mock
@@ -23,7 +23,7 @@ class TestGetDevices():
 
     @unittest.skipIf(platform.system() not in ['Linux', 'Darwin'],
                      'Platform not supported')
-    @mock.patch('digits.device_query.ctypes.cdll')
+    @mock.patch('origae.device_query.ctypes.cdll')
     def test_no_cudart(self, mock_cdll):
         mock_cdll.LoadLibrary.return_value = None
         assert device_query.get_devices(True) == [], 'Devices found even when CUDA disabled!'

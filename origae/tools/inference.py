@@ -16,16 +16,16 @@ except ImportError:
 
 # Add path for DIGITS package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-import digits.config  # noqa
-from digits import utils, log  # noqa
-from digits.inference.errors import InferenceError  # noqa
-from digits.job import Job  # noqa
-from digits.utils.lmdbreader import DbReader  # noqa
+import origae.config  # noqa
+from origae import utils, log  # noqa
+from origae.inference.errors import InferenceError  # noqa
+from origae.job import Job  # noqa
+from origae.utils.lmdbreader import DbReader  # noqa
 
-# Import digits.config before caffe to set the path
+# Import origae.config before caffe to set the path
 import caffe_pb2  # noqa
 
-logger = logging.getLogger('digits.tools.inference')
+logger = logging.getLogger('origae.tools.inference')
 
 
 """
@@ -48,7 +48,7 @@ def infer(input_list,
     """
     # job directory defaults to that defined in DIGITS config
     if jobs_dir == 'none':
-        jobs_dir = digits.config.config_value('jobs_dir')
+        jobs_dir = origae.config.config_value('jobs_dir')
 
     # load model job
     model_dir = os.path.join(jobs_dir, model_id)

@@ -1,3 +1,5 @@
+{# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved. #}
+
 {% extends "job.html" %}
 {% from "helper.html" import serve_file %}
 
@@ -96,7 +98,7 @@
     <div class="distribution-graph" style="display:none;"></div>
     {% if task.distribution_data() %}
         <script>
-            drawDistributionGraph("{{task.html_id()}}"
+            drawDistributionGraph("{{task.html_id()}}",
                 {% autoescape false %}
                 {{task.distribution_data()}}
                 {% endautoescape %}

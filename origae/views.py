@@ -1,3 +1,4 @@
+# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import glob
@@ -8,7 +9,7 @@ import os
 
 import flask
 from flask.ext.socketio import join_room, leave_room
-from werkzeug.http import HTTP_STATUS_CODES
+from werkzeug import HTTP_STATUS_CODES
 import werkzeug.exceptions
 
 from .config import config_value
@@ -18,15 +19,14 @@ from origae import dataset, extensions, model, utils, pretrained_model
 from origae.log import logger
 from origae.utils.routing import request_wants_json
 
-
 blueprint = flask.Blueprint(__name__, __name__)
 
 
 @blueprint.route('/index.json', methods=['GET'])
 @blueprint.route('/', methods=['GET'])
-def home(tab=4):
+def home(tab=2):
     """
-    Origae-6 home page
+    DIGITS home page
     Returns information about each job on the server
 
     Returns JSON when requested:
@@ -39,7 +39,7 @@ def home(tab=4):
     completed_datasets = get_job_list(dataset.DatasetJob, False)
     running_models = get_job_list(model.ModelJob, True)
     completed_models = get_job_list(model.ModelJob, False)
-    # if it's request data only
+
     if request_wants_json():
         data = {
             'version': origae.__version__,
@@ -49,12 +49,10 @@ def home(tab=4):
             'models': [j.json_dict()
                        for j in running_models + completed_models],
         }
-        # Attach server name if it's running in cluster mode.
         if config_value('server_name'):
             data['server_name'] = config_value('server_name')
         return flask.jsonify(data)
     else:
-        # this is requested by browser.
         new_dataset_options = {
             'Images': {
                 'image-classification': {
@@ -123,7 +121,7 @@ def home(tab=4):
                     'origae.model.images.generic.views.new',
                     extension_id=ext_id),
             }
-        # time to bring a comprehensive home page.
+
         return flask.render_template(
             'home.html',
             tab=tab,
@@ -319,8 +317,9 @@ def group():
 
     return 'Jobs regrouped.'
 
-
 # Authentication/login
+
+
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     """
@@ -329,8 +328,7 @@ def login():
     """
     # Get the URL to redirect to after logging in
     next_url = utils.routing.get_request_arg('next') or \
-               flask.request.referrer or \
-               flask.url_for('.home')
+        flask.request.referrer or flask.url_for('.home')
 
     if flask.request.method == 'GET':
         return flask.render_template('login.html', next=next_url)
@@ -712,8 +710,8 @@ def extension_static(extension_type, extension_id, filename):
     if extension is None:
         raise ValueError("Unknown extension '%s'" % extension_id)
 
-    origae_root = os.path.dirname(os.path.abspath(origae.__file__))
-    rootdir = os.path.join(origae_root, *['extensions', 'view', extension.get_dirname(), 'static'])
+    digits_root = os.path.dirname(os.path.abspath(origae.__file__))
+    rootdir = os.path.join(digits_root, *['extensions', 'view', extension.get_dirname(), 'static'])
     return flask.send_from_directory(rootdir, filename)
 
 # SocketIO functions

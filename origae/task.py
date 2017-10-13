@@ -1,3 +1,4 @@
+# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import logging
@@ -70,7 +71,7 @@ class Task(StatusCls):
 
     def set_logger(self):
         self.logger = origae.log.JobIdLoggerAdapter(
-            logging.getLogger('digits.webapp'),
+            logging.getLogger('origae.webapp'),
             {'job_id': self.job_id},
         )
 

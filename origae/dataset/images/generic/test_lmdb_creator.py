@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 """
 Functions for creating temporary LMDBs
 Used in test_views
@@ -25,6 +25,9 @@ if __name__ == '__main__':
     dirname = os.path.dirname(os.path.realpath(__file__))
     sys.path.insert(0, os.path.join(dirname, '..', '..', '..', '..'))
     import origae.config  # noqa
+
+# Import origae.config first to set the path to Caffe
+import caffe_pb2  # noqa
 
 
 IMAGE_SIZE = 10

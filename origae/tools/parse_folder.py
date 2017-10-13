@@ -1,4 +1,6 @@
 #!/usr/bin/env python2
+# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
+
 import argparse
 import logging
 import os
@@ -14,7 +16,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 import origae.config  # noqa
 from origae import utils, log  # noqa
 
-logger = logging.getLogger('digits.tools.parse_folder')
+logger = logging.getLogger('origae.tools.parse_folder')
 
 
 def unescape(s):

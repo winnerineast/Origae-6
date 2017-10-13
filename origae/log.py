@@ -63,9 +63,9 @@ def setup_logging():
         datefmt=DATE_FORMAT,
     )
 
-    # digits logger
+    # origae logger
 
-    main_logger = logging.getLogger('digits')
+    main_logger = logging.getLogger('origae')
     main_logger.setLevel(logging.DEBUG)
     # Log to stdout
     stdoutHandler = logging.StreamHandler(sys.stdout)
@@ -73,13 +73,13 @@ def setup_logging():
     stdoutHandler.setLevel(logging.DEBUG)
     main_logger.addHandler(stdoutHandler)
 
-    # digits.webapp logger
+    # origae.webapp logger
 
     logfile_filename = config_value('log_file')['filename']
     logfile_level = config_value('log_file')['level']
 
     if logfile_filename is not None:
-        webapp_logger = logging.getLogger('digits.webapp')
+        webapp_logger = logging.getLogger('origae.webapp')
         webapp_logger.setLevel(logging.DEBUG)
         # Log to file
         fileHandler = logging.handlers.RotatingFileHandler(

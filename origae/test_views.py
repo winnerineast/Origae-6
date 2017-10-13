@@ -1,3 +1,4 @@
+# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import json
@@ -35,7 +36,7 @@ class BaseViewsTest(object):
         cls.created_models = []
 
         rv = cls.app.post('/login', data={
-            'username': 'digits-testsuite'})
+            'username': 'origae-testsuite'})
         assert rv.status_code == 302, 'Login failed with %s' % rv.status_code
 
     @classmethod

@@ -492,8 +492,8 @@ def main(_):
                 train_model.create_model(UserModel, stage_scope)  # noqa
 
         if FLAGS.validation_db:
-            with tf.name_scope(digits.STAGE_VAL) as stage_scope:
-                val_model = Model(digits.STAGE_VAL, FLAGS.croplen, nclasses, reuse_variable=True)
+            with tf.name_scope(origae.STAGE_VAL) as stage_scope:
+                val_model = Model(origae.STAGE_VAL, FLAGS.croplen, nclasses, reuse_variable=True)
                 val_model.create_dataloader(FLAGS.validation_db)
                 val_model.dataloader.setup(FLAGS.validation_labels,
                                            False,
@@ -505,8 +505,8 @@ def main(_):
                 val_model.create_model(UserModel, stage_scope)  # noqa
 
         if FLAGS.inference_db:
-            with tf.name_scope(digits.STAGE_INF) as stage_scope:
-                inf_model = Model(digits.STAGE_INF, FLAGS.croplen, nclasses)
+            with tf.name_scope(origae.STAGE_INF) as stage_scope:
+                inf_model = Model(origae.STAGE_INF, FLAGS.croplen, nclasses)
                 inf_model.create_dataloader(FLAGS.inference_db)
                 inf_model.dataloader.setup(None, False, FLAGS.bitdepth, FLAGS.batch_size, 1, FLAGS.seed)
                 inf_model.dataloader.set_augmentation(mean_loader)
@@ -574,13 +574,13 @@ def main(_):
                          logging_interval_step)
 
             # epoch value will be calculated for every batch size. To maintain unique epoch value between batches,
-            # it needs to be rounded to the required number of significant digits.
-            epoch_round = 0  # holds the required number of significant digits for round function.
+            # it needs to be rounded to the required number of significant origae.
+            epoch_round = 0  # holds the required number of significant origae for round function.
             tmp_batchsize = batch_size_train*logging_interval_step
             while tmp_batchsize <= train_model.dataloader.get_total():
                 tmp_batchsize = tmp_batchsize * 10
                 epoch_round += 1
-            logging.info("While logging, epoch value will be rounded to %s significant digits", epoch_round)
+            logging.info("While logging, epoch value will be rounded to %s significant origae", epoch_round)
 
             # Create the learning rate policy
             total_training_steps = train_model.dataloader.num_epochs * train_model.dataloader.get_total() / \

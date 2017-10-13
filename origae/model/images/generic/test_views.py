@@ -1,4 +1,4 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import itertools
@@ -18,13 +18,13 @@ except ImportError:
 
 from bs4 import BeautifulSoup
 
-from digits import extensions
-from digits.config import config_value
-import digits.dataset.images.generic.test_views
-import digits.dataset.generic.test_views
-import digits.test_views
-from digits import test_utils
-import digits.webapp
+from origae import extensions
+from origae.config import config_value
+import origae.dataset.images.generic.test_views
+import origae.dataset.generic.test_views
+import origae.test_views
+from origae import test_utils
+import origae.webapp
 
 
 # May be too short on a slow system
@@ -36,7 +36,7 @@ TIMEOUT_MODEL = 60
 ################################################################################
 
 
-class BaseViewsTest(digits.test_views.BaseViewsTest):
+class BaseViewsTest(origae.test_views.BaseViewsTest):
     """
     Provides some functions
     """
@@ -107,7 +107,7 @@ class UserModel(Tower):
     @model_property
     def loss(self):
         y = tf.reshape(self.y, shape=[-1, 2])
-        return digits.mse_loss(self.inference, y)
+        return origae.mse_loss(self.inference, y)
 """
 
     @classmethod
@@ -239,10 +239,10 @@ class BaseViewsTestWithAnyDataset(BaseViewsTest):
 
 
 class BaseViewsTestWithDataset(BaseViewsTestWithAnyDataset,
-                               digits.dataset.images.generic.test_views.BaseViewsTestWithDataset):
+                               origae.dataset.images.generic.test_views.BaseViewsTestWithDataset):
     """
     This inherits from BaseViewsTestWithAnyDataset and
-    digits.dataset.images.generic.test_views.BaseViewsTestWithDataset
+    origae.dataset.images.generic.test_views.BaseViewsTestWithDataset
     in order to provide an interface to test models on "images/generic" datasets
     """
     pass
@@ -510,8 +510,8 @@ class BaseTestCreation(BaseViewsTestWithDataset):
 
         assert (content1 == content2), 'job content does not match'
 
-        job1 = digits.webapp.scheduler.get_job(job1_id)
-        job2 = digits.webapp.scheduler.get_job(job2_id)
+        job1 = origae.webapp.scheduler.get_job(job1_id)
+        job2 = origae.webapp.scheduler.get_job(job2_id)
 
         assert (job1.form_data == job2.form_data), 'form content does not match'
 
@@ -522,11 +522,11 @@ class BaseTestCreatedWithAnyDataset(BaseViewsTestWithModelWithAnyDataset):
     """
 
     def test_save(self):
-        job = digits.webapp.scheduler.get_job(self.model_id)
+        job = origae.webapp.scheduler.get_job(self.model_id)
         assert job.save(), 'Job failed to save'
 
     def test_get_snapshot(self):
-        job = digits.webapp.scheduler.get_job(self.model_id)
+        job = origae.webapp.scheduler.get_job(self.model_id)
         task = job.train_task()
         f = task.get_snapshot(-1)
 
@@ -689,7 +689,7 @@ class BaseTestCreatedWithAnyDataset(BaseViewsTestWithModelWithAnyDataset):
 
 
 class BaseTestCreated(BaseTestCreatedWithAnyDataset,
-                      digits.dataset.images.generic.test_views.BaseViewsTestWithDataset):
+                      origae.dataset.images.generic.test_views.BaseViewsTestWithDataset):
     """
     Tests on a model that has already been created with an "images/generic" dataset
     """
@@ -697,7 +697,7 @@ class BaseTestCreated(BaseTestCreatedWithAnyDataset,
 
 
 class BaseTestCreatedWithGradientDataExtension(BaseTestCreatedWithAnyDataset,
-                                               digits.dataset.generic.test_views.BaseViewsTestWithDataset):
+                                               origae.dataset.generic.test_views.BaseViewsTestWithDataset):
     """
     Tests on a model that has already been created with a "generic" dataset,
     using the gradients extension in that instance
@@ -742,7 +742,7 @@ class BaseTestCreatedWithGradientDataExtension(BaseTestCreatedWithAnyDataset,
 
 class BaseTestCreatedWithImageProcessingExtension(
         BaseTestCreatedWithAnyDataset,
-        digits.dataset.generic.test_views.BaseViewsTestWithDataset):
+        origae.dataset.generic.test_views.BaseViewsTestWithDataset):
     """
     Test Image processing extension with a dummy identity network
     """
@@ -791,7 +791,7 @@ class UserModel(Tower):
 
     @model_property
     def loss(self):
-        return digits.mse_loss(self.model, self.y)
+        return origae.mse_loss(self.model, self.y)
 """
 
     EXTENSION_ID = "image-processing"

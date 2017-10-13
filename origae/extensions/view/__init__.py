@@ -11,7 +11,7 @@ from . import rawData
 
 # Entry point group (this is the key we use to register and
 # find installed plug-ins)
-GROUP = "digits.plugins.view"
+GROUP = "origae.plugins.view"
 
 
 # built-in extensions

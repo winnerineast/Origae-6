@@ -972,7 +972,7 @@ class TensorflowTrainTask(TrainTask):
         }
 
         if hasattr(self, "digits_version"):
-            stats.update({"digits version": self.digits_version})
+            stats.update({"origae version": self.digits_version})
 
         if hasattr(self.dataset, "resize_mode"):
             stats.update({"image resize mode": self.dataset.resize_mode})

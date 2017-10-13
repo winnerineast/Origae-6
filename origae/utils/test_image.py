@@ -17,8 +17,8 @@ import PIL.Image
 
 from . import errors
 from . import image as image_utils
-import digits
-from digits import test_utils
+import origae
+from origae import test_utils
 
 
 test_utils.skipIfNotFramework('none')
@@ -82,13 +82,13 @@ class TestLoadImage():
         assert new is not None, 'load_image should never return None'
         assert new.mode == new_mode, 'Image mode should be "%s", not "%s\nargs - %s' % (new_mode, new.mode, args)
 
-    @mock.patch('digits.utils.image.requests')
+    @mock.patch('origae.utils.image.requests')
     def test_good_url(self, mock_requests):
         # requests
         response = mock.Mock()
         response.status_code = mock_requests.codes.ok
         img_file = os.path.join(
-            os.path.dirname(digits.__file__),
+            os.path.dirname(origae.__file__),
             'static',
             'images',
             'mona_lisa.jpg',

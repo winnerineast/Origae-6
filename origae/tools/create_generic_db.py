@@ -18,15 +18,15 @@ import threading
 
 # Add path for DIGITS package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-import digits.config  # noqa
-from digits import extensions, log  # noqa
-from digits.job import Job  # noqa
+import origae.config  # noqa
+from origae import extensions, log  # noqa
+from origae.job import Job  # noqa
 
-# Import digits.config first to set the path to Caffe
+# Import origae.config first to set the path to Caffe
 import caffe.io  # noqa
 import caffe_pb2  # noqa
 
-logger = logging.getLogger('digits.tools.create_dataset')
+logger = logging.getLogger('origae.tools.create_dataset')
 
 
 class DbWriter(threading.Thread):
@@ -408,7 +408,7 @@ def create_generic_db(jobs_dir, dataset_id, stage):
 
     # job directory defaults to that defined in DIGITS config
     if jobs_dir == 'none':
-        jobs_dir = digits.config.config_value('jobs_dir')
+        jobs_dir = origae.config.config_value('jobs_dir')
 
     # load dataset job
     dataset_dir = os.path.join(jobs_dir, dataset_id)

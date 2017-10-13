@@ -1,4 +1,4 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import logging
@@ -20,7 +20,7 @@ def load_logfile_filename():
         filename = os.environ['DIGITS_LOGFILE_FILENAME']
         throw_error = True
     else:
-        filename = os.path.join(os.path.dirname(origae.__file__), 'origae-6.log')
+        filename = os.path.join(os.path.dirname(origae.__file__), 'origae.log')
 
     if filename is not None:
         try:

@@ -1,4 +1,4 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import os
@@ -281,7 +281,7 @@ def create(extension_id=None):
                 if request_wants_json():
                     return flask.jsonify(job.json_dict())
                 else:
-                    return flask.redirect(flask.url_for('digits.model.views.show', job_id=job.id()))
+                    return flask.redirect(flask.url_for('origae.model.views.show', job_id=job.id()))
 
         except:
             if job:
@@ -297,7 +297,7 @@ def create(extension_id=None):
 
 def show(job, related_jobs=None):
     """
-    Called from digits.model.views.models_show()
+    Called from origae.model.views.models_show()
     """
     data_extensions = get_data_extensions()
     view_extensions = get_view_extensions()

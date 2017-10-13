@@ -4,7 +4,7 @@ import os
 
 from origae.job import Job
 from origae.utils import subclass, override
-from origae.pretrained_model.tasks import TensorflowUploadTask
+from origae.pretrained_model.tasks import CaffeUploadTask, TorchUploadTask, TensorflowUploadTask
 
 
 @subclass
@@ -35,7 +35,11 @@ class PretrainedModelJob(Job):
             "job_dir": self.dir()
         }
 
-        if self.framework == "tensorflow":
+        if self.framework == "caffe":
+            self.tasks.append(CaffeUploadTask(**taskKwargs))
+        elif self.framework == "torch":
+            self.tasks.append(TorchUploadTask(**taskKwargs))
+        elif self.framework == "tensorflow":
             self.tasks.append(TensorflowUploadTask(**taskKwargs))
         else:
             raise Exception("framework of type " + self.framework + " is not supported")

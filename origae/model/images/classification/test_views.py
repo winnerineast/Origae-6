@@ -20,12 +20,12 @@ except ImportError:
 
 from bs4 import BeautifulSoup
 
-from digits.config import config_value
-import digits.dataset.images.classification.test_views
-import digits.test_views
-from digits import test_utils
-import digits.webapp
-from digits.frameworks import CaffeFramework
+from origae.config import config_value
+import origae.dataset.images.classification.test_views
+import origae.test_views
+from origae import test_utils
+import origae.webapp
+from origae.frameworks import CaffeFramework
 from google.protobuf import text_format
 
 # May be too short on a slow system
@@ -37,7 +37,7 @@ TIMEOUT_MODEL = 60
 ################################################################################
 
 
-class BaseViewsTest(digits.test_views.BaseViewsTest):
+class BaseViewsTest(origae.test_views.BaseViewsTest):
     """
     Provides some functions
     """
@@ -112,7 +112,7 @@ class UserModel(Tower):
 
     @model_property
     def loss(self):
-        loss = digits.classification_loss(self.inference, self.y)
+        loss = origae.classification_loss(self.inference, self.y)
         return loss
 """
 
@@ -156,7 +156,7 @@ class UserModel(Tower):
 
 
 class BaseViewsTestWithDataset(BaseViewsTest,
-                               digits.dataset.images.classification.test_views.BaseViewsTestWithDataset):
+                               origae.dataset.images.classification.test_views.BaseViewsTestWithDataset):
     """
     Provides a dataset
     """
@@ -594,8 +594,8 @@ class UserModel(Tower):
 
         assert (content1 == content2), 'job content does not match'
 
-        job1 = digits.webapp.scheduler.get_job(job1_id)
-        job2 = digits.webapp.scheduler.get_job(job2_id)
+        job1 = origae.webapp.scheduler.get_job(job1_id)
+        job2 = origae.webapp.scheduler.get_job(job2_id)
         assert (job1.form_data == job2.form_data), 'form content does not match'
 
 
@@ -605,11 +605,11 @@ class BaseTestCreated(BaseViewsTestWithModel):
     """
 
     def test_save(self):
-        job = digits.webapp.scheduler.get_job(self.model_id)
+        job = origae.webapp.scheduler.get_job(self.model_id)
         assert job.save(), 'Job failed to save'
 
     def test_get_snapshot(self):
-        job = digits.webapp.scheduler.get_job(self.model_id)
+        job = origae.webapp.scheduler.get_job(self.model_id)
         task = job.train_task()
         f = task.get_snapshot(-1)
 
@@ -1191,7 +1191,7 @@ class TestCaffeLeNet(BaseTestCreated, test_utils.CaffeMixin):
 
     CAFFE_NETWORK = open(
         os.path.join(
-            os.path.dirname(digits.__file__),
+            os.path.dirname(origae.__file__),
             'standard-networks', 'caffe', 'lenet.prototxt')
     ).read()
 
@@ -1226,7 +1226,7 @@ class TestTorchLeNet(BaseTestCreated, test_utils.TorchMixin):
     # or grayscale images
     TORCH_NETWORK = open(
         os.path.join(
-            os.path.dirname(digits.__file__),
+            os.path.dirname(origae.__file__),
             'standard-networks', 'torch', 'lenet.lua')
     ).read()
 
@@ -1406,7 +1406,7 @@ class TestTensorflowLeNet(BaseTestCreated, test_utils.TensorflowMixin):
 
     # standard lenet model will adjust to color
     # or grayscale images
-    TENSORFLOW_NETWORK = open(os.path.join(os.path.dirname(digits.__file__),
+    TENSORFLOW_NETWORK = open(os.path.join(os.path.dirname(origae.__file__),
                                            'standard-networks',
                                            'tensorflow',
                                            'lenet.py')).read()

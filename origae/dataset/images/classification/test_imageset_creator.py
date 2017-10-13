@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 """
 Functions for creating temporary datasets
 Used in test_views
@@ -74,7 +74,7 @@ def _create_gradient_image(size, color_from, color_to, rotation):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Create-Imageset tool - Origae-6')
+    parser = argparse.ArgumentParser(description='Create-Imageset tool - DIGITS')
 
     # Positional arguments
 

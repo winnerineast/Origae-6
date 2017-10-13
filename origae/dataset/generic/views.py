@@ -8,6 +8,7 @@ try:
 except ImportError:
     from StringIO import StringIO
 
+import caffe_pb2
 import flask
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -128,7 +129,7 @@ def create(extension_id):
             return flask.jsonify(job.json_dict())
         else:
             return flask.redirect(flask.url_for(
-                'digits.dataset.views.show',
+                'origae.dataset.views.show',
                 job_id=job.id()))
 
     except:
@@ -175,7 +176,7 @@ def explore():
     pages = range(min_page, max_page + 1)
     for key, value in reader.entries():
         if count >= page * size:
-            datum = [] #caffe_pb2.Datum()
+            datum = caffe_pb2.Datum()
             datum.ParseFromString(value)
             if not datum.encoded:
                 raise RuntimeError("Expected encoded database")
@@ -203,7 +204,7 @@ def explore():
 
 def show(job, related_jobs=None):
     """
-    Called from digits.dataset.views.show()
+    Called from origae.dataset.views.show()
     """
     return flask.render_template('datasets/generic/show.html', job=job, related_jobs=related_jobs)
 

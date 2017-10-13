@@ -1,10 +1,10 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 from __future__ import absolute_import
 
 import unittest
 
 from . import parse_version
-from digits import test_utils
+from origae import test_utils
 
 
 test_utils.skipIfNotFramework('none')

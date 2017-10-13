@@ -35,7 +35,7 @@ class TestVersion():
         self.check_version(origae.version.__version__)
 
     # Test a programmatic and reliable way to check the version
-    # python -c "execfile('digits/version.py'); print __version__"
+    # python -c "execfile('origae/version.py'); print __version__"
     def test_execfile_version(self):
         import origae
         filename = os.path.join(os.path.dirname(origae.__file__), 'version.py')

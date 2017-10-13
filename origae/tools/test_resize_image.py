@@ -1,10 +1,10 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
+
 
 import mock
 import tempfile
 
 from . import resize_image
-from digits import test_utils
+from origae import test_utils
 
 
 test_utils.skipIfNotFramework('none')
