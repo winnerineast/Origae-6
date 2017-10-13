@@ -44,10 +44,7 @@ def main():
         print origae.__version__
         sys.exit()
 
-    print '  ___ ___ ___ ___ _____ ___'
-    print ' |   \_ _/ __|_ _|_   _/ __|'
-    print ' | |) | | (_ || |  | | \__ \\'
-    print ' |___/___\___|___| |_| |___/', origae.__version__
+    print 'Origae-6 is coming with ', origae.__version__
     print
 
     import origae.config
