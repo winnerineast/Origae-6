@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import glob
@@ -9,7 +8,7 @@ import os
 
 import flask
 from flask.ext.socketio import join_room, leave_room
-from werkzeug import HTTP_STATUS_CODES
+from werkzeug.http import HTTP_STATUS_CODES
 import werkzeug.exceptions
 
 from .config import config_value
@@ -24,7 +23,7 @@ blueprint = flask.Blueprint(__name__, __name__)
 
 @blueprint.route('/index.json', methods=['GET'])
 @blueprint.route('/', methods=['GET'])
-def home(tab=2):
+def home(tab=1):
     """
     DIGITS home page
     Returns information about each job on the server
@@ -57,13 +56,35 @@ def home(tab=2):
             'Images': {
                 'image-classification': {
                     'title': 'Classification',
-                    'url': flask.url_for(
-                        'origae.dataset.images.classification.views.new'),
+                    'url': flask.url_for('origae.dataset.images.classification.views.new'),
                 },
                 'image-other': {
                     'title': 'Other',
-                    'url': flask.url_for(
-                        'origae.dataset.images.generic.views.new'),
+                    'url': flask.url_for('origae.dataset.images.generic.views.new'),
+                },
+            },
+            'Audio':{
+                'Audio-featureextraction':{
+                    'title':'FeatureExtraction',
+                    'url': flask.url_for('origae.dataset.audio.featureextraction.views.new'),
+                },
+                'Audio-Segmentation':{
+                    'title':'Segmentation',
+                    'url': flask.url_for('origae.dataset.audio.segmentation.views.new'),
+                },
+                'Audio-other': {
+                    'title': 'Other',
+                    'url': flask.url_for('origae.dataset.audio.generic.views.new'),
+                },
+            },
+            'Text': {
+                'text-classification': {
+                    'title': 'Classification',
+                    'url': flask.url_for('origae.dataset.text.classification.views.new'),
+                },
+                'text-other': {
+                    'title': 'Other',
+                    'url': flask.url_for('origae.dataset.text.generic.views.new'),
                 },
             },
         }
@@ -72,24 +93,45 @@ def home(tab=2):
             'Images': {
                 'image-classification': {
                     'title': 'Classification',
-                    'url': flask.url_for(
-                        'origae.model.images.classification.views.new'),
+                    'url': flask.url_for('origae.model.images.classification.views.new'),
                 },
                 'image-other': {
                     'title': 'Other',
-                    'url': flask.url_for(
-                        'origae.model.images.generic.views.new'),
+                    'url': flask.url_for('origae.model.images.generic.views.new'),
+                },
+            },
+            'Audio': {
+                'audio-featureextraction': {
+                    'title': 'FeatureExtraction',
+                    'url': flask.url_for('origae.model.audio.featureextraction.views.new'),
+                },
+                'audio-segmentation': {
+                    'title': 'Segmentation',
+                    'url': flask.url_for('origae.model.audio.segmentation.views.new'),
+                },
+                'audio-other': {
+                    'title': 'Other',
+                    'url': flask.url_for('origae.model.audio.generic.views.new'),
+                },
+            },
+            'Text': {
+                'text-classification': {
+                    'title': 'Classification',
+                    'url': flask.url_for('origae.model.text.classification.views.new'),
+                },
+                'text-other': {
+                    'title': 'Other',
+                    'url': flask.url_for('origae.model.text.generic.views.new'),
                 },
             },
         }
 
         load_model_options = {
-            'Images': {
+            'Data': {
                 'pretrained-model': {
                     'title': 'Upload Pretrained Model',
                     'id': 'uploadPretrainedModel',
-                    'url': flask.url_for(
-                        'origae.pretrained_model.views.new'),
+                    'url': flask.url_for('origae.pretrained_model.views.new'),
                 },
                 'access-model-store': {
                     'title': 'Retrieve from Model Store',
@@ -105,6 +147,7 @@ def home(tab=2):
             ext_category = extension.get_category()
             ext_title = extension.get_title()
             ext_id = extension.get_id()
+            # try to handle with unknown dataset in a generic way
             if ext_category not in new_dataset_options:
                 new_dataset_options[ext_category] = {}
             new_dataset_options[ext_category][ext_id] = {
@@ -113,6 +156,7 @@ def home(tab=2):
                     'origae.dataset.generic.views.new',
                     extension_id=ext_id),
             }
+            # try to handle with unknown model in a generic way
             if ext_category not in new_model_options:
                 new_model_options[ext_category] = {}
             new_model_options[ext_category][ext_id] = {
@@ -714,11 +758,9 @@ def extension_static(extension_type, extension_id, filename):
     rootdir = os.path.join(digits_root, *['extensions', 'view', extension.get_dirname(), 'static'])
     return flask.send_from_directory(rootdir, filename)
 
+
 # SocketIO functions
-
 # /home
-
-
 @socketio.on('connect', namespace='/home')
 def on_connect_home():
     """

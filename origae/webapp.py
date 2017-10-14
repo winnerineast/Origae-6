@@ -14,7 +14,6 @@ from origae.utils.store import StoreCache  # noqa
 import origae.scheduler  # noqa
 
 # Create Flask, Scheduler and SocketIO objects
-
 url_prefix = config_value('url_prefix')
 app = flask.Flask(__name__, static_url_path=url_prefix+'/static')
 app.config['DEBUG'] = True
@@ -30,7 +29,6 @@ app.config['store_url_list'] = config_value('model_store')['url_list']
 scheduler = origae.scheduler.Scheduler(config_value('gpu_list'), True)
 
 # Register filters and views
-
 app.jinja_env.globals['server_name'] = config_value('server_name')
 app.jinja_env.globals['server_version'] = origae.__version__
 app.jinja_env.globals['caffe_version'] = config_value('caffe')['version']
@@ -45,39 +43,83 @@ app.jinja_env.filters['has_permission'] = utils.auth.has_permission
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
+# import all view-form-jobs here
 import origae.views  # noqa
 app.register_blueprint(origae.views.blueprint,
                        url_prefix=url_prefix)
+
 import origae.dataset.views  # noqa
 app.register_blueprint(origae.dataset.views.blueprint,
                        url_prefix=url_prefix+'/datasets')
+
 import origae.dataset.generic.views  # noqa
 app.register_blueprint(origae.dataset.generic.views.blueprint,
                        url_prefix=url_prefix+'/datasets/generic')
+
 import origae.dataset.images.views  # noqa
 app.register_blueprint(origae.dataset.images.views.blueprint,
                        url_prefix=url_prefix+'/datasets/images')
+
 import origae.dataset.images.classification.views  # noqa
 app.register_blueprint(origae.dataset.images.classification.views.blueprint,
                        url_prefix=url_prefix+'/datasets/images/classification')
+
 import origae.dataset.images.generic.views  # noqa
 app.register_blueprint(origae.dataset.images.generic.views.blueprint,
                        url_prefix=url_prefix+'/datasets/images/generic')
+##########
+import origae.dataset.audio.views  # noqa
+app.register_blueprint(origae.dataset.audio.views.blueprint,
+                       url_prefix=url_prefix+'/datasets/audio')
+
+import origae.dataset.audio.featureextraction.views  # noqa
+app.register_blueprint(origae.dataset.audio.featureextraction.views.blueprint,
+                       url_prefix=url_prefix+'/datasets/audio/featureextraction')
+
+import origae.dataset.audio.segmentation.views  # noqa
+app.register_blueprint(origae.dataset.audio.segmentation.views.blueprint,
+                       url_prefix=url_prefix+'/datasets/audio/segmentation')
+
+import origae.dataset.audio.generic.views  # noqa
+app.register_blueprint(origae.dataset.audio.generic.views.blueprint,
+                       url_prefix=url_prefix+'/datasets/audio/generic')
+##########
 import origae.model.views  # noqa
 app.register_blueprint(origae.model.views.blueprint,
                        url_prefix=url_prefix+'/models')
+
 import origae.model.images.views  # noqa
 app.register_blueprint(origae.model.images.views.blueprint,
                        url_prefix=url_prefix+'/models/images')
+
 import origae.model.images.classification.views  # noqa
 app.register_blueprint(origae.model.images.classification.views.blueprint,
                        url_prefix=url_prefix+'/models/images/classification')
+
 import origae.model.images.generic.views  # noqa
 app.register_blueprint(origae.model.images.generic.views.blueprint,
                        url_prefix=url_prefix+'/models/images/generic')
+
 import origae.pretrained_model.views  # noqa
 app.register_blueprint(origae.pretrained_model.views.blueprint,
                        url_prefix=url_prefix+'/pretrained_models')
+##########
+import origae.model.audio.views  # noqa
+app.register_blueprint(origae.model.audio.views.blueprint,
+                       url_prefix=url_prefix+'/models/audio')
+
+import origae.model.audio.featureextraction.views  # noqa
+app.register_blueprint(origae.model.audio.featureextraction.views.blueprint,
+                       url_prefix=url_prefix+'/models/audio/featureextraction')
+
+import origae.model.audio.segmentation.views  # noqa
+app.register_blueprint(origae.model.audio.segmentation.views.blueprint,
+                       url_prefix=url_prefix+'/models/audio/segmentation')
+
+import origae.model.audio.generic.views  # noqa
+app.register_blueprint(origae.model.audio.generic.views.blueprint,
+                       url_prefix=url_prefix+'/models/audio/generic')
+##########
 import origae.store.views  # noqa
 app.register_blueprint(origae.store.views.blueprint,
                        url_prefix=url_prefix+'/store')
@@ -93,9 +135,10 @@ def username_decorator(f):
         return f(*args, **kwargs)
     return decorated
 
-for endpoint, function in app.view_functions.iteritems():
-    app.view_functions[endpoint] = username_decorator(function)
+
+for endpoint, func in app.view_functions.iteritems():
+    app.view_functions[endpoint] = username_decorator(func)
 
 # Setup the environment
-
 scheduler.load_past_jobs()
+
