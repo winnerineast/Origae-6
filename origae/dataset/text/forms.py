@@ -1,15 +1,14 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import wtforms
 from wtforms import validators
 
 from ..forms import DatasetForm
-from .job import ImageDatasetJob
+from .job import TextDatasetJob
 from origae import utils
 
 
-class ImageDatasetForm(DatasetForm):
+class TextDatasetForm(DatasetForm):
     """
     Defines the form used to create a new ImageDatasetJob
     (abstract class)
@@ -48,6 +47,6 @@ class ImageDatasetForm(DatasetForm):
     resize_mode = utils.forms.SelectField(
         u'Resize Transformation',
         default='squash',
-        choices=ImageDatasetJob.resize_mode_choices(),
+        choices=TextDatasetJob.resize_mode_choices(),
         tooltip="Options for dealing with aspect ratio changes during resize. See examples below."
     )

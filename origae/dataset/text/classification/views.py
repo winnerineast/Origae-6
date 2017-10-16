@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import os
@@ -14,8 +13,8 @@ import caffe_pb2
 import flask
 import PIL.Image
 
-from .forms import ImageClassificationDatasetForm
-from .job import ImageClassificationDatasetJob
+from .forms import TextClassificationDatasetForm
+from .job import TextClassificationDatasetJob
 from origae import utils
 from origae.dataset import tasks
 from origae.utils.forms import fill_form_if_cloned, save_form_to_job
@@ -270,12 +269,12 @@ def new():
     """
     Returns a form for a new ImageClassificationDatasetJob
     """
-    form = ImageClassificationDatasetForm()
+    form = TextClassificationDatasetForm()
 
     # Is there a request to clone a job with ?clone=<job_id>
     fill_form_if_cloned(form)
 
-    return flask.render_template('datasets/images/classification/new.html', form=form)
+    return flask.render_template('datasets/text/classification/new.html', form=form)
 
 
 @blueprint.route('.json', methods=['POST'])
@@ -287,7 +286,7 @@ def create():
 
     Returns JSON when requested: {job_id,name,status} or {errors:[]}
     """
-    form = ImageClassificationDatasetForm()
+    form = TextClassificationDatasetForm()
 
     # Is there a request to clone a job with ?clone=<job_id>
     fill_form_if_cloned(form)
@@ -296,11 +295,11 @@ def create():
         if request_wants_json():
             return flask.jsonify({'errors': form.errors}), 400
         else:
-            return flask.render_template('datasets/images/classification/new.html', form=form), 400
+            return flask.render_template('datasets/text/classification/new.html', form=form), 400
 
     job = None
     try:
-        job = ImageClassificationDatasetJob(
+        job = TextClassificationDatasetJob(
             username=utils.auth.get_username(),
             name=form.dataset_name.data,
             group=form.group_name.data,
@@ -340,14 +339,14 @@ def show(job, related_jobs=None):
     """
     Called from origae.dataset.views.datasets_show()
     """
-    return flask.render_template('datasets/images/classification/show.html', job=job, related_jobs=related_jobs)
+    return flask.render_template('datasets/text/classification/show.html', job=job, related_jobs=related_jobs)
 
 
 def summary(job):
     """
     Return a short HTML summary of an ImageClassificationDatasetJob
     """
-    return flask.render_template('datasets/images/classification/summary.html',
+    return flask.render_template('datasets/text/classification/summary.html',
                                  dataset=job)
 
 
@@ -431,6 +430,6 @@ def explore():
             break
 
     return flask.render_template(
-        'datasets/images/explore.html',
+        'datasets/text/explore.html',
         page=page, size=size, job=job, imgs=imgs, labels=labels,
         pages=pages, label=label, total_entries=total_entries, db=db)

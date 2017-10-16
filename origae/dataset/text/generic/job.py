@@ -1,7 +1,6 @@
-
 from __future__ import absolute_import
 
-from ..job import ImageDatasetJob
+from ..job import TextDatasetJob
 from origae.dataset import tasks
 from origae.utils import subclass, override, constants
 
@@ -10,18 +9,18 @@ PICKLE_VERSION = 1
 
 
 @subclass
-class GenericImageDatasetJob(ImageDatasetJob):
+class GenericTextDatasetJob(TextDatasetJob):
     """
     A Job that creates an image dataset for a generic network
     """
 
     def __init__(self, **kwargs):
         self.mean_file = kwargs.pop('mean_file', None)
-        super(GenericImageDatasetJob, self).__init__(**kwargs)
+        super(GenericTextDatasetJob, self).__init__(**kwargs)
         self.pickver_job_dataset_image_generic = PICKLE_VERSION
 
     def __setstate__(self, state):
-        super(GenericImageDatasetJob, self).__setstate__(state)
+        super(GenericTextDatasetJob, self).__setstate__(state)
         self.pickver_job_dataset_image_generic = PICKLE_VERSION
 
     def analyze_db_task(self, stage):

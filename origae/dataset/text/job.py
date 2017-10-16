@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 from ..job import DatasetJob
@@ -7,7 +6,7 @@ from ..job import DatasetJob
 PICKLE_VERSION = 1
 
 
-class ImageDatasetJob(DatasetJob):
+class TextDatasetJob(DatasetJob):
     """
     A Job that creates an image dataset
     """
@@ -21,7 +20,7 @@ class ImageDatasetJob(DatasetJob):
         self.image_dims = kwargs.pop('image_dims', None)
         self.resize_mode = kwargs.pop('resize_mode', None)
 
-        super(ImageDatasetJob, self).__init__(**kwargs)
+        super(TextDatasetJob, self).__init__(**kwargs)
         self.pickver_job_dataset_image = PICKLE_VERSION
 
     @staticmethod

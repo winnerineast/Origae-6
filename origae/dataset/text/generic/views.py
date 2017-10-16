@@ -2,8 +2,8 @@ from __future__ import absolute_import
 
 import flask
 
-from .forms import GenericImageDatasetForm
-from .job import GenericImageDatasetJob
+from .forms import GenericTextDatasetForm
+from .job import GenericTextDatasetJob
 from origae import utils
 from origae.dataset import tasks
 from origae.webapp import scheduler
@@ -19,12 +19,12 @@ def new():
     """
     Returns a form for a new GenericImageDatasetJob
     """
-    form = GenericImageDatasetForm()
+    form = GenericTextDatasetForm()
 
     # Is there a request to clone a job with ?clone=<job_id>
     fill_form_if_cloned(form)
 
-    return flask.render_template('datasets/images/generic/new.html', form=form)
+    return flask.render_template('datasets/text/generic/new.html', form=form)
 
 
 @blueprint.route('.json', methods=['POST'])
@@ -36,7 +36,7 @@ def create():
 
     Returns JSON when requested: {job_id,name,status} or {errors:[]}
     """
-    form = GenericImageDatasetForm()
+    form = GenericTextDatasetForm()
 
     # Is there a request to clone a job with ?clone=<job_id>
     fill_form_if_cloned(form)
@@ -45,11 +45,11 @@ def create():
         if request_wants_json():
             return flask.jsonify({'errors': form.errors}), 400
         else:
-            return flask.render_template('datasets/images/generic/new.html', form=form), 400
+            return flask.render_template('datasets/text/generic/new.html', form=form), 400
 
     job = None
     try:
-        job = GenericImageDatasetJob(
+        job = GenericTextDatasetJob(
             username=utils.auth.get_username(),
             name=form.dataset_name.data,
             group=form.group_name.data,
@@ -121,12 +121,12 @@ def show(job, related_jobs=None):
     """
     Called from origae.dataset.views.datasets_show()
     """
-    return flask.render_template('datasets/images/generic/show.html', job=job, related_jobs=related_jobs)
+    return flask.render_template('datasets/text/generic/show.html', job=job, related_jobs=related_jobs)
 
 
 def summary(job):
     """
     Return a short HTML summary of a GenericImageDatasetJob
     """
-    return flask.render_template('datasets/images/generic/summary.html',
+    return flask.render_template('datasets/text/generic/summary.html',
                                  dataset=job)

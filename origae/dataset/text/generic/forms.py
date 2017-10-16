@@ -1,4 +1,3 @@
-
 from __future__ import absolute_import
 
 import os.path
@@ -6,12 +5,12 @@ import os.path
 import wtforms
 from wtforms import validators
 
-from ..forms import ImageDatasetForm
+from ..forms import TextDatasetForm
 from origae import utils
 from origae.utils.forms import validate_required_iff
 
 
-class GenericImageDatasetForm(ImageDatasetForm):
+class GenericTextDatasetForm(TextDatasetForm):
     """
     Defines the form used to create a new GenericImageDatasetJob
     """

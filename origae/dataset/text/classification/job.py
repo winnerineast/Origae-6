@@ -1,9 +1,8 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import os
 
-from ..job import ImageDatasetJob
+from ..job import TextDatasetJob
 from origae.dataset import tasks
 from origae.status import Status
 from origae.utils import subclass, override, constants
@@ -13,19 +12,19 @@ PICKLE_VERSION = 2
 
 
 @subclass
-class ImageClassificationDatasetJob(ImageDatasetJob):
+class TextClassificationDatasetJob(TextDatasetJob):
     """
     A Job that creates an image dataset for a classification network
     """
 
     def __init__(self, **kwargs):
-        super(ImageClassificationDatasetJob, self).__init__(**kwargs)
+        super(TextClassificationDatasetJob, self).__init__(**kwargs)
         self.pickver_job_dataset_image_classification = PICKLE_VERSION
 
         self.labels_file = None
 
     def __setstate__(self, state):
-        super(ImageClassificationDatasetJob, self).__setstate__(state)
+        super(TextClassificationDatasetJob, self).__setstate__(state)
 
         if self.pickver_job_dataset_image_classification <= 1:
             task = self.train_db_task()
@@ -130,11 +129,11 @@ class ImageClassificationDatasetJob(ImageDatasetJob):
 
     @override
     def job_type(self):
-        return 'Image Classification Dataset'
+        return 'Text Classification Dataset'
 
     @override
     def json_dict(self, verbose=False):
-        d = super(ImageClassificationDatasetJob, self).json_dict(verbose)
+        d = super(TextClassificationDatasetJob, self).json_dict(verbose)
 
         if verbose:
             d.update({

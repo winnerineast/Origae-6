@@ -6,10 +6,13 @@ Warning: this is a playground where I build a machine learning system with all o
 AI is something interesting but not easy to play with it. So I would like put up some kind of visual works, Origae-6 to lower down the difficulty for most of people who love AI.
 ## Features
 A more detailed working progress can be found in my daily [work notes](docs/dailynotes.md)
-- [x] Create datasets for images.
-- [ ] Create datasets for texts.
-- [ ] Create datasets for audios.
-- [ ] Create datasets for videos.
+- [x] Create datasets for images. 
+- [x] MNIST dataset
+- [x] CIFAR-10 dataset
+- [x] CIFAR-100 dataset
+- [x] Create datasets for texts.
+- [x] Create datasets for audios.
+- [x] Create datasets for videos.
 - [x] Train caffe models.
 - [x] Train Tensorflow models.
 - [x] Train Torch7 models.

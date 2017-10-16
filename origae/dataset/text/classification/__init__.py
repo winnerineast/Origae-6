@@ -1,5 +1,5 @@
 from __future__ import absolute_import
 
-from .job import ImageClassificationDatasetJob
+from .job import TextClassificationDatasetJob
 
-__all__ = ['ImageClassificationDatasetJob']
+__all__ = ['TextClassificationDatasetJob']

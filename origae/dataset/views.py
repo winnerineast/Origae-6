@@ -5,6 +5,7 @@ import werkzeug.exceptions
 
 from . import images as dataset_images
 from . import audio as dataset_audio
+from . import text as dataset_text
 from . import generic
 from origae import extensions
 from origae.utils.routing import job_from_request, request_wants_json
@@ -22,6 +23,10 @@ def get_actual_job_view(job):
         return dataset_audio.AudioFeatureExtractionDatasetJob.views
     elif isinstance(job, dataset_audio.GenericAudioDatasetJob):
         return dataset_audio.GenericAudioDatasetJob.views
+    elif isinstance(job, dataset_text.TextClassificationDatasetJob):
+        return dataset_text.classification.views
+    elif isinstance(job, dataset_text.GenericTextDatasetJob):
+        return dataset_text.generic.views
     elif isinstance(job, generic.GenericDatasetJob):
         return generic.views
     else:
