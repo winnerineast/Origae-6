@@ -29,7 +29,7 @@ from . import is_url, HTTP_TIMEOUT, errors
 #       datum.data type -- bytes (uint8)
 #       datum.float_data type -- float32
 #       when decoding images, channels are BGR
-#   DIGITS:
+#   Origae-6:
 #       image_dims -- (height, width, channels)
 
 # List of supported file extensions

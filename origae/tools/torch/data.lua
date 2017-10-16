@@ -314,7 +314,7 @@ function LMDBSource:new(lighningmdb, path)
         -- the lock file so we will try again with MDB_NOLOCK. MDB_NOLOCK is safe
         -- in this process as we are opening the database in read-only mode.
         -- However if another process is writing into the database we might have a
-        -- concurrency issue - note that this shouldn't happen in DIGITS since the
+        -- concurrency issue - note that this shouldn't happen in Origae-6 since the
         -- database is written only once during dataset creation
         logmessage.display(0,'opening LMDB database failed with error: "' .. err .. '". Trying with MDB_NOLOCK')
         flags = bit.bor(flags, lighningmdb.MDB_NOLOCK)

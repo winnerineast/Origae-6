@@ -1,8 +1,8 @@
 # Object Detection Data Extension
 
-This data extension creates DIGITS datasets for object detection networks such as [DetectNet](https://github.com/NVIDIA/caffe/tree/caffe-0.15/examples/kitti).
+This data extension creates Origae-6 datasets for object detection networks such as [DetectNet](https://github.com/NVIDIA/caffe/tree/caffe-0.15/examples/kitti).
 
-DIGITS uses the KITTI format for object detection data.
+Origae-6 uses the KITTI format for object detection data.
 When preparing your own data for ingestion into a dataset, you must follow the same format.
 
 #### Table of contents
@@ -121,8 +121,8 @@ data correctly.
 
 ## Custom class mappings
 
-When creating the dataset, DIGITS has to translate from the object type string to a numerical identifier.
-By default, DIGITS uses the following class mappings, as follows from the above label format description:
+When creating the dataset, Origae-6 has to translate from the object type string to a numerical identifier.
+By default, Origae-6 uses the following class mappings, as follows from the above label format description:
 
 Class name (string in label file) | Class ID (number in database)
 ---------- | ---

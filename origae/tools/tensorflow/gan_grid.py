@@ -5,7 +5,7 @@
 # Linter: pylint
 
 """
-TensorFlow training executable for DIGITS
+TensorFlow training executable for Origae-6
 Defines the training procedure
 
 Usage:
@@ -82,7 +82,7 @@ tf.app.flags.DEFINE_integer(
     'validation_interval', 1, """Number of train epochs to complete, to perform one validation""")
 tf.app.flags.DEFINE_string('labels_list', '', """Text file listing label definitions""")
 tf.app.flags.DEFINE_string('mean', '', """Mean image file""")
-tf.app.flags.DEFINE_float('momentum', '0.9', """Momentum""")  # Not used by DIGITS front-end
+tf.app.flags.DEFINE_float('momentum', '0.9', """Momentum""")  # Not used by Origae-6 front-end
 tf.app.flags.DEFINE_string('network', '', """File containing network (model)""")
 tf.app.flags.DEFINE_string('networkDirectory', '', """Directory in which network exists""")
 tf.app.flags.DEFINE_string('optimization', 'sgd', """Optimization method""")
@@ -111,7 +111,7 @@ tf.app.flags.DEFINE_boolean(
 tf.app.flags.DEFINE_string(
     'weights', '', """Filename for weights of a model to use for fine-tuning""")
 
-# @TODO(tzaman): is the bitdepth in line with the DIGITS team?
+# @TODO(tzaman): is the bitdepth in line with the Origae-6 team?
 tf.app.flags.DEFINE_integer('bitdepth', 8, """Specifies an image's bitdepth""")
 
 # @TODO(tzaman); remove torch mentions below
@@ -130,7 +130,7 @@ tf.app.flags.DEFINE_string(
     """Required to calculate stepsize of the learning rate. Applies to: (step, multistep, sigmoid).
     For the 'multistep' lr_policy you can input multiple values seperated by commas""")
 
-# Tensorflow-unique arguments for DIGITS
+# Tensorflow-unique arguments for Origae-6
 tf.app.flags.DEFINE_string(
     'save_vars', 'all',
     """Sets the collection of variables to be saved: 'all' or only 'trainable'.""")
@@ -242,7 +242,7 @@ def summary_to_lists(summary_str):
 
 def print_summarylist(tags, vals):
     """ Prints a nice one-line listing of tags and their values in a nice format
-    that corresponds to how the DIGITS regex reads it.
+    that corresponds to how the Origae-6 regex reads it.
     Args:
         tags: an array of tags
         vals: an array of values
@@ -758,7 +758,7 @@ def main(_):
                 logging.info('Done training for epochs: tf.errors.OutOfRangeError')
             except ValueError as err:
                 logging.error(err.args[0])
-                exit(-1)  # DIGITS wants a dirty error.
+                exit(-1)  # Origae-6 wants a dirty error.
             except (KeyboardInterrupt):
                 logging.info('Interrupt signal received.')
 

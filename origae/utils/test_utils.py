@@ -30,7 +30,7 @@ class TestParseVersion():
         # Each list should be in strictly increasing order
         example_lists = []
 
-        # Some DIGITS versions
+        # Some Origae-6 versions
         example_lists.append(
             'v1.0 v1.0.1 v1.0.2 v1.0.3 v1.1.0-rc1 v1.1.0-rc2 v1.1.0 v1.1.1 '
             'v1.1.2 v1.1.3 v2.0.0-rc v2.0.0-rc2 v2.0.0-rc3 v2.0.0-preview '

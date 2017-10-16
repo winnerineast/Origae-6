@@ -11,7 +11,7 @@ New Image Classification Model
 {% endblock %}
 
 {% block nav %}
-<li class="active"><a href="{{url_for('origae.model.images.classification.views.new')}}">New Model</a></li>
+<li class="active"><a href="{{url_for('origae.model.audio.classification.views.new')}}">New Model</a></li>
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@ function syncAceEditor(){
 }
 </script>
 
-<form onsubmit="syncAceEditor();" id="model-form" action="{{url_for('origae.model.images.classification.views.create')}}" enctype="multipart/form-data" method="post">
+<form onsubmit="syncAceEditor();" id="model-form" action="{{url_for('origae.model.audio.classification.views.create')}}" enctype="multipart/form-data" method="post">
     {{ form.hidden_tag() }}
 
     {{ print_errors(form) }}
@@ -530,13 +530,13 @@ function setFramework(fwid)
             <div class="tab-content well">
                 <div style="display:none;">{{form.framework(class='form-control')}}</div>
                 <div id="network-tab-standard" class="tab-pane active">
-                  {% include "models/images/classification/partials/new/network_tab_standard.html" %}
+                  {% include "models/audio/classification/partials/new/network_tab_standard.html" %}
                 </div>
                 <div id="network-tab-previous" class="tab-pane">
-                  {% include "models/images/classification/partials/new/network_tab_previous.html" %}
+                  {% include "models/audio/classification/partials/new/network_tab_previous.html" %}
                 </div>
                 <div id="network-tab-pretrained" class="tab-pane">
-                  {% include "models/images/classification/partials/new/network_tab_pretrained.html" %}
+                  {% include "models/audio/classification/partials/new/network_tab_pretrained.html" %}
                 </div>
 
                 <script>
@@ -698,7 +698,7 @@ function visualizeNetwork() {
 
                                 <div class="form-group{{mark_errors([form.custom_network])}}">
                                     {{form.custom_network.label}}
-                                    {{form.custom_network.explanation(file='/models/images/classification/custom_network_explanation.html')}}
+                                    {{form.custom_network.explanation(file='/models/audio/classification/custom_network_explanation.html')}}
                                     <div style="display: none;">{{form.custom_network(class='form-control', rows=10)}}</div>
                                     <a href=# class="btn btn-info" onClick="return visualizeNetwork();">Visualize</a>
                                 </div>

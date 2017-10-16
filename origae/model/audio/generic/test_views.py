@@ -1350,7 +1350,7 @@ class TestTensorflowCreatedVariableSizeDataset(BaseTestCreatedWithImageProcessin
 
     @classmethod
     def setUpClass(cls):
-        raise unittest.SkipTest('Variable-size dataset not supported in Tensorflow/DIGITS')
+        raise unittest.SkipTest('Variable-size dataset not supported in Tensorflow/Origae-6')
 
 
 class TestTensorflowCreatedCropInForm(BaseTestCreatedCropInForm, test_utils.TensorflowMixin):

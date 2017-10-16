@@ -6,7 +6,7 @@ import urllib
 
 
 class DataDownloader(object):
-    """Base class for downloading data and setting it up for DIGITS"""
+    """Base class for downloading data and setting it up for Origae-6"""
 
     def __init__(self, outdir, clean=False, file_extension='png'):
         """
@@ -25,7 +25,7 @@ class DataDownloader(object):
     def getData(self):
         """
         This is the main function that should be called by the users!
-        Downloads the dataset and prepares it for DIGITS consumption
+        Downloads the dataset and prepares it for Origae-6 consumption
         """
         for url in self.urlList():
             self.__downloadFile(url)
@@ -49,7 +49,7 @@ class DataDownloader(object):
 
     def processData(self):
         """
-        Process the downloaded files and prepare the data for DIGITS
+        Process the downloaded files and prepare the data for Origae-6
         """
         raise NotImplementedError
 

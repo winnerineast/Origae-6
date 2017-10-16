@@ -1670,7 +1670,7 @@ def cleanedUpClassificationNetwork(original_network, num_categories):
                 'Unsupported data layer type %s' % layer.type
 
         elif layer.type == 'Input':
-            # DIGITS handles the deploy file for you
+            # Origae-6 handles the deploy file for you
             del network.layer[i]
 
         elif layer.type == 'Accuracy':
@@ -1701,7 +1701,7 @@ def cleanedUpGenericNetwork(original_network):
                 'Unsupported data layer type %s' % layer.type
 
         elif layer.type == 'Input':
-            # DIGITS handles the deploy file for you
+            # Origae-6 handles the deploy file for you
             del network.layer[i]
 
         elif layer.type == 'InnerProduct':

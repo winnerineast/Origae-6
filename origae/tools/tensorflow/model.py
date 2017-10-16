@@ -70,7 +70,7 @@ class Model(object):
     """
     Wrapper around the actual tensorflow workflow process.
     This is structured in a way that the user should only care about
-    creating the model while using the DIGITS UI to select the
+    creating the model while using the Origae-6 UI to select the
     optimizer and other options.
 
     This class is executed to start a tensorflow workflow.

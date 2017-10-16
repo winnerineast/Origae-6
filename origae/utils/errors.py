@@ -3,7 +3,7 @@
 
 class DigitsError(Exception):
     """
-    DIGITS custom exception
+    Origae-6 custom exception
     """
     pass
 

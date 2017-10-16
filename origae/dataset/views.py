@@ -13,25 +13,31 @@ from origae.webapp import scheduler
 
 blueprint = flask.Blueprint(__name__, __name__)
 
-
+'''
 def get_actual_job_view(job):
+    # Images
     if isinstance(job, dataset_images.ImageClassificationDatasetJob):
         return dataset_images.classification.views
     elif isinstance(job, dataset_images.GenericImageDatasetJob):
         return dataset_images.generic.views
+    # Audio
     elif isinstance(job, dataset_audio.AudioFeatureExtractionDatasetJob):
         return dataset_audio.AudioFeatureExtractionDatasetJob.views
+    elif isinstance(job, dataset_audio.AudioSegmentationDatasetJob):
+        return dataset_audio.AudioSegmentationDatasetJob.views
     elif isinstance(job, dataset_audio.GenericAudioDatasetJob):
         return dataset_audio.GenericAudioDatasetJob.views
+    # Text
     elif isinstance(job, dataset_text.TextClassificationDatasetJob):
         return dataset_text.classification.views
     elif isinstance(job, dataset_text.GenericTextDatasetJob):
         return dataset_text.generic.views
+    # Generic
     elif isinstance(job, generic.GenericDatasetJob):
         return generic.views
     else:
         raise werkzeug.exceptions.BadRequest('Invalid job type')
-
+'''
 
 @blueprint.route('/<job_id>.json', methods=['GET'])
 @blueprint.route('/<job_id>', methods=['GET'])
@@ -51,8 +57,30 @@ def show(job_id):
     if request_wants_json():
         return flask.jsonify(job.json_dict(True))
     else:
-        views = get_actual_job_view(job)
-        views.show(job, related_jobs=related_jobs)
+        # views = get_actual_job_view(job)
+        # views.show(job, related_jobs=related_jobs)
+        # Images
+        if isinstance(job, dataset_images.ImageClassificationDatasetJob):
+            return dataset_images.classification.views.show(job, related_jobs=related_jobs)
+        elif isinstance(job, dataset_images.GenericImageDatasetJob):
+            return dataset_images.generic.views.show(job, related_jobs=related_jobs)
+        # Audio
+        elif isinstance(job, dataset_audio.AudioFeatureExtractionDatasetJob):
+            return dataset_audio.AudioFeatureExtractionDatasetJob.views.show(job, related_jobs=related_jobs)
+        elif isinstance(job, dataset_audio.AudioSegmentationDatasetJob):
+            return dataset_audio.AudioSegmentationDatasetJob.views.show(job, related_jobs=related_jobs)
+        elif isinstance(job, dataset_audio.GenericAudioDatasetJob):
+            return dataset_audio.GenericAudioDatasetJob.views.show(job, related_jobs=related_jobs)
+        # Text
+        elif isinstance(job, dataset_text.TextClassificationDatasetJob):
+            return dataset_text.classification.views.show(job, related_jobs=related_jobs)
+        elif isinstance(job, dataset_text.GenericTextDatasetJob):
+            return dataset_text.generic.views.show(job, related_jobs=related_jobs)
+        # Generic
+        elif isinstance(job, generic.GenericDatasetJob):
+            return generic.views.show(job, related_jobs=related_jobs)
+        else:
+            raise werkzeug.exceptions.BadRequest('Invalid job type')
 
 
 @blueprint.route('/summary', methods=['GET'])
@@ -61,8 +89,30 @@ def summary():
     Return a short HTML summary of a DatasetJob
     """
     job = job_from_request()
-    views = get_actual_job_view(job)
-    views.summary(job)
+    # views = get_actual_job_view(job)
+    # views.summary(job)
+    # Images
+    if isinstance(job, dataset_images.ImageClassificationDatasetJob):
+        return dataset_images.classification.views.summary(job)
+    elif isinstance(job, dataset_images.GenericImageDatasetJob):
+        return dataset_images.generic.views.summary(job)
+    # Audio
+    elif isinstance(job, dataset_audio.AudioFeatureExtractionDatasetJob):
+        return dataset_audio.AudioFeatureExtractionDatasetJob.views.summary(job)
+    elif isinstance(job, dataset_audio.AudioSegmentationDatasetJob):
+        return dataset_audio.AudioSegmentationDatasetJob.views.summary(job)
+    elif isinstance(job, dataset_audio.GenericAudioDatasetJob):
+        return dataset_audio.GenericAudioDatasetJob.views.summary(job)
+    # Text
+    elif isinstance(job, dataset_text.TextClassificationDatasetJob):
+        return dataset_text.classification.views.summary(job)
+    elif isinstance(job, dataset_text.GenericTextDatasetJob):
+        return dataset_text.generic.views.summary(job)
+    # Generic
+    elif isinstance(job, generic.GenericDatasetJob):
+        return generic.views.summary(job)
+    else:
+        raise werkzeug.exceptions.BadRequest('Invalid job type')
 
 
 @blueprint.route('/inference-form/<extension_id>/<job_id>', methods=['GET'])

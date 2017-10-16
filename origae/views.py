@@ -25,7 +25,7 @@ blueprint = flask.Blueprint(__name__, __name__)
 @blueprint.route('/', methods=['GET'])
 def home(tab=1):
     """
-    DIGITS home page
+    Origae-6 home page
     Returns information about each job on the server
 
     Returns JSON when requested:
@@ -629,7 +629,6 @@ def clone_job(clone):
     """
 
     # <clone> is the job_id to clone
-
     job = scheduler.get_job(clone)
     if job is None:
         raise werkzeug.exceptions.NotFound('Job not found')

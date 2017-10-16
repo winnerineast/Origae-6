@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css', ver=dir_hash) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', ver=dir_hash) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/c3.min.css', ver=dir_hash) }}">
-    <title>{% block title %}DIGITS{% endblock %}</title>
+    <title>{% block title %}Origae-6{% endblock %}</title>
 
     <script type="text/javascript">
         var URL_PREFIX = "{{config['URL_PREFIX']}}";
@@ -35,7 +35,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url_for("origae.views.home") }}">DIGITS</a>
+            <a class="navbar-brand" href="{{ url_for("origae.views.home") }}">Origae-6</a>
         </div>
         <ul class="nav navbar-nav">
             {% block nav %}
@@ -57,22 +57,26 @@
                 {% if server_name %}
                 <li><span class="navbar-text">Server: {{server_name}}</span></li>
                 {% endif %}
-                <li><span class="navbar-text">DIGITS version: <br> {{server_version}}</span></li>
+                <li><span class="navbar-text">Origae-6 version: <br> {{server_version}}</span></li>
                 <li><span class="navbar-text">Caffe version: <br> {{caffe_version}}</span></li>
                 <li><span class="navbar-text">Caffe flavor: <br> {{caffe_flavor}}</span></li>
+                <li><span class="navbar-text">Tensorflow version: <br> {{ tensorflow_version }}</span> </li>
+                <li><span class="navbar-text">Torch version: <br> {{ torch_version }}</span> </li>
+                <li><span class="navbar-text">librosa version: <br> {{ librosa_version }}</span> </li>
+                <li><span class="navbar-text">PyAudioAnalysis version: <br> {{ pyaudioanalysis_version }}</span> </li>
             </ul>
             </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<span class="caret"></span></a>
                 <ul class="dropdown-menu about-menu navbar-inverse">
                     <li><span class="navbar-text"><a target="_blank" href="https://developer.nvidia.com/origae">
-                        DIGITS on developer.nvidia.com
+                        Origae-6 on developer.nvidia.com
                     </a></span></li>
-                    <li><span class="navbar-text"><a target="_blank" href="https://github.com/NVIDIA/DIGITS">
-                        DIGITS on GitHub
+                    <li><span class="navbar-text"><a target="_blank" href="https://github.com/NVIDIA/Origae-6">
+                        Origae-6 on GitHub
                     </a></span></li>
                     <li><span class="navbar-text"><a target="_blank" href="https://groups.google.com/d/forum/origae-users">
-                        DIGITS user group
+                        Origae-6 user group
                     </a></span></li>
                     <li><span class="navbar-text"><a href="mailto:origae@nvidia.com">
                         origae@nvidia.com

@@ -80,7 +80,7 @@ class TensorflowFramework(Framework):
         """
         return new instance of network from previous network
         """
-        # note: use_same_dataset is ignored here because for Tensorflow, DIGITS
+        # note: use_same_dataset is ignored here because for Tensorflow, Origae-6
         # does not change the number of outputs of the last linear layer
         # to match the number of classes in the case of a classification
         # network. In order to write a flexible network description that

@@ -9,7 +9,7 @@ from cifar100 import Cifar100Downloader
 from mnist import MnistDownloader
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Download-Data tool - DIGITS')
+    parser = argparse.ArgumentParser(description='Download-Data tool - Origae-6')
 
     # Positional arguments
 

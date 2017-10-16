@@ -74,7 +74,7 @@ def _create_gradient_image(size, color_from, color_to, rotation):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Create-Imageset tool - DIGITS')
+    parser = argparse.ArgumentParser(description='Create-Imageset tool - Origae-6')
 
     # Positional arguments
 

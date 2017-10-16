@@ -170,7 +170,7 @@ def _save_mean(mean, filename):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Create-LMDB tool - DIGITS')
+    parser = argparse.ArgumentParser(description='Create-LMDB tool - Origae-6')
 
     # Positional arguments
 

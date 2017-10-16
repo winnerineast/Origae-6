@@ -3,7 +3,7 @@ import os.path
 import sys
 
 
-# Update PATH to include the local DIGITS directory
+# Update PATH to include the local Origae-6 directory
 PARENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 found_parent_dir = False
 for p in sys.path:
@@ -15,7 +15,7 @@ if not found_parent_dir:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='DIGITS server')
+    parser = argparse.ArgumentParser(description='Origae-6 server')
     parser.add_argument(
         '-p', '--port',
         type=int,

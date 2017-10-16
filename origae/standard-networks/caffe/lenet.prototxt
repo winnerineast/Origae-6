@@ -138,7 +138,7 @@ layer {
     lr_mult: 2
   }
   inner_product_param {
-    # Since num_output is unset, DIGITS will automatically set it to the
+    # Since num_output is unset, Origae-6 will automatically set it to the
     #   number of classes in your dataset.
     # Uncomment this line to set it explicitly:
     #num_output: 10

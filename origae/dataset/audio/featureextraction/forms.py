@@ -1,4 +1,3 @@
-# Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
 
 import os.path
@@ -14,7 +13,7 @@ from origae.utils.forms import validate_required_iff, validate_greater_than
 
 class AudioFeatureExtractionDatasetForm(AudioDatasetForm):
     """
-    Defines the form used to create a new ImageClassificationDatasetJob
+    Defines the form used to create a new AudioFeatureExtractionDatasetJob
     """
 
     backend = wtforms.SelectField('DB backend',

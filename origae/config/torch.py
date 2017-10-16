@@ -44,11 +44,15 @@ else:
 
 
 if executable is None:
+    version = 'N.A.'
     option_list['torch'] = {
+        'version': version,
         'enabled': False,
     }
 else:
+    version = '0.7'
     option_list['torch'] = {
+        'version': version,
         'enabled': True,
         'executable': executable,
     }

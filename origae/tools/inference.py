@@ -14,7 +14,7 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-# Add path for DIGITS package
+# Add path for Origae-6 package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import origae.config  # noqa
 from origae import utils, log  # noqa
@@ -46,7 +46,7 @@ def infer(input_list,
     """
     Perform inference on a list of images using the specified model
     """
-    # job directory defaults to that defined in DIGITS config
+    # job directory defaults to that defined in Origae-6 config
     if jobs_dir == 'none':
         jobs_dir = origae.config.config_value('jobs_dir')
 
@@ -207,7 +207,7 @@ def infer(input_list,
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Inference tool - DIGITS')
+    parser = argparse.ArgumentParser(description='Inference tool - Origae-6')
 
     # Positional arguments
 
@@ -233,7 +233,7 @@ if __name__ == '__main__':
         '-j',
         '--jobs_dir',
         default='none',
-        help='Jobs directory (default: from DIGITS config)',
+        help='Jobs directory (default: from Origae-6 config)',
     )
 
     parser.add_argument(

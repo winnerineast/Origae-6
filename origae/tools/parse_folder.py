@@ -11,7 +11,7 @@ import sys
 import time
 import urllib
 
-# Add path for DIGITS package
+# Add path for Origae-6 package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import origae.config  # noqa
 from origae import utils, log  # noqa
@@ -467,7 +467,7 @@ def parse_folder(folder, labels_file,
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Parse-Folder tool - DIGITS')
+    parser = argparse.ArgumentParser(description='Parse-Folder tool - Origae-6')
 
     # Positional arguments
 

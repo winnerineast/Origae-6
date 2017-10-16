@@ -14,7 +14,7 @@ PICKLE_VERSION = 2
 @subclass
 class AudioFeatureExtractionDatasetJob(AudioDatasetJob):
     """
-    A Job that creates an image dataset for a classification network
+    A Job that creates an audio dataset for a Feature Extraction
     """
 
     def __init__(self, **kwargs):

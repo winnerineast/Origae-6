@@ -19,7 +19,7 @@ import lmdb
 import numpy as np
 import PIL.Image
 
-# Add path for DIGITS package
+# Add path for  package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import origae.config  # noqa
 from origae import log  # noqa
@@ -183,7 +183,7 @@ def analyze_db(database,
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Analyze-Db tool - DIGITS')
+    parser = argparse.ArgumentParser(description='Analyze-Db tool - Origae-6')
 
     # Positional arguments
 

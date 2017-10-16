@@ -74,7 +74,7 @@ Usage details:
 ]]
 
 -----------------------------------------------------------------------------------------------------------------------------
---Note: At present DIGITS supports only fine tuning, which means copying only the weights from pretrained model.
+--Note: At present Origae-6 supports only fine tuning, which means copying only the weights from pretrained model.
 --
 --To include "crash recovery" feature, we may need to save the below torch elements for every fixed duration (or) for every fixed epochs (for instance 30 minutes or 10 epochs).
 --
@@ -331,7 +331,7 @@ if opt.visualizeModel then
     os.exit(0)
 end
 
--- NOTE: currently randomState option wasn't used in DIGITS. This option was provided to be used from command line, if required.
+-- NOTE: currently randomState option wasn't used in Origae-6. This option was provided to be used from command line, if required.
 -- load random number state from backup
 if opt.randomState ~= '' then
     if paths.filep(opt.randomState) then
@@ -345,7 +345,7 @@ end
 
 ----------------------------------------------------------------------
 
--- NOTE: currently retrain option wasn't used in DIGITS. This option was provided to be used from command line, if required.
+-- NOTE: currently retrain option wasn't used in Origae-6. This option was provided to be used from command line, if required.
 -- If preloading option is set, preload existing models appropriately
 if opt.retrain ~= '' then
     if paths.filep(opt.retrain) then
@@ -514,7 +514,7 @@ else
 
 end
 
--- NOTE: currently lrpolicyState option wasn't used in DIGITS. This option was provided to be used from command line, if required.
+-- NOTE: currently lrpolicyState option wasn't used in Origae-6. This option was provided to be used from command line, if required.
 if opt.lrpolicyState ~= '' then
     if paths.filep(opt.lrpolicyState) then
         logmessage.display(0,'Loading lrpolicy state from file: ' .. opt.lrpolicyState)
@@ -537,7 +537,7 @@ local optimState = {
     learningRateDecay = opt.learningRateDecay
 }
 
--- NOTE: currently optimState option wasn't used in DIGITS. This option was provided to be used from command line, if required.
+-- NOTE: currently optimState option wasn't used in Origae-6. This option was provided to be used from command line, if required.
 if opt.optimState ~= '' then
     if paths.filep(opt.optimState) then
         logmessage.display(0,'Loading optimState from file: ' .. opt.optimState)
@@ -619,7 +619,7 @@ logmessage.display(0,'random number state will be saved as randomState_<EPOCH>.t
 logmessage.display(0,'LRPolicy state will be saved as lrpolicy_<EPOCH>.t7')
 --]]
 
--- NOTE: currently this routine wasn't used in DIGITS.
+-- NOTE: currently this routine wasn't used in Origae-6.
 -- This routine takes backup of model, optim state, LRPolicy and random number state
 local function backupforrecovery(backup_epoch)
     -- save model

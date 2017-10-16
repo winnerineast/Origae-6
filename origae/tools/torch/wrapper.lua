@@ -12,8 +12,8 @@ require 'logmessage'
 -- custom error handler prints error using logmessage API
 function err (x)
     logmessage.display(3, x)
-    print(debug.traceback('DIGITS Lua Error',2))
-    return "DIGITS error"
+    print(debug.traceback('Origae-6 Lua Error',2))
+    return "Origae-6 error"
 end -- err
 
 if #arg < 1 then

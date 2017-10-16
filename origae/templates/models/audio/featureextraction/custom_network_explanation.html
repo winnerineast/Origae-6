@@ -15,7 +15,7 @@
         This should produce the only network output.
     </li>
     <li>
-        If any InnerProduct layers have left <i>num_output</i> unset, DIGITS will <b>fill it in for you automatically</b> with the number of classes in your dataset.
+        If any InnerProduct layers have left <i>num_output</i> unset, Origae-6 will <b>fill it in for you automatically</b> with the number of classes in your dataset.
     </li>
     <li>
         If any Accuracy layer has a <i>top_k</i> value that is smaller than the number of classes in your dataset, then that layer is <b>removed</b>.
@@ -95,7 +95,7 @@
     </tr>
 </table>
 <p>
-    You may notice that DIGITS still generates separate files for <i>train_val</i> and <i>deploy</i> networks, and that they each only use <i>phase</i> and not <i>stage</i>.
+    You may notice that Origae-6 still generates separate files for <i>train_val</i> and <i>deploy</i> networks, and that they each only use <i>phase</i> and not <i>stage</i>.
     This is because Caffe doesn't fully support all-in-one networks yet.
 </p>
 

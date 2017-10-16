@@ -290,7 +290,7 @@ def get_nvml_info(device_id):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='DIGITS Device Query')
+    parser = argparse.ArgumentParser(description='Origae-6 Device Query')
     parser.add_argument('-v', '--verbose', action='store_true')
     args = parser.parse_args()
 

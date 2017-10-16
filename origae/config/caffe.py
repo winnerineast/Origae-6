@@ -119,7 +119,7 @@ def import_pycaffe(dirname=None):
     os.environ['GLOG_minloglevel'] = '2'
 
     # for Windows environment, loading h5py before caffe solves the issue mentioned in
-    # https://github.com/NVIDIA/DIGITS/issues/47#issuecomment-206292824
+    # https://github.com/NVIDIA/Origae-6/issues/47#issuecomment-206292824
     import h5py  # noqa
     try:
         import caffe

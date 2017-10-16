@@ -343,7 +343,7 @@ class TensorflowTrainTask(TrainTask):
                 assert not('Inf' in value or 'NaN' in value), 'Network reported %s for %s.' % (value, key)
                 value = float(value)
                 if key == 'lr':
-                    key = 'learning_rate'  # Convert to special DIGITS key for learning rate
+                    key = 'learning_rate'  # Convert to special Origae-6 key for learning rate
                 if stage == 'Training':
                     self.save_train_output(key, key, value)
                 elif stage == 'Validation':
@@ -843,7 +843,7 @@ class TensorflowTrainTask(TrainTask):
             args = [sys.executable,
                     os.path.join(os.path.dirname(os.path.abspath(origae.__file__)), 'tools', 'tensorflow', 'main.py'),
                     '--testMany=1',
-                    '--allPredictions=1',  # all predictions are grabbed and formatted as required by DIGITS
+                    '--allPredictions=1',  # all predictions are grabbed and formatted as required by Origae-6
                     '--inference_db=%s' % str(temp_dir_path),
                     '--network=%s' % self.model_file,
                     '--networkDirectory=%s' % self.job_dir,

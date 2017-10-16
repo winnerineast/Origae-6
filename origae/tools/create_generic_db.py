@@ -16,7 +16,7 @@ import Queue
 import sys
 import threading
 
-# Add path for DIGITS package
+# Add path for Origae-6 package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import origae.config  # noqa
 from origae import extensions, log  # noqa
@@ -406,7 +406,7 @@ def create_generic_db(jobs_dir, dataset_id, stage):
     Create a generic DB
     """
 
-    # job directory defaults to that defined in DIGITS config
+    # job directory defaults to that defined in Origae-6 config
     if jobs_dir == 'none':
         jobs_dir = origae.config.config_value('jobs_dir')
 
@@ -446,7 +446,7 @@ def create_generic_db(jobs_dir, dataset_id, stage):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='DB creation tool - DIGITS')
+    parser = argparse.ArgumentParser(description='DB creation tool - Origae-6')
 
     # Positional arguments
 
@@ -459,7 +459,7 @@ if __name__ == '__main__':
         '-j',
         '--jobs_dir',
         default='none',
-        help='Jobs directory (default: from DIGITS config)',
+        help='Jobs directory (default: from Origae-6 config)',
     )
 
     parser.add_argument(

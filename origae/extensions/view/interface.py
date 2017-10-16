@@ -36,7 +36,7 @@ class VisualizationInterface(object):
     def get_default_visibility():
         """
         Return whether to show extension in GUI (can be overridden through
-        DIGITS configuration options)
+        Origae-6 configuration options)
         """
         return True
 

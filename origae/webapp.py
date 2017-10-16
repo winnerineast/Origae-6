@@ -33,6 +33,9 @@ app.jinja_env.globals['server_name'] = config_value('server_name')
 app.jinja_env.globals['server_version'] = origae.__version__
 app.jinja_env.globals['caffe_version'] = config_value('caffe')['version']
 app.jinja_env.globals['caffe_flavor'] = config_value('caffe')['flavor']
+app.jinja_env.globals['tensorflow_version'] = config_value('tensorflow')['version']
+app.jinja_env.globals['torch_version'] = config_value('torch')['version']
+
 app.jinja_env.globals['dir_hash'] = fs.dir_hash(
     os.path.join(os.path.dirname(origae.__file__), 'static'))
 app.jinja_env.filters['print_time'] = utils.time_filters.print_time
@@ -67,7 +70,7 @@ app.register_blueprint(origae.dataset.images.classification.views.blueprint,
 import origae.dataset.images.generic.views  # noqa
 app.register_blueprint(origae.dataset.images.generic.views.blueprint,
                        url_prefix=url_prefix+'/datasets/images/generic')
-##########
+
 import origae.dataset.audio.views  # noqa
 app.register_blueprint(origae.dataset.audio.views.blueprint,
                        url_prefix=url_prefix+'/datasets/audio')
@@ -83,7 +86,19 @@ app.register_blueprint(origae.dataset.audio.segmentation.views.blueprint,
 import origae.dataset.audio.generic.views  # noqa
 app.register_blueprint(origae.dataset.audio.generic.views.blueprint,
                        url_prefix=url_prefix+'/datasets/audio/generic')
-##########
+
+import origae.dataset.text.views  # noqa
+app.register_blueprint(origae.dataset.text.views.blueprint,
+                       url_prefix=url_prefix+'/datasets/text')
+
+import origae.dataset.text.classification.views  # noqa
+app.register_blueprint(origae.dataset.text.classification.views.blueprint,
+                       url_prefix=url_prefix+'/datasets/text/classification')
+
+import origae.dataset.text.generic.views  # noqa
+app.register_blueprint(origae.dataset.text.generic.views.blueprint,
+                       url_prefix=url_prefix+'/datasets/text/generic')
+
 import origae.model.views  # noqa
 app.register_blueprint(origae.model.views.blueprint,
                        url_prefix=url_prefix+'/models')
@@ -103,7 +118,7 @@ app.register_blueprint(origae.model.images.generic.views.blueprint,
 import origae.pretrained_model.views  # noqa
 app.register_blueprint(origae.pretrained_model.views.blueprint,
                        url_prefix=url_prefix+'/pretrained_models')
-##########
+
 import origae.model.audio.views  # noqa
 app.register_blueprint(origae.model.audio.views.blueprint,
                        url_prefix=url_prefix+'/models/audio')
@@ -119,7 +134,19 @@ app.register_blueprint(origae.model.audio.segmentation.views.blueprint,
 import origae.model.audio.generic.views  # noqa
 app.register_blueprint(origae.model.audio.generic.views.blueprint,
                        url_prefix=url_prefix+'/models/audio/generic')
-##########
+
+import origae.model.text.views  # noqa
+app.register_blueprint(origae.model.text.views.blueprint,
+                       url_prefix=url_prefix+'/models/text')
+
+import origae.model.text.classification.views  # noqa
+app.register_blueprint(origae.model.text.classification.views.blueprint,
+                       url_prefix=url_prefix+'/models/text/classification')
+
+import origae.model.text.generic.views  # noqa
+app.register_blueprint(origae.model.text.generic.views.blueprint,
+                       url_prefix=url_prefix+'/models/text/generic')
+
 import origae.store.views  # noqa
 app.register_blueprint(origae.store.views.blueprint,
                        url_prefix=url_prefix+'/store')

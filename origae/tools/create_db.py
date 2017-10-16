@@ -25,7 +25,7 @@ import lmdb
 import numpy as np
 import PIL.Image
 
-# Add path for DIGITS package
+# Add path for Origae-6 package
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 import origae.config  # noqa
 from origae import utils, log  # noqa
@@ -857,7 +857,7 @@ def _save_means(image_sum, image_count, mean_files):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Create-Db tool - DIGITS')
+    parser = argparse.ArgumentParser(description='Create-Db tool - Origae-6')
 
     # Positional arguments
 
