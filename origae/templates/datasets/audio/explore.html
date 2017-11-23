@@ -13,11 +13,11 @@
 
 {% block content %}
     <div class="row">
-        <h2>Exploring {{job.name()}} ({{ db }}) images</h2>
+        <h2>Exploring {{job.name()}} ({{ db }}) Audio</h2>
     </div>
     <div class="row">
         <ul class="list-unstyled list-inline">
-            <li><a href="?job_id={{job.id()}}&page=0&size={{size}}&db={{db}}">Show all images</a></li>
+            <li><a href="?job_id={{job.id()}}&page=0&size={{size}}&db={{db}}">Show all audios</a></li>
         {% if labels %}
             <li>or</li>
             <li><h5>filter by class:</h5></li>

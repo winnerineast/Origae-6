@@ -11,7 +11,7 @@ New Image Classification Model
 {% endblock %}
 
 {% block nav %}
-<li class="active"><a href="{{url_for('origae.model.audio.classification.views.new')}}">New Model</a></li>
+<li class="active"><a href="{{url_for('origae.model.audio.segmentation.views.new')}}">New Model</a></li>
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@ function syncAceEditor(){
 }
 </script>
 
-<form onsubmit="syncAceEditor();" id="model-form" action="{{url_for('origae.model.audio.classification.views.create')}}" enctype="multipart/form-data" method="post">
+<form onsubmit="syncAceEditor();" id="model-form" action="{{url_for('origae.model.audio.segmentation.views.create')}}" enctype="multipart/form-data" method="post">
     {{ form.hidden_tag() }}
 
     {{ print_errors(form) }}
@@ -530,13 +530,13 @@ function setFramework(fwid)
             <div class="tab-content well">
                 <div style="display:none;">{{form.framework(class='form-control')}}</div>
                 <div id="network-tab-standard" class="tab-pane active">
-                  {% include "models/audio/classification/partials/new/network_tab_standard.html" %}
+                  {% include "models/audio/segmentation/partials/new/network_tab_standard.html" %}
                 </div>
                 <div id="network-tab-previous" class="tab-pane">
-                  {% include "models/audio/classification/partials/new/network_tab_previous.html" %}
+                  {% include "models/audio/segmentation/partials/new/network_tab_previous.html" %}
                 </div>
                 <div id="network-tab-pretrained" class="tab-pane">
-                  {% include "models/audio/classification/partials/new/network_tab_pretrained.html" %}
+                  {% include "models/audio/segmentation/partials/new/network_tab_pretrained.html" %}
                 </div>
 
                 <script>
