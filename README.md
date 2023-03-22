@@ -10,7 +10,7 @@ A more detailed working progress can be found in my daily [work notes](docs/dail
 - [ ] LLaMA: Open and Efficient Foundation Language Models
 - [ ] Stanford Alpca: An Instruction-following LLaMA Model
 - [ ] llama.cpp: Port of Meta LLaMA model in C/C++
-- [ ] alpaca.cpp: Locally run an Instruction-Tuned Chat-Style LLM
+- [x] alpaca.cpp: Locally run an Instruction-Tuned Chat-Style LLM
 - [ ] dalai: The simplest way to run LLaMA on your local machine.
 - [ ] point-alpaca: one of way to further train LLaMA.
 - [ ] ColossaAI: Making large AI models cheaper, faster and more accessaible
