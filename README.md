@@ -1,11 +1,20 @@
 # Origae-6
 ![Alt text](img/header.jpg)
 
-Warning: this is a playground where I build a machine learning system with all open source codes MERELY.
+Warning: this is a playground where I build a machine learning system with all open source codes MERELY since 2018. Now it's 2023 and AI goes into new era and I enter this project again and make it better.
 ## Background
 AI is something interesting but not easy to play with it. So I would like put up some kind of visual works, Origae-6 to lower down the difficulty for most of people who love AI.
+I wrote these words in 2018 and I have tried many and now I catch up AIGC (Artificial Intelligence Generated Content) here.
 ## Features
 A more detailed working progress can be found in my daily [work notes](docs/dailynotes.md)
+- [ ] LLaMA: Open and Efficient Foundation Language Models
+- [ ] Stanford Alpca: An Instruction-following LLaMA Model
+- [ ] llama.cpp: Port of Meta LLaMA model in C/C++
+- [ ] alpaca.cpp: Locally run an Instruction-Tuned Chat-Style LLM
+- [ ] dalai: The simplest way to run LLaMA on your local machine.
+- [ ] point-alpaca: one of way to further train LLaMA.
+- [ ] ColossaAI: Making large AI models cheaper, faster and more accessaible
+- [ ] ...
 - [x] Create datasets for images. 
 - [x] MNIST dataset
 - [x] CIFAR-10 dataset
@@ -19,8 +28,15 @@ A more detailed working progress can be found in my daily [work notes](docs/dail
 - [x] Test caffe models.
 - [x] Test Tensorflow models.
 - [x] Test Torch7 models.
-- [ ] Transfer trained models to remote machines.
+- [ ] ...
+
 ## Pre-requirements
+### here is just my own testing environments.
+- Apple Macbook Pro M2 MAX (32GB version)
+- HP Elitebook 845 G8 (32GB)
+- Software requirements will be moved to individual software projects.
+### Warning: the following instruction has been outdated and merely for your information.
+
 - Ubuntu 16.04.3 or Mac OS 10.13: it's OS for all others.
 - [Pycharm](https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=linux&code=PCC): it's main editor for coding.
 - NVidia driver It's okay to use v384 in ubuntu software update manager and it's used to drive GPU. (skip it with Mac OS.)
