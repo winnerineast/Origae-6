@@ -11,3 +11,6 @@
 [submodule "nvcaffe"]
 	path = nvcaffe
 	url = https://github.com/NVIDIA/caffe.git
+[submodule "AIGC/alpaca.cpp"]
+	path = AIGC/alpaca.cpp
+	url = https://github.com/winnerineast/alpaca.cpp.git

@@ -35,12 +35,12 @@ Setting the `CAFFE_ROOT` environment variable will help DIGITS automatically det
 
 Several PyPI packages need to be installed:
 ```sh
-sudo pip install -r $CAFFE_ROOT/python/requirements.txt
+sudo pip install -r $CAFFE_ROOT/python/requirements_old.txt
 ```
 
 If you hit some errors about missing imports, then use this command to install the packages in order ([see discussion here](https://github.com/BVLC/caffe/pull/1950#issuecomment-76026969)):
 ```sh
-cat $CAFFE_ROOT/python/requirements.txt | xargs -n1 sudo pip install
+cat $CAFFE_ROOT/python/requirements_old.txt | xargs -n1 sudo pip install
 ```
 
 ## Build

@@ -102,3 +102,7 @@ ENV/
 .DS_Store
 .idea/
 origae/jobs/
+
+# big model files
+AIGC/alpaca.cpp/ggml-alpaca-7b-q4.bin
+AIGC/alpaca.cpp/ggml-alpaca-13b-q4.bin
