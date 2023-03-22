@@ -32,7 +32,7 @@ A more detailed working progress can be found in my daily [work notes](docs/dail
 
 ## Pre-requirements
 ### here is just my own testing environments.
-- Apple Macbook Pro M2 MAX (32GB version)
+- Apple Macbook Pro M2 MAX (32GB)
 - HP Elitebook 845 G8 (32GB)
 - Software requirements will be moved to individual software projects.
 ### Warning: the following instruction has been outdated and merely for your information.
