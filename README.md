@@ -13,7 +13,9 @@ A more detailed working progress can be found in my daily [work notes](docs/dail
 - [x] alpaca.cpp: Locally run an Instruction-Tuned Chat-Style LLM
 - [ ] dalai: The simplest way to run LLaMA on your local machine.
 - [ ] point-alpaca: one of way to further train LLaMA.
+- [ ] alpaca-lora: Instruct-tune LLaMA on consumer hardware.
 - [ ] ColossaAI: Making large AI models cheaper, faster and more accessaible
+- [ ] langchain: Building applications with LLMs through composability
 - [ ] ...
 - [x] Create datasets for images. 
 - [x] MNIST dataset

@@ -1,3 +1,5 @@
+# 23 Mar, 2023
+Beside port giant model into local machine, I also think about how to develop new type of applications. That's why I watch on langchain project.
 # 22 Mar, 2023
 to make LLM run on a local machine such as macbook or wintel laptop, I need to find out a way to simplify models. So to choose Meta LLaMA as baseline, leverage alpca project to work further.
 # 6 Oct, 2017

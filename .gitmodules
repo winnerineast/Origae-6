@@ -14,3 +14,9 @@
 [submodule "AIGC/alpaca.cpp"]
 	path = AIGC/alpaca.cpp
 	url = https://github.com/winnerineast/alpaca.cpp.git
+[submodule "AIGC/llama.cpp"]
+	path = AIGC/llama.cpp
+	url = https://github.com/ggerganov/llama.cpp.git
+[submodule "AIGC/alpaca-lora"]
+	path = AIGC/alpaca-lora
+	url = https://github.com/winnerineast/alpaca-lora.git
