@@ -5,6 +5,12 @@ Warning: this is a playground where I build a machine learning system with all o
 ## Background
 AI is something interesting but not easy to play with it. So I would like put up some kind of visual works, Origae-6 to lower down the difficulty for most of people who love AI.
 I wrote these words in 2018 and I have tried many and now I catch up AIGC (Artificial Intelligence Generated Content) here.
+
+Basic idea is to have:
+1. dataset and data pipeline to pump data into vector database.
+2. setup langchain with at least two different LLMs.
+3. build API for media editing system.
+
 ## Features
 A more detailed working progress can be found in my daily [work notes](docs/dailynotes.md)
 - [ ] LLaMA: Open and Efficient Foundation Language Models
